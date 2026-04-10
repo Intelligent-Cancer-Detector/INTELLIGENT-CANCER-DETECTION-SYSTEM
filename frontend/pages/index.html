@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICDS | Intelligent Cancer Detection System</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+    <!-- Floating Medical Symbols Animation -->
+    <div class="medical-symbols" id="medicalSymbols"></div>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <span>Intelligent</span>
+                    <span>CDS</span>
+                </div>
+                
+                <ul class="nav-menu">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#cancers">Cancers</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                
+                <div class="nav-buttons">
+                    <a href="register.html" class="btn btn-secondary">Register Hospital</a>
+                    <a href="login.html" class="btn btn-primary">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="badge">AI-Powered Clinical Decision Support</span>
+                <h1>Intelligent Cancer Detection System</h1>
+                <p class="hero-subtitle">Empowering Clinicians with AI-Driven Diagnostics</p>
+                <p class="hero-description">
+                    Advanced machine learning system that assists healthcare professionals in early cancer detection through comprehensive symptom analysis and risk assessment.
+                </p>
+                
+                <div class="hero-stats">
+                    <div>
+                        <span class="stat-number">10+</span>
+                        <span class="stat-label">Cancer Types</span>
+                    </div>
+                    <div>
+                        <span class="stat-number">98.5%</span>
+                        <span class="stat-label">Detection Accuracy</span>
+                    </div>
+                    <div>
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Clinical Support</span>
+                    </div>
+                </div>
+                
+                <div>
+                    <a href="login.html" class="btn btn-primary">Access System →</a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="dashboard-preview">
+                    <div class="dashboard-header">
+                        <div class="dashboard-dot"></div>
+                        <div class="dashboard-dot"></div>
+                        <div class="dashboard-dot"></div>
+                    </div>
+                    <div class="dashboard-content">
+                        <div class="risk-card">
+                            <h4>⚠️ HIGH RISK ASSESSMENT</h4>
+                            <div class="risk-progress">
+                                <div class="risk-fill"></div>
+                            </div>
+                            <p style="font-size: 0.75rem; margin-top: 0.5rem;">Lung Cancer Probability: <strong>78%</strong></p>
+                        </div>
+                        <div>
+                            <span class="symptom-tag">Persistent cough</span>
+                            <span class="symptom-tag">Fatigue</span>
+                            <span class="symptom-tag">Weight loss</span>
+                            <span class="symptom-tag">Hemoptysis</span>
+                        </div>
+                        <div class="ai-message">
+                            <i class="fas fa-robot"></i> Based on symptoms and risk factors, urgent pulmonary consultation recommended.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Clinical Excellence</span>
+                <h2 class="section-title">Why Healthcare Providers Trust ICDS</h2>
+            </div>
+            
+            <div class="workflow-steps">
+                <div class="workflow-step" style="--i:1">
+                    <div class="step-number">1</div>
+                    <h4>Enter Symptoms</h4>
+                    <p>Doctor inputs patient symptoms into the system</p>
+                </div>
+                <div class="workflow-step" style="--i:2">
+                    <div class="step-number">2</div>
+                    <h4>AI Analysis</h4>
+                    <p>AI asks intelligent follow-up questions</p>
+                </div>
+                <div class="workflow-step" style="--i:3">
+                    <div class="step-number">3</div>
+                    <h4>Risk Assessment</h4>
+                    <p>Real-time cancer probability calculation</p>
+                </div>
+                <div class="workflow-step" style="--i:4">
+                    <div class="step-number">4</div>
+                    <h4>Clinical Action</h4>
+                    <p>Evidence-based recommendations provided</p>
+                </div>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                    <h3>Intelligent Analysis</h3>
+                    <p>AI-driven symptom analysis that learns from thousands of clinical cases to provide accurate risk assessment.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
+                    <h3>Multi-Cancer Detection</h3>
+                    <p>Comprehensive analysis across 10+ cancer types with probability-based risk stratification.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>HIPAA Compliant</h3>
+                    <p>Enterprise-grade security protecting patient data with full audit trails and access controls.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cancers" class="cancers">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Comprehensive Coverage</span>
+                <h2 class="section-title">Cancers We Detect</h2>
+                <p style="color: var(--gray-600); margin-top: 0.5rem;">Early detection saves lives. Our AI analyzes symptoms across multiple cancer types.</p>
+            </div>
+            
+            <div class="cancers-grid">
+                <div class="cancer-card"><div class="cancer-icon"><i class="fas fa-female"></i></div><h4>Breast Cancer</h4></div>
+                <div class="cancer-card"><div class="cancer-icon"><i class="fas fa-lungs"></i></div><h4>Lung Cancer</h4></div>
+                <div class="cancer-card"><div class="cancer-icon"><i class="fas fa-stethoscope"></i></div><h4>Colorectal Cancer</h4></div>
+                <div class="cancer-card"><div class="cancer-icon"><i class="fas fa-brain"></i></div><h4>Brain Cancer</h4></div>
+                <div class="cancer-card"><div class="cancer-icon"><i class="fas fa-male"></i></div><h4>Prostate Cancer</h4></div>
+                <div class="cancer-card"><div class="cancer-icon"><i class="fas fa-eye"></i></div><h4>Eye Cancer</h4></div>
+                <div class="cancer-card"><div class="cancer-icon"><i class="fas fa-vial"></i></div><h4>Liver Cancer</h4></div>
+                <div class="cancer-card"><div class="cancer-icon"><i class="fas fa-venus"></i></div><h4>Cervical Cancer</h4></div>
+                <div class="cancer-card"><div class="cancer-icon"><i class="fas fa-hand-dots"></i></div><h4>Skin Cancer</h4></div>
+                <div class="cancer-card"><div class="cancer-icon"><i class="fas fa-capsules"></i></div><h4>Pancreatic Cancer</h4></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="cta">
+        <div class="container">
+            <h2>Advancing Cancer Care Through AI</h2>
+            <p>Join leading healthcare institutions using ICDS for clinical decision support.</p>
+            <div class="cta-buttons">
+                <a href="register.html" class="btn btn-secondary-light">Register Your Hospital</a>
+                <a href="login.html" class="btn btn-outline">Access Platform</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>ICDS</h4>
+                    <p>Intelligent Cancer Detection System<br>AI-Powered Clinical Decision Support</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <p><a href="#home">Home</a></p>
+                    <p><a href="#features">Features</a></p>
+                    <p><a href="#cancers">Cancers</a></p>
+                </div>
+                <div class="footer-col">
+                    <h4>For Hospitals</h4>
+                    <p><a href="register.html">Register Hospital</a></p>
+                    <p><a href="login.html">Provider Login</a></p>
+                    <p><a href="#">Request Demo</a></p>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p>support@icds.health</p>
+                    <p>+1 (888) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Intelligent Cancer Detection System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- External JavaScript -->
+    <script src="js/index.js"></script>
+</body>
+</html>

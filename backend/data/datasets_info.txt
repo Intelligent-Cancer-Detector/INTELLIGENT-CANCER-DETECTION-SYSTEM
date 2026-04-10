@@ -1,0 +1,68 @@
+ICDS Cancer Datasets Summary
+==================================================
+
+Cancer  : brain
+File    : brain_cancer.csv
+Note    : Brain tumor features — size, type, symptoms
+Status  : MISSING
+
+Cancer  : breast
+File    : breast_cancer_wdbc.csv
+Note    : Wisconsin Diagnostic — 569 patients, 30 features. M=malignant B=benign
+Status  : 124,103 bytes
+
+Cancer  : breast
+File    : breast_cancer_symptoms.csv
+Note    : Symptom-based — 286 patients, age, menopause, tumor size, recurrence
+Status  : 24,373 bytes
+
+Cancer  : colorectal
+File    : colorectal_cancer.csv
+Note    : Colon cancer survival — 929 patients, treatment, recurrence, death
+Status  : 84,108 bytes
+
+Cancer  : colorectal
+File    : cervical_risk_factors.csv
+Note    : 858 patients — risk factors: smoking, STDs, age, contraceptives
+Status  : 102,059 bytes
+
+Cancer  : eye
+File    : eye_disease.csv
+Note    : Eye disease features — vision loss, pressure, symptoms
+Status  : MISSING
+
+Cancer  : lungs
+File    : lung_cancer_survey.csv
+Note    : 285 patients — smoking, cough, fatigue, wheezing, chest pain, dyspnea
+Status  : MISSING
+
+Cancer  : prostate
+File    : prostate_cancer.csv
+Note    : 100 patients — radius, texture, perimeter, PSA, diagnosis B/M
+Status  : MISSING
+
+Cancer  : ovarian
+File    : ovarian_cancer.csv
+Note    : Ovarian cancer — CA-125, age, pelvic pain, bloating features
+Status  : 634 bytes
+
+Cancer  : pancreatic
+File    : pancreatic_cancer.csv
+Note    : Pancreatic cancer survival — clinical features + biomarkers
+Status  : MISSING
+
+Cancer  : skin
+File    : skin_dermatology.csv
+Note    : 366 patients — 34 skin features: erythema, scaling, itching, koebner
+Status  : 25,964 bytes
+
+Cancer  : bladder
+File    : bladder_cancer.csv
+Note    : Bladder cancer recurrence — treatment, tumors, size, recurrences
+Status  : 6,632 bytes
+
+Cancer  : .
+File    : cancer_prediction_general.csv
+Note    : Multi-cancer prediction — age, gender, symptoms, cancer type label
+Status  : MISSING
+

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICDS | Secure Login</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a5c2e;
+            --primary-dark: #064e24;
+            --primary-light: #2c7a4a;
+            --primary-gradient: linear-gradient(135deg, #0a5c2e, #064e24);
+            --success: #10b981;
+            --danger: #ef4444;
+            --white: #ffffff;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: linear-gradient(135deg, #e8f0e8 0%, #d4e4d4 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            max-width: 450px;
+            width: 100%;
+            background: var(--white);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+            overflow: hidden;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-header {
+            background: var(--primary-gradient);
+            color: var(--white);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path fill="%23ffffff" d="M20,20 L30,20 L25,28 Z M70,70 L80,70 L75,78 Z M45,10 L55,10 L50,18 Z M10,45 L18,50 L10,55 Z M90,45 L82,50 L90,55 Z M50,85 L50,95 L58,90 Z M35,85 L35,95 L27,90 Z"/><circle cx="50" cy="50" r="8"/></svg>');
+            background-repeat: repeat;
+            background-size: 30px;
+            opacity: 0.15;
+        }
+
+        .login-header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin: 0 0 10px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .login-header p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-form {
+            padding: 40px 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--gray-700);
+            font-size: 13px;
+        }
+
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            color: var(--gray-400);
+            font-size: 16px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 15px 14px 48px;
+            border: 1.5px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 14px;
+            transition: all 0.3s;
+            font-family: var(--font-sans);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(10,92,46,0.1);
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 16px;
+            color: var(--gray-400);
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .toggle-password:hover {
+            color: var(--primary);
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .remember-me label {
+            margin: 0;
+            font-weight: normal;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .forgot-password {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .divider {
+            position: relative;
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gray-200);
+        }
+
+        .divider span {
+            position: relative;
+            background: var(--white);
+            padding: 0 15px;
+            color: var(--gray-500);
+            font-size: 12px;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .login-footer p {
+            color: var(--gray-600);
+            font-size: 13px;
+        }
+
+        .login-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+        }
+
+        .alert.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .alert-success {
+            background: #ecfdf5;
+            border: 1px solid var(--success);
+            color: #065f46;
+        }
+
+        .alert-error {
+            background: #fef2f2;
+            border: 1px solid var(--danger);
+            color: #991b1b;
+        }
+
+        .alert-info {
+            background: #eff6ff;
+            border: 1px solid #3b82f6;
+            color: #1e40af;
+        }
+
+        .alert i {
+            font-size: 16px;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                border-radius: 20px;
+            }
+            .login-header {
+                padding: 30px 20px;
+            }
+            .login-form {
+                padding: 30px 20px;
+            }
+            .form-options {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>ICDS</h1>
+            <p>Intelligent Cancer Detection System</p>
+        </div>
+        
+        <div class="login-form">
+            <div id="successAlert" class="alert alert-success">
+                <i class="fas fa-check-circle"></i>
+                <span id="successMessage">Login successful! Redirecting...</span>
+            </div>
+            
+            <div id="errorAlert" class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorMessage">Invalid email or password</span>
+            </div>
+            
+            <div id="infoAlert" class="alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                <span id="infoMessage">Checking credentials...</span>
+            </div>
+            
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-group">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" id="email" name="email" 
+                               placeholder="doctor@hospital.org" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="password" name="password" 
+                               placeholder="Enter your password" required>
+                        <i class="fas fa-eye toggle-password" onclick="togglePassword()" id="toggleIcon"></i>
+                    </div>
+                </div>
+                
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password" onclick="forgotPassword()">
+                        Forgot Password?
+                    </a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
+            </form>
+            
+            <div class="divider">
+                <span>New to ICDS?</span>
+            </div>
+            
+            <div class="login-footer">
+                <p>Don't have an account? <a href="register.html">Register your hospital</a></p>
+                <p style="margin-top: 12px; font-size: 11px; color: var(--gray-400);">
+                    <i class="fas fa-shield-alt"></i> HIPAA Compliant | Secure Login
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ====================================
+        // BACKEND API CONFIGURATION
+        // ====================================
+        
+        const API_BASE_URL = "http://localhost:5000/api";
+        
+        // Test credentials
+        const TEST_EMAIL = "wycliffr254@gmail.com";
+        const TEST_PASSWORD = "Test@123456";
+        
+        // Handle login with backend API
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('remember').checked;
+            const loginBtn = document.getElementById('loginBtn');
+            
+            if (!email || !password) {
+                showAlert('error', 'Please enter both email and password');
+                return;
+            }
+            
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<span class="loading-spinner"></span> Authenticating...';
+            showAlert('info', 'Connecting to server...');
+            
+            try {
+                // Call backend login API
+                const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Login successful
+                    showAlert('success', `Welcome back, ${data.user.name}! Redirecting...`);
+                    
+                    // Store login state in localStorage
+                    localStorage.setItem('icds_logged_in', 'true');
+                    localStorage.setItem('icds_user_id', data.user.id);
+                    localStorage.setItem('icds_user_email', data.user.email);
+                    localStorage.setItem('icds_user_name', data.user.name);
+                    localStorage.setItem('icds_user_role', data.user.role);
+                    localStorage.setItem('icds_department', data.user.department || 'Medical');
+                    localStorage.setItem('icds_hospital_id', data.user.hospital_id);
+                    localStorage.setItem('icds_hospital', data.user.hospital_name);
+                    localStorage.setItem('icds_token', data.token);
+                    
+                    if (rememberMe) {
+                        localStorage.setItem('icds_remember_me', 'true');
+                        localStorage.setItem('icds_saved_email', email);
+                    } else {
+                        localStorage.removeItem('icds_remember_me');
+                        localStorage.removeItem('icds_saved_email');
+                    }
+                    
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1500);
+                } else {
+                    showAlert('error', data.error || 'Invalid email or password');
+                    resetLoginButton(loginBtn);
+                }
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                showAlert('error', 'Cannot connect to server. Make sure backend is running on port 5000');
+                resetLoginButton(loginBtn);
+            }
+        }
+        
+        function resetLoginButton(loginBtn) {
+            loginBtn.disabled = false;
+            loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+        }
+        
+        function showAlert(type, message) {
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
+            const infoAlert = document.getElementById('infoAlert');
+            
+            successAlert.classList.remove('show');
+            errorAlert.classList.remove('show');
+            infoAlert.classList.remove('show');
+            
+            if (type === 'success') {
+                document.getElementById('successMessage').textContent = message;
+                successAlert.classList.add('show');
+                setTimeout(() => successAlert.classList.remove('show'), 3000);
+            } else if (type === 'error') {
+                document.getElementById('errorMessage').textContent = message;
+                errorAlert.classList.add('show');
+                setTimeout(() => errorAlert.classList.remove('show'), 4000);
+            } else if (type === 'info') {
+                document.getElementById('infoMessage').textContent = message;
+                infoAlert.classList.add('show');
+                setTimeout(() => infoAlert.classList.remove('show'), 2000);
+            }
+        }
+        
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggleIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+        
+        function forgotPassword() {
+            alert('Please contact your hospital administrator to reset your password.\n\nOr use test mode (Ctrl+Shift+L)');
+        }
+        
+        function loadSavedCredentials() {
+            const rememberMe = localStorage.getItem('icds_remember_me');
+            if (rememberMe === 'true') {
+                const savedEmail = localStorage.getItem('icds_saved_email');
+                if (savedEmail) {
+                    document.getElementById('email').value = savedEmail;
+                    document.getElementById('remember').checked = true;
+                }
+            }
+        }
+        
+        // Test Mode - Press Ctrl+Shift+L to load test credentials
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'L') {
+                e.preventDefault();
+                document.getElementById('email').value = TEST_EMAIL;
+                document.getElementById('password').value = TEST_PASSWORD;
+                showAlert('success', 'Test credentials loaded! Click Sign In to login.');
+            }
+        });
+        
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+            }
+        });
+        
+        loadSavedCredentials();
+        console.log('ICDS Login Page Ready - Using Backend API at', API_BASE_URL);
+        console.log('Test credentials: Ctrl+Shift+L to load');
+        console.log('Make sure backend is running: python app.py');
+    </script>
+</body>
+</html>

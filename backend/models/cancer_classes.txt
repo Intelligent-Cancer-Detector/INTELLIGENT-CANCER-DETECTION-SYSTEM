@@ -1,0 +1,11 @@
+0,bladder
+1,brain
+2,breast
+3,colorectal
+4,eye
+5,lung
+6,none
+7,ovarian
+8,pancreatic
+9,prostate
+10,skin

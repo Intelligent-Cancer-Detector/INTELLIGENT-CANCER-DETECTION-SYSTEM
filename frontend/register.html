@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICDS | Hospital Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <link rel="stylesheet" href="../css/register.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo"><i class="fas fa-microscope"></i></div>
+            <h1>Hospital Registration</h1>
+            <p>Join the Intelligent Cancer Detection System</p>
+        </div>
+
+        <div class="form-card">
+            <div id="alert" class="alert"></div>
+
+            <!-- SECTION 1: Institution Details -->
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-hospital"></i> Institution Information</h2>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label>Institution Email <span class="required">*</span></label>
+                        <input type="email" id="hospitalEmail" placeholder="hospital@domain.org" oninput="checkHospitalEmail()">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Institution Name <span class="required">*</span></label>
+                        <input type="text" id="hospitalName" placeholder="Enter hospital name">
+                        <div id="aiSuggest" class="ai-suggest">
+                            <i class="fas fa-robot"></i>
+                            <span id="aiSuggestText"></span>
+                            <button onclick="applyAISuggestion()">Apply</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Institution Type <span class="required">*</span></label>
+                        <select id="hospitalType">
+                            <option value="">Select type</option>
+                            <option value="private">Private Hospital</option>
+                            <option value="government">Government Hospital</option>
+                            <option value="teaching">Teaching Hospital</option>
+                            <option value="cancer-center">Specialty Cancer Center</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Facility Size</label>
+                        <select id="hospitalSize">
+                            <option value="">Select bed capacity</option>
+                            <option value="small">&lt; 100 beds</option>
+                            <option value="medium">100-300 beds</option>
+                            <option value="large">301-800 beds</option>
+                            <option value="major">801+ beds</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Street Address <span class="required">*</span></label>
+                        <input type="text" id="address" placeholder="Street address">
+                    </div>
+                    <div class="form-group">
+                        <label>City <span class="required">*</span></label>
+                        <input type="text" id="city" placeholder="City">
+                    </div>
+                    <div class="form-group">
+                        <label>County/Province</label>
+                        <input type="text" id="state" placeholder="County/Province">
+                    </div>
+                    <div class="form-group">
+                        <label>Postal Code</label>
+                        <input type="text" id="postalCode" placeholder="Postal Code">
+                    </div>
+                    <div class="form-group">
+                        <label>Country</label>
+                        <select id="country">
+                            <option value="">Select country</option>
+                            <option value="Kenya">Kenya</option>
+                            <option value="Uganda">Uganda</option>
+                            <option value="Tanzania">Tanzania</option>
+                            <option value="Rwanda">Rwanda</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Main Phone <span class="required">*</span></label>
+                        <input type="tel" id="phone" placeholder="+254 XXX XXXXXX">
+                    </div>
+                    <div class="form-group">
+                        <label>Emergency Contact</label>
+                        <input type="tel" id="emergencyContact" placeholder="+254 XXX XXXXXX">
+                    </div>
+                    <div class="form-group">
+                        <label>License Number</label>
+                        <input type="text" id="licenseNumber" placeholder="Hospital license number">
+                    </div>
+                    <div class="form-group">
+                        <label>Year Established</label>
+                        <input type="number" id="yearEstablished" placeholder="YYYY" min="1800" max="2026">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: Administrator Details -->
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-user-md"></i> Administrator Information</h2>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label>Full Name <span class="required">*</span></label>
+                        <input type="text" id="fullName" placeholder="Dr. John Smith">
+                    </div>
+                    <div class="form-group">
+                        <label>Designation <span class="required">*</span></label>
+                        <select id="designation">
+                            <option value="">Select designation</option>
+                            <option value="medical-director">Medical Director</option>
+                            <option value="chief-oncology">Chief of Oncology</option>
+                            <option value="administrator">Hospital Administrator</option>
+                            <option value="it-head">Head of IT / Health Informatics</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Department <span class="required">*</span></label>
+                        <select id="department">
+                            <option value="">Select department</option>
+                            <option value="administration">Administration</option>
+                            <option value="oncology">Oncology</option>
+                            <option value="internal-medicine">Internal Medicine</option>
+                            <option value="it">Information Technology</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Professional License Number</label>
+                        <input type="text" id="adminLicense" placeholder="Medical license number">
+                    </div>
+                    <div class="form-group">
+                        <label>Work Email <span class="required">*</span></label>
+                        <input type="email" id="adminEmail" placeholder="doctor@hospital.org">
+                    </div>
+                    <div class="form-group">
+                        <label>Direct Phone <span class="required">*</span></label>
+                        <input type="tel" id="adminPhone" placeholder="+254 XXX XXXXXX">
+                    </div>
+                    <div class="form-group">
+                        <label>Mobile (Optional)</label>
+                        <input type="tel" id="adminMobile" placeholder="+254 XXX XXXXXX">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Alternative Contact Person</label>
+                        <input type="text" id="alternativeContact" placeholder="Name of backup contact">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 3: Security Details -->
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-lock"></i> Security Setup</h2>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label>Username <span class="required">*</span></label>
+                        <input type="text" id="username" placeholder="dr.john.smith">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Password <span class="required">*</span></label>
+                        <input type="password" id="password" placeholder="Create a strong password" oninput="checkPasswordStrength()">
+                        <div class="password-strength">
+                            <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+                            <div class="strength-text" id="strengthText">Enter a password</div>
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Confirm Password <span class="required">*</span></label>
+                        <input type="password" id="confirmPassword" placeholder="Re-enter password" oninput="checkPasswordMatch()">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Security Question 1 (Optional)</label>
+                        <select id="securityQuestion1">
+                            <option value="">Select a question</option>
+                            <option value="first-hospital">What was the name of your first hospital?</option>
+                            <option value="mother-maiden">What is your mother's maiden name?</option>
+                            <option value="first-school">What was your first medical school?</option>
+                        </select>
+                        <input type="text" id="securityAnswer1" placeholder="Your answer" style="margin-top: 10px;">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Security Question 2 (Optional)</label>
+                        <select id="securityQuestion2">
+                            <option value="">Select a question</option>
+                            <option value="birth-city">What city were you born in?</option>
+                            <option value="favorite-book">What is your favorite book?</option>
+                            <option value="first-teacher">Who was your first teacher?</option>
+                        </select>
+                        <input type="text" id="securityAnswer2" placeholder="Your answer" style="margin-top: 10px;">
+                    </div>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="agreeTerms">
+                    <label>I confirm that I am an authorized representative of this institution</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="agreePrivacy">
+                    <label>I agree to the Terms of Service and Privacy Policy</label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="submit-section">
+                <button class="btn-submit" onclick=(submitRegistration())><i class="fas fa-check-circle"></i> Complete Registration</button>
+            </div>
+
+            <!-- Verification Section -->
+            <div id="verificationSection" class="verification-section" style="display: none;">
+                <div class="verification-icon"><i class="fas fa-envelope-open-text"></i></div>
+                <h3>Verify Your Email Address</h3>
+                <p>A verification code has been sent to:</p>
+                <p class="verify-email" id="verifyEmail">-</p>
+                <div class="code-inputs">
+                    <input type="text" class="code-input" maxlength="1" id="code1" onkeyup="moveToNext(1,2)">
+                    <input type="text" class="code-input" maxlength="1" id="code2" onkeyup="moveToNext(2,3)">
+                    <input type="text" class="code-input" maxlength="1" id="code3" onkeyup="moveToNext(3,4)">
+                    <input type="text" class="code-input" maxlength="1" id="code4" onkeyup="moveToNext(4,5)">
+                    <input type="text" class="code-input" maxlength="1" id="code5" onkeyup="moveToNext(5,6)">
+                    <input type="text" class="code-input" maxlength="1" id="code6" onkeyup="verifyOTP()">
+                </div>
+                <div class="timer" id="timer">Code expires in: 05:00</div>
+                <button class="btn-verify-submit" onclick="verifyOTP()"><i class="fas fa-check-circle"></i> Verify Email</button>
+                <p class="resend-link"><a href="#" onclick="resendOTP()">Resend verification code</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p>Registering your hospital...</p>
+    </div>
+
+    <script src="../js/register.js"></script>
+</body>
+</html>
