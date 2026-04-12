@@ -1,3 +1,31 @@
-/.env
-/.venv
-/.vscode
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+
+# ML / Data files (if you don't want to push models)
+*.joblib
+*.pkl
+*.h5
+*.model
+models/*.pkl
+
+# Logs
+*.log
+
+# VS Code
+.vscode/
