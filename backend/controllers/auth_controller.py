@@ -40,6 +40,7 @@ def register_user():
             hospital.get("type"),
         )
 
+
         # CREATE USER
         user_id = str(uuid.uuid4())
         user = create_user(
