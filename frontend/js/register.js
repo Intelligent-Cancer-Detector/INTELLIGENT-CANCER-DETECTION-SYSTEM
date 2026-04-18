@@ -4,6 +4,9 @@
 //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRncnJtenVzcWp6enZoZXZtbWJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyOTg4NDUsImV4cCI6MjA5MDg3NDg0NX0.nmD117ohEA-pMV4YnNluPxJGT4N-HFJxPaRRyGFyyks";
 // const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+import { API_PATHS } from "../utils/apiPaths.js";
+import api from "../utils/axiosInstance.js";
+
 let generatedOTP = "";
 let timerInterval;
 let currentFormData = null;
@@ -374,13 +377,15 @@ async function submitRegistration() {
   if (!validateAll()) return;
   const data = getFormData();
   console.log(data);
-  const res = await fetch("http://localhost:5000/api/auth/register", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
+  // const res = await fetch("http://localhost:5000/api/auth/register", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify(data),
+  // });
+
+  const res = await api.post(API_PATHS.AUTH.REGISTER, JSON.stringify(data));
   const result = await res.json();
   if (result.success) {
     alert("✅ Registration successful");
