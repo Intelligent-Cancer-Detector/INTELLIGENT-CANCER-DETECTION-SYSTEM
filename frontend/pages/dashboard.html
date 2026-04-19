@@ -1,1500 +1,285 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard - ICDS | Intelligent Cancer Detection System</title>
-    
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="../css/dashboard.css" />
+
     <!-- Chart.js for graphs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+
     <!-- Supabase JS Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #0a5c2e;
-            --primary-dark: #064e24;
-            --primary-light: #2c7a4a;
-            --primary-gradient: linear-gradient(135deg, #0a5c2e, #064e24);
-            --secondary: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --info: #3b82f6;
-            --white: #ffffff;
-            --gray-50: #f8fafc;
-            --gray-100: #f1f5f9;
-            --gray-200: #e2e8f0;
-            --gray-300: #cbd5e1;
-            --gray-400: #94a3b8;
-            --gray-500: #64748b;
-            --gray-600: #475569;
-            --gray-700: #334155;
-            --gray-800: #1e293b;
-            --gray-900: #0f172a;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            
-            --sidebar-width: 280px;
-            --sidebar-collapsed-width: 80px;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            background: var(--gray-50);
-            overflow-x: hidden;
-        }
-
-        .app-container {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: var(--sidebar-width);
-            background: linear-gradient(135deg, var(--gray-900), #1e3a8a);
-            color: var(--white);
-            position: fixed;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            overflow-y: auto;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            box-shadow: 4px 0 10px rgba(0,0,0,0.1);
-        }
-
-        .sidebar.collapsed {
-            width: var(--sidebar-collapsed-width);
-        }
-
-        .sidebar.collapsed .sidebar-header h3,
-        .sidebar.collapsed .menu-text,
-        .sidebar.collapsed .hospital-info p,
-        .sidebar.collapsed .hospital-info small {
-            display: none;
-        }
-
-        .sidebar.collapsed .sidebar-header {
-            padding: 20px 0;
-            justify-content: center;
-        }
-
-        .sidebar.collapsed .menu-item {
-            justify-content: center;
-            padding: 15px;
-        }
-
-        .sidebar.collapsed .menu-item i {
-            margin: 0;
-            font-size: 20px;
-        }
-
-        .sidebar-header {
-            padding: 25px 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .sidebar-header i {
-            font-size: 30px;
-            color: var(--primary-light);
-        }
-
-        .sidebar-header h3 {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .sidebar-header span {
-            font-size: 12px;
-            color: var(--gray-400);
-            display: block;
-        }
-
-        .hospital-info {
-            padding: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            text-align: left;
-        }
-
-        .hospital-info h4 {
-            font-size: 16px;
-            margin-bottom: 5px;
-            color: var(--white);
-        }
-
-        .hospital-info p {
-            font-size: 14px;
-            color: var(--gray-300);
-            margin: 3px 0;
-        }
-
-        .hospital-info i {
-            width: 20px;
-            color: var(--primary-light);
-        }
-
-        .hospital-info small {
-            font-size: 11px;
-            color: var(--gray-400);
-            display: block;
-            margin-top: 10px;
-        }
-
-        .sidebar-menu {
-            padding: 20px 0;
-        }
-
-        .menu-item {
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--gray-300);
-            text-decoration: none;
-            transition: all 0.3s;
-            margin: 5px 10px;
-            border-radius: 10px;
-        }
-
-        .menu-item i {
-            font-size: 18px;
-            width: 24px;
-        }
-
-        .menu-item:hover {
-            background: rgba(255,255,255,0.1);
-            color: var(--white);
-        }
-
-        .menu-item.active {
-            background: var(--primary-gradient);
-            color: var(--white);
-            box-shadow: 0 4px 10px rgba(10,92,46,0.3);
-        }
-
-        .menu-text {
-            flex: 1;
-        }
-
-        .sidebar-footer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .logout-btn {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--gray-300);
-            text-decoration: none;
-            padding: 10px;
-            border-radius: 10px;
-            transition: all 0.3s;
-        }
-
-        .logout-btn:hover {
-            background: rgba(239,68,68,0.2);
-            color: var(--danger);
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            margin-left: var(--sidebar-width);
-            transition: all 0.3s ease;
-        }
-
-        .main-content.expanded {
-            margin-left: var(--sidebar-collapsed-width);
-        }
-
-        .top-nav {
-            background: var(--white);
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .menu-toggle {
-            background: var(--gray-100);
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .menu-toggle:hover {
-            background: var(--gray-200);
-        }
-
-        .menu-toggle i {
-            font-size: 20px;
-            color: var(--gray-600);
-        }
-
-        .page-title h2 {
-            font-size: 20px;
-            color: var(--gray-800);
-        }
-
-        .page-title p {
-            font-size: 14px;
-            color: var(--gray-500);
-            margin-top: 2px;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .notifications {
-            position: relative;
-            cursor: pointer;
-        }
-
-        .notifications i {
-            font-size: 22px;
-            color: var(--gray-600);
-        }
-
-        .notification-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: var(--danger);
-            color: white;
-            font-size: 10px;
-            padding: 2px 6px;
-            border-radius: 30px;
-            display: none;
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            padding: 5px 10px;
-            border-radius: 10px;
-            transition: all 0.3s;
-        }
-
-        .user-profile:hover {
-            background: var(--gray-100);
-        }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            background: var(--primary-gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-        }
-
-        .user-info h4 {
-            font-size: 14px;
-            margin: 0;
-        }
-
-        .user-info p {
-            font-size: 12px;
-            color: var(--gray-500);
-            margin: 0;
-        }
-
-        /* Dashboard Content */
-        .dashboard-content {
-            padding: 30px;
-        }
-
-        .welcome-banner {
-            background: var(--primary-gradient);
-            border-radius: 20px;
-            padding: 30px;
-            color: white;
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .welcome-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            width: 50%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path fill="%23ffffff" fill-opacity="0.1" d="M45,-65.5C58.1,-55.8,68.4,-41.5,75.3,-25.4C82.2,-9.3,85.7,8.5,80.1,23.5C74.5,38.5,59.8,50.7,44.1,59.6C28.4,68.5,11.7,74.1,-4.9,73.9C-21.5,73.7,-38.1,67.7,-52.3,57.3C-66.5,46.9,-78.3,32.1,-81.9,15.5C-85.5,-1.2,-80.9,-19.7,-70.1,-33.9C-59.3,-48.1,-42.3,-58,-26.2,-64.4C-10.1,-70.8,5.1,-73.7,20.3,-70.3C35.4,-66.9,50.6,-57.1,45,-65.5Z" transform="translate(100 100)" /></svg>');
-            background-repeat: no-repeat;
-            background-position: right;
-            background-size: cover;
-        }
-
-        .welcome-banner h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .welcome-banner p {
-            opacity: 0.9;
-            margin-bottom: 20px;
-        }
-
-        .quick-actions {
-            display: flex;
-            gap: 15px;
-        }
-
-        .quick-action-btn {
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.3);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-
-        .quick-action-btn:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-        }
-
-        /* Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            border: 1px solid var(--gray-200);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-
-        .stat-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .stat-icon.primary {
-            background: rgba(10,92,46,0.1);
-            color: var(--primary);
-        }
-
-        .stat-icon.success {
-            background: rgba(16,185,129,0.1);
-            color: var(--secondary);
-        }
-
-        .stat-icon.warning {
-            background: rgba(245,158,11,0.1);
-            color: var(--warning);
-        }
-
-        .stat-icon.info {
-            background: rgba(59,130,246,0.1);
-            color: var(--info);
-        }
-
-        .stat-details h3 {
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--gray-800);
-            margin-bottom: 5px;
-        }
-
-        .stat-details p {
-            color: var(--gray-500);
-            font-size: 14px;
-            margin: 0;
-        }
-
-        /* Charts */
-        .charts-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .chart-card {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border: 1px solid var(--gray-200);
-        }
-
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .chart-header h3 {
-            font-size: 16px;
-            color: var(--gray-700);
-        }
-
-        .chart-container {
-            height: 300px;
-            position: relative;
-        }
-
-        canvas {
-            max-height: 300px;
-        }
-
-        /* Recent Assessments Table */
-        .recent-assessments {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
-            border: 1px solid var(--gray-200);
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .section-header h3 {
-            font-size: 18px;
-            color: var(--gray-800);
-        }
-
-        .view-all {
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .table-container {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th {
-            text-align: left;
-            padding: 15px;
-            background: var(--gray-50);
-            color: var(--gray-600);
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        td {
-            padding: 15px;
-            border-bottom: 1px solid var(--gray-200);
-            color: var(--gray-700);
-        }
-
-        .empty-table {
-            text-align: center;
-            padding: 40px;
-            color: var(--gray-400);
-        }
-
-        .empty-table i {
-            font-size: 48px;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .risk-high {
-            color: var(--danger);
-            font-weight: 600;
-        }
-
-        .risk-medium {
-            color: var(--warning);
-            font-weight: 600;
-        }
-
-        .risk-low {
-            color: var(--secondary);
-            font-weight: 600;
-        }
-
-        /* Alerts Section */
-        .alerts-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .alert-card {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border: 1px solid var(--gray-200);
-        }
-
-        .alert-card h3 {
-            margin-bottom: 15px;
-        }
-
-        .empty-alert {
-            text-align: center;
-            padding: 30px;
-            color: var(--gray-400);
-        }
-
-        .empty-alert i {
-            font-size: 40px;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .alert-item {
-            padding: 12px;
-            border-bottom: 1px solid var(--gray-200);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .alert-item:last-child {
-            border-bottom: none;
-        }
-
-        .alert-item i {
-            font-size: 18px;
-        }
-
-        .alert-item.warning i {
-            color: var(--warning);
-        }
-
-        .alert-item.danger i {
-            color: var(--danger);
-        }
-
-        .alert-item.info i {
-            color: var(--info);
-        }
-
-        .alert-content {
-            flex: 1;
-        }
-
-        .alert-title {
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .alert-time {
-            font-size: 11px;
-            color: var(--gray-400);
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .modal-header h3 {
-            font-size: 20px;
-        }
-
-        .close-modal {
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--gray-500);
-        }
-
-        /* Loading Spinner */
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--gray-200);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        @media (max-width: 1024px) {
-            .charts-row {
-                grid-template-columns: 1fr;
-            }
-            .alerts-section {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
-            .sidebar.active {
-                transform: translateX(0);
-            }
-            .main-content {
-                margin-left: 0 !important;
-            }
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            .quick-actions {
-                flex-direction: column;
-            }
-            .user-info {
-                display: none;
-            }
-        }
-    </style>
-</head>
-<body>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <div class="app-container">
-        <!-- SIDEBAR -->
-        <div class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <i class="fas fa-microscope"></i>
-                <div>
-                    <h3>ICDS</h3>
-                    <span>Intelligent Cancer Detection</span>
-                </div>
-            </div>
-            
-            <div class="hospital-info" id="hospitalInfo">
-                <h4 id="hospitalName">--</h4>
-                <p><i class="fas fa-user-md"></i> <span id="adminName">--</span></p>
-                <p><i class="fas fa-envelope"></i> <span id="adminEmail">--</span></p>
-                <small><i class="fas fa-shield-alt"></i> Verified Institution</small>
-            </div>
-            
-            <div class="sidebar-menu">
-                <a href="dashboard.html" class="menu-item active">
-                    <i class="fas fa-home"></i>
-                    <span class="menu-text">Dashboard</span>
-                </a>
-                <a href="assessment.html" class="menu-item">
-                    <i class="fas fa-notes-medical"></i>
-                    <span class="menu-text">New Assessment</span>
-                </a>
-                <a href="patient-history.html" class="menu-item">
-                    <i class="fas fa-history"></i>
-                    <span class="menu-text">Patient History</span>
-                </a>
-                <a href="analytics.html" class="menu-item">
-                    <i class="fas fa-chart-bar"></i>
-                    <span class="menu-text">Analytics</span>
-                </a>
-                <a href="manage-users.html" class="menu-item">
-                    <i class="fas fa-users"></i>
-                    <span class="menu-text">Manage Users</span>
-                </a>
-                <a href="hospital-profile.html" class="menu-item">
-                    <i class="fas fa-hospital"></i>
-                    <span class="menu-text">Hospital Profile</span>
-                </a>
-                <a href="settings.html" class="menu-item">
-                    <i class="fas fa-cog"></i>
-                    <span class="menu-text">Settings</span>
-                </a>
-            </div>
-            
-            <div class="sidebar-footer">
-                <a href="login.html" class="logout-btn" onclick="logout()">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span class="menu-text">Logout</span>
-                </a>
-            </div>
+      <!-- SIDEBAR -->
+      <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <i class="fas fa-microscope"></i>
+          <div>
+            <h3>ICDS</h3>
+            <span>Intelligent Cancer Detection</span>
+          </div>
         </div>
-        
-        <!-- MAIN CONTENT -->
-        <div class="main-content" id="mainContent">
-            <div class="top-nav">
-                <div class="nav-left">
-                    <button class="menu-toggle" onclick="toggleSidebar()">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <div class="page-title">
-                        <h2>Dashboard</h2>
-                        <p>Welcome back, <span id="greetingName">--</span></p>
-                    </div>
-                </div>
-                
-                <div class="nav-right">
-                    <div class="notifications" onclick="showNotifications()">
-                        <i class="far fa-bell"></i>
-                        <span class="notification-badge" id="notificationBadge">0</span>
-                    </div>
-                    
-                    <div class="user-profile" onclick="toggleUserMenu()">
-                        <div class="user-avatar" id="userAvatar">--</div>
-                        <div class="user-info">
-                            <h4 id="userDisplayName">--</h4>
-                            <p>Medical Director</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="dashboard-content">
-                <!-- Welcome Banner -->
-                <div class="welcome-banner">
-                    <h2>Welcome to ICDS</h2>
-                    <p>Start by creating your first patient assessment. The system will help you analyze symptoms and calculate cancer risk probabilities.</p>
-                    <div class="quick-actions">
-                        <button class="quick-action-btn" onclick="newAssessment()">
-                            <i class="fas fa-plus-circle"></i> New Assessment
-                        </button>
-                        <button class="quick-action-btn" onclick="viewReports()">
-                            <i class="fas fa-file-alt"></i> View Reports
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Stats Cards -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon primary">
-                            <i class="fas fa-calendar-check"></i>
-                        </div>
-                        <div class="stat-details">
-                            <h3 id="assessmentsToday">0</h3>
-                            <p>Assessments Today</p>
-                        </div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon warning">
-                            <i class="fas fa-exclamation-triangle"></i>
-                        </div>
-                        <div class="stat-details">
-                            <h3 id="highRiskCases">0</h3>
-                            <p>High Risk Cases</p>
-                        </div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon success">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div class="stat-details">
-                            <h3 id="cancerDetected">0</h3>
-                            <p>Cancers Detected</p>
-                        </div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-icon info">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-details">
-                            <h3 id="activeDoctors">0</h3>
-                            <p>Active Doctors</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Charts Row -->
-                <div class="charts-row">
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <h3><i class="fas fa-chart-bar"></i> Cancer Detection by Type</h3>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="cancerChart"></canvas>
-                        </div>
-                    </div>
-                    
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <h3><i class="fas fa-chart-pie"></i> Risk Distribution</h3>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="riskChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Recent Assessments -->
-                <div class="recent-assessments">
-                    <div class="section-header">
-                        <h3><i class="fas fa-list"></i> Recent Patient Assessments</h3>
-                        <a href="patient-history.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                    
-                    <div class="table-container">
-                        <table id="assessmentsTable">
-                            <thead>
-                                <tr>
-                                    <th>Patient</th>
-                                    <th>Age/Sex</th>
-                                    <th>Symptoms</th>
-                                    <th>Risk Level</th>
-                                    <th>Cancer Type</th>
-                                    <th>Doctor</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="assessmentsTableBody">
-                                <tr>
-                                    <td colspan="8" class="empty-table">
-                                        <div class="loading-spinner"></div>
-                                        <p style="margin-top: 15px;">Loading assessments...</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                
-                <!-- Alerts Section -->
-                <div class="alerts-section">
-                    <div class="alert-card">
-                        <h3><i class="fas fa-bell"></i> Urgent Alerts</h3>
-                        <div id="urgentAlertsContainer">
-                            <div class="empty-alert">
-                                <i class="fas fa-check-circle" style="color: var(--success);"></i>
-                                <p>No urgent alerts</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="alert-card">
-                        <h3><i class="fas fa-info-circle"></i> System Updates</h3>
-                        <div id="systemUpdatesContainer">
-                            <div class="empty-alert">
-                                <i class="fas fa-check-circle" style="color: var(--success);"></i>
-                                <p>System is up to date</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+        <div class="hospital-info" id="hospitalInfo">
+          <h4 id="hospitalName">--</h4>
+          <p><i class="fas fa-user-md"></i> <span id="adminName">--</span></p>
+          <p><i class="fas fa-envelope"></i> <span id="adminEmail">--</span></p>
+          <small><i class="fas fa-shield-alt"></i> Verified Institution</small>
         </div>
+
+        <div class="sidebar-menu">
+          <a href="dashboard.html" class="menu-item active">
+            <i class="fas fa-home"></i>
+            <span class="menu-text">Dashboard</span>
+          </a>
+          <a href="assessment.html" class="menu-item">
+            <i class="fas fa-notes-medical"></i>
+            <span class="menu-text">New Assessment</span>
+          </a>
+          <a href="patient-history.html" class="menu-item">
+            <i class="fas fa-history"></i>
+            <span class="menu-text">Patient History</span>
+          </a>
+          <a href="analytics.html" class="menu-item">
+            <i class="fas fa-chart-bar"></i>
+            <span class="menu-text">Analytics</span>
+          </a>
+          <a href="manage-users.html" class="menu-item">
+            <i class="fas fa-users"></i>
+            <span class="menu-text">Manage Users</span>
+          </a>
+          <a href="hospital-profile.html" class="menu-item">
+            <i class="fas fa-hospital"></i>
+            <span class="menu-text">Hospital Profile</span>
+          </a>
+          <a href="settings.html" class="menu-item">
+            <i class="fas fa-cog"></i>
+            <span class="menu-text">Settings</span>
+          </a>
+        </div>
+
+        <div class="sidebar-footer">
+          <a href="login.html" class="logout-btn" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="menu-text">Logout</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div class="main-content" id="mainContent">
+        <div class="top-nav">
+          <div class="nav-left">
+            <button class="menu-toggle" onclick="toggleSidebar()">
+              <i class="fas fa-bars"></i>
+            </button>
+            <div class="page-title">
+              <h2>Dashboard</h2>
+              <p>Welcome back, <span id="greetingName">--</span></p>
+            </div>
+          </div>
+
+          <div class="nav-right">
+            <div class="notifications" onclick="showNotifications()">
+              <i class="far fa-bell"></i>
+              <span class="notification-badge" id="notificationBadge">0</span>
+            </div>
+
+            <div class="user-profile" onclick="toggleUserMenu()">
+              <div class="user-avatar" id="userAvatar">--</div>
+              <div class="user-info">
+                <h4 id="userDisplayName">--</h4>
+                <p>Medical Director</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-content">
+          <!-- Welcome Banner -->
+          <div class="welcome-banner">
+            <h2>Welcome to ICDS</h2>
+            <p>
+              Start by creating your first patient assessment. The system will
+              help you analyze symptoms and calculate cancer risk probabilities.
+            </p>
+            <div class="quick-actions">
+              <button class="quick-action-btn" onclick="newAssessment()">
+                <i class="fas fa-plus-circle"></i> New Assessment
+              </button>
+              <button class="quick-action-btn" onclick="viewReports()">
+                <i class="fas fa-file-alt"></i> View Reports
+              </button>
+            </div>
+          </div>
+
+          <!-- Stats Cards -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon primary">
+                <i class="fas fa-calendar-check"></i>
+              </div>
+              <div class="stat-details">
+                <h3 id="assessmentsToday">0</h3>
+                <p>Assessments Today</p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon warning">
+                <i class="fas fa-exclamation-triangle"></i>
+              </div>
+              <div class="stat-details">
+                <h3 id="highRiskCases">0</h3>
+                <p>High Risk Cases</p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon success">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div class="stat-details">
+                <h3 id="cancerDetected">0</h3>
+                <p>Cancers Detected</p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon info">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="stat-details">
+                <h3 id="activeDoctors">0</h3>
+                <p>Active Doctors</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Row -->
+          <div class="charts-row">
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3>
+                  <i class="fas fa-chart-bar"></i> Cancer Detection by Type
+                </h3>
+              </div>
+              <div class="chart-container">
+                <canvas id="cancerChart"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3><i class="fas fa-chart-pie"></i> Risk Distribution</h3>
+              </div>
+              <div class="chart-container">
+                <canvas id="riskChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Assessments -->
+          <div class="recent-assessments">
+            <div class="section-header">
+              <h3><i class="fas fa-list"></i> Recent Patient Assessments</h3>
+              <a href="patient-history.html" class="view-all"
+                >View All <i class="fas fa-arrow-right"></i
+              ></a>
+            </div>
+
+            <div class="table-container">
+              <table id="assessmentsTable">
+                <thead>
+                  <tr>
+                    <th>Patient</th>
+                    <th>Age/Sex</th>
+                    <th>Symptoms</th>
+                    <th>Risk Level</th>
+                    <th>Cancer Type</th>
+                    <th>Doctor</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="assessmentsTableBody">
+                  <tr>
+                    <td colspan="8" class="empty-table">
+                      <div class="loading-spinner"></div>
+                      <p style="margin-top: 15px">Loading assessments...</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Alerts Section -->
+          <div class="alerts-section">
+            <div class="alert-card">
+              <h3><i class="fas fa-bell"></i> Urgent Alerts</h3>
+              <div id="urgentAlertsContainer">
+                <div class="empty-alert">
+                  <i
+                    class="fas fa-check-circle"
+                    style="color: var(--success)"
+                  ></i>
+                  <p>No urgent alerts</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="alert-card">
+              <h3><i class="fas fa-info-circle"></i> System Updates</h3>
+              <div id="systemUpdatesContainer">
+                <div class="empty-alert">
+                  <i
+                    class="fas fa-check-circle"
+                    style="color: var(--success)"
+                  ></i>
+                  <p>System is up to date</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    
+
     <!-- Notifications Modal -->
     <div class="modal" id="notificationsModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Notifications</h3>
-                <span class="close-modal" onclick="closeNotifications()">&times;</span>
-            </div>
-            <div id="notificationsList">
-                <div class="empty-alert">
-                    <i class="fas fa-bell-slash"></i>
-                    <p>No notifications</p>
-                </div>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Notifications</h3>
+          <span class="close-modal" onclick="closeNotifications()"
+            >&times;</span
+          >
         </div>
+        <div id="notificationsList">
+          <div class="empty-alert">
+            <i class="fas fa-bell-slash"></i>
+            <p>No notifications</p>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <script>
-        // ====================================
-        // SUPABASE CONFIGURATION
-        // ====================================
-        
-        const SUPABASE_URL = "https://tgrrmzusqjzzvhevmmbt.supabase.co";
-        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRncnJtenVzcWp6enZoZXZtbWJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyOTg4NDUsImV4cCI6MjA5MDg3NDg0NX0.nmD117ohEA-pMV4YnNluPxJGT4N-HFJxPaRRyGFyyks";
-        
-        // Initialize Supabase client
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        
-        // Global variables
-        let cancerChart = null;
-        let riskChart = null;
-        let currentHospitalId = null;
-        
-        // Load dashboard data on page load
-        window.onload = async function() {
-            checkAuth();
-            await loadUserData();
-            await loadDashboardData();
-            await loadRecentAssessments();
-            await loadAlerts();
-        };
-        
-        // Check if user is authenticated
-        function checkAuth() {
-            const loggedIn = localStorage.getItem('icds_logged_in');
-            if (!loggedIn || loggedIn !== 'true') {
-                window.location.href = 'login.html';
-            }
-        }
-        
-        // Load user data from localStorage and Supabase
-        async function loadUserData() {
-            const userId = localStorage.getItem('icds_user_id');
-            const hospitalId = localStorage.getItem('icds_hospital_id');
-            const name = localStorage.getItem('icds_user_name');
-            const email = localStorage.getItem('icds_user_email');
-            const hospital = localStorage.getItem('icds_hospital');
-            
-            currentHospitalId = hospitalId;
-            
-            document.getElementById('hospitalName').textContent = hospital || '--';
-            document.getElementById('adminName').textContent = name || '--';
-            document.getElementById('adminEmail').textContent = email || '--';
-            
-            const firstName = name ? name.replace('Dr.', '').trim().split(' ')[0] : 'Guest';
-            document.getElementById('greetingName').textContent = firstName;
-            document.getElementById('userDisplayName').textContent = name || '--';
-            
-            const initials = name ? name.split(' ').map(n => n[0]).join('').substring(0,2) : '--';
-            document.getElementById('userAvatar').textContent = initials.toUpperCase();
-        }
-        
-        // Load all dashboard statistics
-        async function loadDashboardData() {
-            const hospitalId = localStorage.getItem('icds_hospital_id');
-            
-            if (!hospitalId) {
-                console.log('No hospital ID found');
-                return;
-            }
-            
-            try {
-                // Get today's date range
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
-                const tomorrow = new Date(today);
-                tomorrow.setDate(tomorrow.getDate() + 1);
-                
-                // Fetch assessments for this hospital
-                const { data: assessments, error: assessmentsError } = await supabase
-                    .from('assessments')
-                    .select(`
-                        id,
-                        status,
-                        created_at,
-                        predictions (
-                            top_cancer_type,
-                            top_probability
-                        )
-                    `)
-                    .eq('hospital_id', hospitalId);
-                
-                if (assessmentsError) throw assessmentsError;
-                
-                // Count assessments today
-                const todayAssessments = assessments?.filter(a => {
-                    const date = new Date(a.created_at);
-                    return date >= today && date < tomorrow;
-                }).length || 0;
-                
-                // Count high risk cases (probability > 70%)
-                const highRisk = assessments?.filter(a => 
-                    a.predictions && a.predictions.top_probability > 70
-                ).length || 0;
-                
-                // Count cancers detected (completed assessments with predictions)
-                const cancersDetected = assessments?.filter(a => 
-                    a.status === 'completed' && a.predictions
-                ).length || 0;
-                
-                // Count active doctors
-                const { data: doctors, error: doctorsError } = await supabase
-                    .from('users')
-                    .select('id', { count: 'exact' })
-                    .eq('hospital_id', hospitalId)
-                    .eq('is_active', true)
-                    .in('role', ['doctor', 'super_admin', 'admin']);
-                
-                if (doctorsError) throw doctorsError;
-                
-                // Update stats display
-                document.getElementById('assessmentsToday').textContent = todayAssessments;
-                document.getElementById('highRiskCases').textContent = highRisk;
-                document.getElementById('cancerDetected').textContent = cancersDetected;
-                document.getElementById('activeDoctors').textContent = doctors?.length || 0;
-                
-                // Load charts
-                await loadCancerChart(assessments);
-                await loadRiskChart(assessments);
-                
-            } catch (error) {
-                console.error('Error loading dashboard data:', error);
-            }
-        }
-        
-        // Load cancer detection chart
-        async function loadCancerChart(assessments) {
-            if (!assessments || assessments.length === 0) {
-                document.getElementById('cancerChartContainer').innerHTML = `
-                    <div class="no-data-message">
-                        <i class="fas fa-chart-simple"></i>
-                        <p>No data available yet</p>
-                        <p style="font-size: 12px;">Complete assessments to see statistics</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            // Count cancer types from predictions
-            const cancerCounts = {
-                'Lung Cancer': 0,
-                'Breast Cancer': 0,
-                'Colorectal Cancer': 0,
-                'Prostate Cancer': 0,
-                'Liver Cancer': 0,
-                'Cervical Cancer': 0,
-                'Brain Cancer': 0,
-                'Skin Cancer': 0,
-                'Pancreatic Cancer': 0,
-                'Eye Cancer': 0
-            };
-            
-            assessments.forEach(assessment => {
-                if (assessment.predictions && assessment.predictions.top_cancer_type) {
-                    const cancerType = assessment.predictions.top_cancer_type;
-                    if (cancerCounts[cancerType] !== undefined) {
-                        cancerCounts[cancerType]++;
-                    }
-                }
-            });
-            
-            const labels = Object.keys(cancerCounts);
-            const data = Object.values(cancerCounts);
-            
-            const ctx = document.getElementById('cancerChart').getContext('2d');
-            
-            if (cancerChart) {
-                cancerChart.destroy();
-            }
-            
-            cancerChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Number of Cases',
-                        data: data,
-                        backgroundColor: 'rgba(10, 92, 46, 0.6)',
-                        borderColor: 'rgba(10, 92, 46, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: {
-                        legend: { position: 'top' },
-                        title: { display: false }
-                    }
-                }
-            });
-        }
-        
-        // Load risk distribution chart
-        async function loadRiskChart(assessments) {
-            if (!assessments || assessments.length === 0) {
-                document.getElementById('riskChartContainer').innerHTML = `
-                    <div class="no-data-message">
-                        <i class="fas fa-chart-pie"></i>
-                        <p>No data available yet</p>
-                        <p style="font-size: 12px;">Complete assessments to see statistics</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            // Count risk levels
-            let highRisk = 0;
-            let mediumRisk = 0;
-            let lowRisk = 0;
-            
-            assessments.forEach(assessment => {
-                if (assessment.predictions && assessment.predictions.top_probability) {
-                    const prob = assessment.predictions.top_probability;
-                    if (prob > 70) highRisk++;
-                    else if (prob > 40) mediumRisk++;
-                    else lowRisk++;
-                }
-            });
-            
-            const ctx = document.getElementById('riskChart').getContext('2d');
-            
-            if (riskChart) {
-                riskChart.destroy();
-            }
-            
-            riskChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: ['High Risk (>70%)', 'Medium Risk (40-70%)', 'Low Risk (<40%)'],
-                    datasets: [{
-                        data: [highRisk, mediumRisk, lowRisk],
-                        backgroundColor: ['#ef4444', '#f59e0b', '#10b981'],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: {
-                        legend: { position: 'bottom' }
-                    }
-                }
-            });
-        }
-        
-        // Load recent assessments
-        async function loadRecentAssessments() {
-            const hospitalId = localStorage.getItem('icds_hospital_id');
-            const tbody = document.getElementById('assessmentsTableBody');
-            
-            if (!hospitalId) {
-                tbody.innerHTML = `
-                    <tr><td colspan="8" class="empty-table">
-                        <i class="fas fa-hospital"></i>
-                        <p>No hospital associated with your account</p>
-                    </td></tr>
-                `;
-                return;
-            }
-            
-            try {
-                const { data: assessments, error } = await supabase
-                    .from('assessments')
-                    .select(`
-                        id,
-                        status,
-                        symptoms,
-                        risk_factors,
-                        created_at,
-                        patients (
-                            first_name,
-                            last_name,
-                            age,
-                            gender
-                        ),
-                        users (
-                            full_name
-                        ),
-                        predictions (
-                            top_cancer_type,
-                            top_probability
-                        )
-                    `)
-                    .eq('hospital_id', hospitalId)
-                    .order('created_at', { ascending: false })
-                    .limit(10);
-                
-                if (error) throw error;
-                
-                if (!assessments || assessments.length === 0) {
-                    tbody.innerHTML = `
-                        <tr><td colspan="8" class="empty-table">
-                            <i class="fas fa-folder-open"></i>
-                            <p>No assessments found</p>
-                            <p style="font-size: 12px;">Create your first patient assessment to see data here</p>
-                            <button class="quick-action-btn" onclick="newAssessment()" style="margin-top: 15px; background: var(--primary); color: white;">
-                                <i class="fas fa-plus-circle"></i> New Assessment
-                            </button>
-                        </td></tr>
-                    `;
-                    return;
-                }
-                
-                tbody.innerHTML = assessments.map(assessment => {
-                    const patient = assessment.patients;
-                    const doctor = assessment.users;
-                    const prediction = assessment.predictions;
-                    const createdDate = new Date(assessment.created_at).toLocaleDateString();
-                    
-                    const riskLevel = prediction?.top_probability > 70 ? 'High' : 
-                                     prediction?.top_probability > 40 ? 'Medium' : 'Low';
-                    const riskClass = riskLevel === 'High' ? 'risk-high' : 
-                                     riskLevel === 'Medium' ? 'risk-medium' : 'risk-low';
-                    
-                    const symptomsList = assessment.symptoms?.slice(0, 2).join(', ') || 'No symptoms';
-                    const symptomsDisplay = symptomsList + (assessment.symptoms?.length > 2 ? '...' : '');
-                    
-                    return `
-                        <tr>
-                            <td>${patient?.first_name || 'Unknown'} ${patient?.last_name || ''}</td>
-                            <td>${patient?.age || '?'}/${patient?.gender || '?'}</td>
-                            <td>${symptomsDisplay}</td>
-                            <td class="${riskClass}">${riskLevel}</td>
-                            <td>${prediction?.top_cancer_type || 'Pending'}</td>
-                            <td>${doctor?.full_name || 'Unknown'}</td>
-                            <td>${createdDate}</td>
-                            <td>
-                                <button class="quick-action-btn" onclick="viewAssessment('${assessment.id}')" style="padding: 5px 10px; font-size: 12px;">
-                                    <i class="fas fa-eye"></i> View
-                                </button>
-                            </td>
-                        </tr>
-                    `;
-                }).join('');
-                
-            } catch (error) {
-                console.error('Error loading assessments:', error);
-                tbody.innerHTML = `
-                    <tr><td colspan="8" class="empty-table">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <p>Error loading assessments</p>
-                        <p style="font-size: 12px;">Please refresh the page</p>
-                    </td></tr>
-                `;
-            }
-        }
-        
-        // Load alerts
-        async function loadAlerts() {
-            const hospitalId = localStorage.getItem('icds_hospital_id');
-            
-            if (!hospitalId) return;
-            
-            try {
-                // Get high risk assessments from last 7 days
-                const sevenDaysAgo = new Date();
-                sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-                
-                const { data: highRiskAssessments, error } = await supabase
-                    .from('assessments')
-                    .select(`
-                        id,
-                        created_at,
-                        patients (first_name, last_name),
-                        predictions (top_probability, top_cancer_type)
-                    `)
-                    .eq('hospital_id', hospitalId)
-                    .gte('created_at', sevenDaysAgo.toISOString());
-                
-                if (error) throw error;
-                
-                const urgentAlerts = highRiskAssessments?.filter(a => 
-                    a.predictions && a.predictions.top_probability > 70
-                ) || [];
-                
-                const alertsContainer = document.getElementById('urgentAlertsContainer');
-                
-                if (urgentAlerts.length === 0) {
-                    alertsContainer.innerHTML = `
-                        <div class="empty-alert">
-                            <i class="fas fa-check-circle" style="color: var(--success);"></i>
-                            <p>No urgent alerts</p>
-                            <p style="font-size: 12px;">All clear</p>
-                        </div>
-                    `;
-                } else {
-                    alertsContainer.innerHTML = urgentAlerts.slice(0, 5).map(alert => {
-                        const patientName = alert.patients ? `${alert.patients.first_name} ${alert.patients.last_name}` : 'Unknown';
-                        const date = new Date(alert.created_at).toLocaleDateString();
-                        return `
-                            <div class="alert-item danger">
-                                <i class="fas fa-exclamation-triangle"></i>
-                                <div class="alert-content">
-                                    <div class="alert-title">High Risk: ${alert.predictions.top_cancer_type}</div>
-                                    <div>Patient: ${patientName} (${alert.predictions.top_probability}% probability)</div>
-                                    <div class="alert-time">${date}</div>
-                                </div>
-                            </div>
-                        `;
-                    }).join('');
-                }
-                
-                // Update notification badge
-                document.getElementById('notificationBadge').textContent = urgentAlerts.length;
-                document.getElementById('notificationBadge').style.display = urgentAlerts.length > 0 ? 'inline-block' : 'none';
-                
-            } catch (error) {
-                console.error('Error loading alerts:', error);
-            }
-        }
-        
-        // View assessment details
-        function viewAssessment(assessmentId) {
-            window.location.href = `view-assessment.html?id=${assessmentId}`;
-        }
-        
-        // Toggle sidebar
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const mainContent = document.getElementById('mainContent');
-            
-            sidebar.classList.toggle('collapsed');
-            
-            if (sidebar.classList.contains('collapsed')) {
-                mainContent.classList.add('expanded');
-            } else {
-                mainContent.classList.remove('expanded');
-            }
-        }
-        
-        // Logout
-        function logout() {
-            localStorage.removeItem('icds_logged_in');
-            localStorage.removeItem('icds_user_id');
-            localStorage.removeItem('icds_user_email');
-            localStorage.removeItem('icds_user_name');
-            localStorage.removeItem('icds_hospital');
-            localStorage.removeItem('icds_hospital_id');
-            localStorage.removeItem('icds_user_role');
-            localStorage.removeItem('icds_department');
-            window.location.href = 'login.html';
-        }
-        
-        // New assessment
-        function newAssessment() {
-            window.location.href = 'assessment.html';
-        }
-        
-        // View reports
-        function viewReports() {
-            window.location.href = 'analytics.html';
-        }
-        
-        // Show notifications
-        function showNotifications() {
-            document.getElementById('notificationsModal').classList.add('active');
-        }
-        
-        // Close notifications
-        function closeNotifications() {
-            document.getElementById('notificationsModal').classList.remove('active');
-        }
-        
-        // Toggle user menu
-        function toggleUserMenu() {
-            const name = localStorage.getItem('icds_user_name') || 'Not logged in';
-            const hospital = localStorage.getItem('icds_hospital') || 'No hospital';
-            const email = localStorage.getItem('icds_user_email') || 'No email';
-            const role = localStorage.getItem('icds_user_role') || 'Unknown';
-            alert(`${name}\n${hospital}\n${email}\nRole: ${role}`);
-        }
-        
-        // Keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.key === 'n') {
-                e.preventDefault();
-                newAssessment();
-            }
-            if (e.key === 'Escape') {
-                closeNotifications();
-            }
-        });
-        
-        // Handle window resize
-        window.addEventListener('resize', function() {
-            if (window.innerWidth <= 768) {
-                document.getElementById('sidebar').classList.remove('collapsed');
-                document.getElementById('mainContent').classList.remove('expanded');
-            }
-        });
-        
-        console.log('ICDS Dashboard - Connected to Supabase Database');
-    </script>
-</body>
+    <script type="module" src="../js/dashboard.js"></script>
+  </body>
 </html>

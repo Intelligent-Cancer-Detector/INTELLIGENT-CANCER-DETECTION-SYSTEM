@@ -5,16 +5,31 @@ let generatedOTP = "";
 let timerInterval;
 let currentFormData = null;
 
-console.log("Registration system ready!");
+// console.log("Registration system ready!");
+
+document.addEventListener("DOMContentLoaded", () => {
+  const hospitalEmailInput = document.getElementById("hospitalEmail");
+
+  if (hospitalEmailInput) {
+    hospitalEmailInput.addEventListener("input", checkHospitalEmail);
+  }
+});
 
 function checkHospitalEmail() {
   const email = document.getElementById("hospitalEmail").value;
   const match = email.match(/@(.+)$/);
-  if (match && match[1].toLowerCase() === "gmail.com") {
-    document.getElementById("aiSuggestText").innerHTML = "My Hospital";
-    document.getElementById("aiSuggest").classList.add("show");
+
+  const aiBox = document.getElementById("aiSuggest");
+  const aiText = document.getElementById("aiSuggestText");
+
+  if (match) {
+    const domain = match[1].toLowerCase();
+
+    // suggest only if domain exists
+    aiText.innerText = "My Hospital";
+    aiBox.classList.add("show");
   } else {
-    document.getElementById("aiSuggest").classList.remove("show");
+    aiBox.classList.remove("show");
   }
 }
 
@@ -55,8 +70,8 @@ function checkPasswordStrength() {
 }
 
 const confirmPasswordInput = document.getElementById("confirmPassword");
-confirmPasswordInput.addEventListener("input",checkPasswordMatch)
-passwordInput.addEventListener("input",checkPasswordMatch)
+confirmPasswordInput.addEventListener("input", checkPasswordMatch);
+passwordInput.addEventListener("input", checkPasswordMatch);
 
 // use the above since no arguments are being passed in to the check password function
 
@@ -68,14 +83,25 @@ passwordInput.addEventListener("input",checkPasswordMatch)
 // });
 
 function checkPasswordMatch() {
+  const confirmText = document.getElementById("strengthText2");
   const pwd = document.getElementById("password").value;
   const confirm = document.getElementById("confirmPassword").value;
-  if (pwd && confirm && pwd !== confirm) {
-    document.getElementById("confirmPassword").style.borderColor = "#ef4444";
-  } else if (pwd && confirm && pwd === confirm) {
-    document.getElementById("confirmPassword").style.borderColor = "#10b981";
+  const confirmInput = document.getElementById("confirmPassword");
+
+  if (!confirm) {
+    confirmText.innerText = "";
+    confirmInput.style.borderColor = "#e2e8f0";
+    return;
+  }
+
+  if (pwd !== confirm) {
+    confirmText.innerText = "❌ Passwords do not match";
+    confirmText.style.color = "#ef4444";
+    confirmInput.style.borderColor = "#ef4444";
   } else {
-    document.getElementById("confirmPassword").style.borderColor = "#e2e8f0";
+    confirmText.innerText = "✅ Passwords match";
+    confirmText.style.color = "#10b981";
+    confirmInput.style.borderColor = "#10b981";
   }
 }
 
@@ -270,34 +296,34 @@ function moveToNext(current, next) {
   }
 }
 
-// async function verifyOTP() {
-//   let code = "";
-//   for (let i = 1; i <= 6; i++)
-//     code += document.getElementById("code" + i).value;
+async function verifyOTP() {
+  let code = "";
+  for (let i = 1; i <= 6; i++)
+    code += document.getElementById("code" + i).value;
 
-//   if (code.length < 6) {
-//     alert("Please enter the 6-digit verification code");
-//     return;
-//   }
+  if (code.length < 6) {
+    alert("Please enter the 6-digit verification code");
+    return;
+  }
 
-//   if (code !== generatedOTP) {
-//     alert("❌ Invalid verification code! Please try again.");
-//     return;
-//   }
+  if (code !== generatedOTP) {
+    alert("❌ Invalid verification code! Please try again.");
+    return;
+  }
 
-//   if (timerInterval) clearInterval(timerInterval);
+  if (timerInterval) clearInterval(timerInterval);
 
-//   document.getElementById("loadingOverlay").classList.add("active");
-//   const result = await saveToDatabase(currentFormData);
-//   document.getElementById("loadingOverlay").classList.remove("active");
+  document.getElementById("loadingOverlay").classList.add("active");
+  const result = await saveToDatabase(currentFormData);
+  document.getElementById("loadingOverlay").classList.remove("active");
 
-//   if (result.success) {
-//     alert("✅ Registration Successful!\n\nRedirecting to login page...");
-//     setTimeout(() => (window.location.href = "login.html"), 2000);
-//   } else {
-//     alert("❌ Registration failed: " + result.error);
-//   }
-// }
+  if (result.success) {
+    alert("✅ Registration Successful!\n\nRedirecting to login page...");
+    setTimeout(() => (window.location.href = "login.html"), 2000);
+  } else {
+    alert("❌ Registration failed: " + result.error);
+  }
+}
 
 function resendOTP() {
   console.log("hello from resendOTP");
@@ -341,6 +367,7 @@ async function submitRegistration() {
 }
 
 // Test Mode: Ctrl+Shift+E
+
 document.addEventListener("keydown", function (e) {
   if (e.ctrlKey && e.shiftKey && e.key === "E") {
     e.preventDefault();
@@ -349,37 +376,67 @@ document.addEventListener("keydown", function (e) {
     document.getElementById("hospitalName").value = "My Hospital";
     document.getElementById("hospitalType").value = "private";
     document.getElementById("hospitalSize").value = "medium";
+
     document.getElementById("address").value = "Nyeri, Kenya";
-    document.getElementById("city").value = "Nyer";
+    document.getElementById("city").value = "Nyeri";
     document.getElementById("state").value = "Nyeri County";
     document.getElementById("postalCode").value = "00100";
     document.getElementById("country").value = "Kenya";
     document.getElementById("phone").value = "+254700000000";
+    document.getElementById("emergencyContact").value = "+254700000111";
+    document.getElementById("licenseNumber").value = "HSP-2026-001";
+    document.getElementById("yearEstablished").value = "2010";
+
     document.getElementById("fullName").value = "Dr. Isaac Ireri";
     document.getElementById("designation").value = "medical-director";
     document.getElementById("department").value = "administration";
-    document.getElementById("adminEmail").value = "mugwimiisaac230@gmail.com";
+    document.getElementById("adminLicense").value = "MD-998877";
+    document.getElementById("adminEmail").value = "isaac@test.com";
     document.getElementById("adminPhone").value = "+254700000000";
+    document.getElementById("adminMobile").value = "+254700000123";
+    document.getElementById("alternativeContact").value = "Jane Doe";
+
     document.getElementById("username").value = "Isaac";
     document.getElementById("password").value = "Test123";
     document.getElementById("confirmPassword").value = "Test123";
+
     document.getElementById("agreeTerms").checked = true;
     document.getElementById("agreePrivacy").checked = true;
 
     const allFields = [
+      // Institution Information
       "hospitalEmail",
       "hospitalName",
       "hospitalType",
+      "hospitalSize",
       "address",
       "city",
+      "state",
+      "postalCode",
+      "country",
       "phone",
+      "emergencyContact",
+      "licenseNumber",
+      "yearEstablished",
+
+      // Administrator Information
       "fullName",
       "designation",
       "department",
+      "adminLicense",
       "adminEmail",
       "adminPhone",
+      "adminMobile",
+      "alternativeContact",
+
+      // Security Setup
       "username",
       "password",
+      "confirmPassword",
+
+      // Checkboxes
+      "agreeTerms",
+      "agreePrivacy",
     ];
     allFields.forEach((fid) => {
       const f = document.getElementById(fid);
@@ -389,4 +446,9 @@ document.addEventListener("keydown", function (e) {
     alert("✅ Test data loaded! Click Complete Registration.");
   }
 });
+
+window.applyAISuggestion = applyAISuggestion;
 window.submitRegistration = submitRegistration;
+window.resendOTP = resendOTP;
+window.moveToNext = moveToNext;
+window.verifyOTP = verifyOTP;
