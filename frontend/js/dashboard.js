@@ -1,5 +1,5 @@
-import { API_PATHS } from "../utils/apiPaths";
-import api from "../utils/axiosInstance";
+import { API_PATHS } from "../utils/apiPaths.js";
+import api from "../utils/axiosInstance.js";
 
 // Global variables
 let cancerChart = null;
@@ -11,6 +11,13 @@ window.onload = async function () {
   checkAuth();
   await loadUserData();
 
+  const btn = document.getElementById("toggleSidebarBtn");
+  console.log("Button: ", btn);
+  btn?.addEventListener("click", () => {
+    console.log("clicked!");
+    toggleSidebar();
+  });
+
   await Promise.all([
     loadDashboardData(),
     loadRecentAssessments(),
@@ -18,11 +25,14 @@ window.onload = async function () {
   ]);
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  document
-    .getElementById("toggleSidebarBtn")
-    .addEventListener("click", toggleSidebar);
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   const btn = document.getElementById("toggleSidebarBtn");
+//   console.log("Button: ", btn);
+//   btn?.addEventListener("click", () => {
+//     console.log("clicked!");
+//     toggleSidebar();
+//   });
+// });
 
 function getHospitalId() {
   return localStorage.getItem("icds_hospital_id");
@@ -333,6 +343,7 @@ function viewAssessment(assessmentId) {
 // Toggle sidebar
 function toggleSidebar() {
   const sidebar = document.getElementById("sidebar");
+  console.log("Hello");
   const mainContent = document.getElementById("mainContent");
 
   sidebar.classList.toggle("collapsed");
