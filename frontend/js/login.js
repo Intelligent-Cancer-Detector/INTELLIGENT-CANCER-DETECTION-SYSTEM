@@ -2,11 +2,14 @@
 // BACKEND API CONFIGURATION
 // ====================================
 
-const API_BASE_URL = "http://localhost:5000/api";
+import { API_PATHS, BASE_URL } from "../utils/apiPaths.js";
+import api from "../utils/axiosInstance.js";
+
+const API_BASE_URL = BASE_URL;
 
 // Test credentials
-const TEST_EMAIL = "wycliffr254@gmail.com";
-const TEST_PASSWORD = "Test@123456";
+const TEST_EMAIL = window.ENV.TEST_EMAIL;
+const TEST_PASSWORD = window.ENV.TEST_PASSWORD;
 
 // Handle login with backend API
 async function handleLogin(event) {
@@ -29,18 +32,23 @@ async function handleLogin(event) {
 
   try {
     // Call backend login API
-    const response = await fetch(`${API_BASE_URL}/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
+    // const response = await fetch(`${API_BASE_URL}/auth/login`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     email: email,
+    //     password: password,
+    //   }),
+    // });
+
+    const response = await api.post(API_PATHS.AUTH.LOGIN, {
+      email: email,
+      password: password,
     });
 
-    const data = await response.json();
+    const data =  response.data;
 
     if (data.success) {
       // Login successful
@@ -150,6 +158,7 @@ function loadSavedCredentials() {
 document.addEventListener("keydown", function (e) {
   if (e.ctrlKey && e.shiftKey && e.key === "Y") {
     e.preventDefault();
+    console.log("hello shortcut pressed!");
     document.getElementById("email").value = TEST_EMAIL;
     document.getElementById("password").value = TEST_PASSWORD;
     showAlert("success", "Test credentials loaded! Click Sign In to login.");
@@ -165,5 +174,9 @@ document.addEventListener("keypress", function (event) {
 
 loadSavedCredentials();
 console.log("ICDS Login Page Ready - Using Backend API at", API_BASE_URL);
-console.log("Test credentials: Ctrl+Shift+L to load");
+console.log("Test credentials: Ctrl+Shift+Y to load");
 console.log("Make sure backend is running: python app.py");
+
+window.togglePassword = togglePassword;
+window.forgotPassword = forgotPassword;
+window.handleLogin = handleLogin;

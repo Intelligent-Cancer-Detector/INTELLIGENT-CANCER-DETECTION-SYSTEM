@@ -1,9 +1,3 @@
-// const SUPABASE_URL =
-//   "https://supabase.com/dashboard/project/tgrrmzusqjzzvhevmmbt";
-// const SUPABASE_ANON_KEY =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRncnJtenVzcWp6enZoZXZtbWJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyOTg4NDUsImV4cCI6MjA5MDg3NDg0NX0.nmD117ohEA-pMV4YnNluPxJGT4N-HFJxPaRRyGFyyks";
-// const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
 import { API_PATHS } from "../utils/apiPaths.js";
 import api from "../utils/axiosInstance.js";
 
@@ -30,6 +24,11 @@ function applyAISuggestion() {
   document.getElementById("aiSuggest").classList.remove("show");
 }
 
+const passwordInput = document.getElementById("password");
+passwordInput.addEventListener("input", () => {
+  checkPasswordStrength();
+});
+
 function checkPasswordStrength() {
   const password = document.getElementById("password").value;
   const fill = document.getElementById("strengthFill");
@@ -54,6 +53,19 @@ function checkPasswordStrength() {
     text.innerText = "Strong password";
   }
 }
+
+const confirmPasswordInput = document.getElementById("confirmPassword");
+confirmPasswordInput.addEventListener("input",checkPasswordMatch)
+passwordInput.addEventListener("input",checkPasswordMatch)
+
+// use the above since no arguments are being passed in to the check password function
+
+// confirmPasswordInput.addEventListener("input", () => {
+//   checkPasswordMatch();
+// });
+// passwordInput.addEventListener("input", () => {
+//   checkPasswordMatch();
+// });
 
 function checkPasswordMatch() {
   const pwd = document.getElementById("password").value;
@@ -215,83 +227,6 @@ function getFormData() {
   };
 }
 
-async function saveToDatabase(data) {
-  console.log("hello from db");
-  //   try {
-  //     let { data: existingHospital, error: checkError } = await supabase
-  //       .from("hospitals")
-  //       .select("id")
-  //       .eq("email", data.hospital.email)
-  //       .maybeSingle();
-
-  //     if (checkError) throw checkError;
-
-  //     let hospitalId;
-
-  //     if (existingHospital) {
-  //       hospitalId = existingHospital.id;
-  //     } else {
-  //       const { data: hospital, error: hErr } = await supabase
-  //         .from("hospitals")
-  //         .insert({
-  //           name: data.hospital.name,
-  //           email: data.hospital.email,
-  //           phone: data.hospital.phone,
-  //           address: data.hospital.address,
-  //           city: data.hospital.city,
-  //           state: data.hospital.state,
-  //           postal_code: data.hospital.postal_code,
-  //           country: data.hospital.country,
-  //           type: data.hospital.type,
-  //           size: data.hospital.size,
-  //           license_number: data.hospital.license,
-  //           year_established: data.hospital.year,
-  //           emergency_phone: data.hospital.emergency,
-  //           status: "active",
-  //           created_at: new Date().toISOString(),
-  //         })
-  //         .select()
-  //         .single();
-
-  //       if (hErr) throw hErr;
-  //       hospitalId = hospital.id;
-  //     }
-
-  //     let { data: existingUser, error: userCheckError } = await supabase
-  //       .from("users")
-  //       .select("id")
-  //       .eq("email", data.admin.email)
-  //       .maybeSingle();
-
-  //     if (userCheckError) throw userCheckError;
-
-  //     if (existingUser) {
-  //       throw new Error("User already registered! Please login.");
-  //     }
-
-  //     const { error: uErr } = await supabase.from("users").insert({
-  //       hospital_id: hospitalId,
-  //       full_name: data.admin.fullName,
-  //       email: data.admin.email,
-  //       password_hash: btoa(data.security.password),
-  //       username: data.security.username,
-  //       role: "super_admin",
-  //       department: data.admin.department,
-  //       phone: data.admin.phone,
-  //       license_number: data.admin.license,
-  //       is_active: true,
-  //       created_at: new Date().toISOString(),
-  //     });
-
-  //     if (uErr) throw uErr;
-
-  //     return { success: true };
-  //   } catch (error) {
-  //     console.error("Database error:", error);
-  //     return { success: false, error: error.message };
-  //   }
-}
-
 function sendOTP(email) {
   generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
   console.log("OTP:", generatedOTP);
@@ -335,34 +270,34 @@ function moveToNext(current, next) {
   }
 }
 
-async function verifyOTP() {
-  let code = "";
-  for (let i = 1; i <= 6; i++)
-    code += document.getElementById("code" + i).value;
+// async function verifyOTP() {
+//   let code = "";
+//   for (let i = 1; i <= 6; i++)
+//     code += document.getElementById("code" + i).value;
 
-  if (code.length < 6) {
-    alert("Please enter the 6-digit verification code");
-    return;
-  }
+//   if (code.length < 6) {
+//     alert("Please enter the 6-digit verification code");
+//     return;
+//   }
 
-  if (code !== generatedOTP) {
-    alert("❌ Invalid verification code! Please try again.");
-    return;
-  }
+//   if (code !== generatedOTP) {
+//     alert("❌ Invalid verification code! Please try again.");
+//     return;
+//   }
 
-  if (timerInterval) clearInterval(timerInterval);
+//   if (timerInterval) clearInterval(timerInterval);
 
-  document.getElementById("loadingOverlay").classList.add("active");
-  const result = await saveToDatabase(currentFormData);
-  document.getElementById("loadingOverlay").classList.remove("active");
+//   document.getElementById("loadingOverlay").classList.add("active");
+//   const result = await saveToDatabase(currentFormData);
+//   document.getElementById("loadingOverlay").classList.remove("active");
 
-  if (result.success) {
-    alert("✅ Registration Successful!\n\nRedirecting to login page...");
-    setTimeout(() => (window.location.href = "login.html"), 2000);
-  } else {
-    alert("❌ Registration failed: " + result.error);
-  }
-}
+//   if (result.success) {
+//     alert("✅ Registration Successful!\n\nRedirecting to login page...");
+//     setTimeout(() => (window.location.href = "login.html"), 2000);
+//   } else {
+//     alert("❌ Registration failed: " + result.error);
+//   }
+// }
 
 function resendOTP() {
   console.log("hello from resendOTP");
@@ -409,7 +344,7 @@ async function submitRegistration() {
 document.addEventListener("keydown", function (e) {
   if (e.ctrlKey && e.shiftKey && e.key === "E") {
     e.preventDefault();
-    console.log("hello shortcut pressed!");
+
     document.getElementById("hospitalEmail").value = "info@myhospital.com";
     document.getElementById("hospitalName").value = "My Hospital";
     document.getElementById("hospitalType").value = "private";
