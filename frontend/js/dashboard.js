@@ -12,9 +12,7 @@ window.onload = async function () {
   await loadUserData();
 
   const btn = document.getElementById("toggleSidebarBtn");
-  console.log("Button: ", btn);
   btn?.addEventListener("click", () => {
-    console.log("clicked!");
     toggleSidebar();
   });
 
@@ -343,7 +341,6 @@ function viewAssessment(assessmentId) {
 // Toggle sidebar
 function toggleSidebar() {
   const sidebar = document.getElementById("sidebar");
-  console.log("Hello");
   const mainContent = document.getElementById("mainContent");
 
   sidebar.classList.toggle("collapsed");
