@@ -73,7 +73,7 @@ def initialize_database():
             hospital_id TEXT REFERENCES hospital(id),
             full_name TEXT NOT NULL,
             age INTEGER,
-            gender INTEGER,           -- 1 = Male, 0 = Female
+            gender TEXT,           -- 1 = Male, 0 = Female
             contact TEXT,
             created_at TIMESTAMPTZ DEFAULT NOW()
         )
