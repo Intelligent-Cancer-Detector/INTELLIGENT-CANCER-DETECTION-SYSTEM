@@ -89,25 +89,21 @@ async function loadDashboardData() {
 
     const result = res.data;
 
-    if (!result.success) {
+    if (result.status != "success") {
       throw new Error("Backend error");
     }
+    const data = result.data;
 
-    const assessments = result.assessments;
+    // const assessments = result.assessments;
 
     // ✅ UI updates
-    document.getElementById("assessmentsToday").textContent =
-      result.todayAssessments;
+    document.getElementById("assessmentsToday").textContent = data.today;
+    document.getElementById("highRiskCases").textContent = data.high_risk;
+    document.getElementById("cancerDetected").textContent = data.cancers;
+    document.getElementById("activeDoctors").textContent = data.doctors;
 
-    document.getElementById("highRiskCases").textContent = result.highRisk;
-
-    document.getElementById("cancerDetected").textContent =
-      result.cancersDetected;
-
-    document.getElementById("activeDoctors").textContent = result.activeDoctors;
-
-    await loadCancerChart(assessments);
-    await loadRiskChart(assessments);
+    await loadCancerChart(data.assessments);
+    await loadRiskChart(data.assessments);
   } catch (error) {
     console.error("Error loading dashboard data:", error);
   }
@@ -140,11 +136,9 @@ async function loadCancerChart(assessments) {
   };
 
   assessments.forEach((assessment) => {
-    if (assessment.predictions && assessment.predictions.top_cancer_type) {
-      const cancerType = assessment.predictions.top_cancer_type;
-      if (cancerCounts[cancerType] !== undefined) {
-        cancerCounts[cancerType]++;
-      }
+    const cancerType = assessment.cancer_type;
+    if (cancerType && cancerCounts[cancerType] !== undefined) {
+      cancerCounts[cancerType]++;
     }
   });
 
@@ -201,12 +195,11 @@ async function loadRiskChart(assessments) {
   let lowRisk = 0;
 
   assessments.forEach((assessment) => {
-    if (assessment.predictions && assessment.predictions.top_probability) {
-      const prob = assessment.predictions.top_probability;
-      if (prob > 70) highRisk++;
-      else if (prob > 40) mediumRisk++;
-      else lowRisk++;
-    }
+    const risk = assessment.risk_level;
+
+    if (risk === "HIGH") highRisk++;
+    else if (risk === "MEDIUM") mediumRisk++;
+    else lowRisk++;
   });
 
   const ctx = document.getElementById("riskChart").getContext("2d");
@@ -249,40 +242,34 @@ async function loadRecentAssessments() {
 
     const result = res.data;
 
-    if (
-      !result.success ||
-      !Array.isArray(result.assessments) ||
-      result.assessments.length === 0
-    ) {
+    // ✅ Check backend status
+    if (result.status !== "success") {
+      throw new Error("Backend error");
+    }
+
+    const assessments = result.data;
+
+    // ✅ Handle empty
+    if (!Array.isArray(assessments) || assessments.length === 0) {
       tbody.innerHTML = `
         <tr><td colspan="8">No assessments found</td></tr>
       `;
       return;
     }
 
-    tbody.innerHTML = result.assessments
-      .map((assessment) => {
-        const patient = assessment.patients;
-        const doctor = assessment.users;
-        const prediction = assessment.predictions;
-
-        const date = new Date(assessment.created_at).toLocaleDateString();
-
-        const risk =
-          prediction?.top_probability > 70
-            ? "High"
-            : prediction?.top_probability > 40
-              ? "Medium"
-              : "Low";
+    // ✅ Render table
+    tbody.innerHTML = assessments
+      .map((a) => {
+        const date = new Date(a.created_at).toLocaleDateString();
 
         return `
         <tr>
-          <td>${patient?.first_name || "Unknown"} ${patient?.last_name || ""}</td>
-          <td>${patient?.age || "?"}/${patient?.gender || "?"}</td>
-          <td>${assessment.symptoms?.slice(0, 2).join(", ") || "No symptoms"}</td>
-          <td>${risk}</td>
-          <td>${prediction?.top_cancer_type || "Pending"}</td>
-          <td>${doctor?.full_name || "Unknown"}</td>
+          <td>${a.patient_name || "Unknown"}</td>
+          <td>${a.age ?? "?"}/${a.gender ?? "?"}</td>
+          <td>${a.symptoms_json || "No symptoms"}</td>
+          <td>${a.risk_level}</td>
+          <td>${a.cancer_type || "N/A"}</td>
+          <td>${a.doctors_name || "Unknown"}</td>
           <td>${date}</td>
         </tr>
       `;
@@ -302,24 +289,31 @@ async function loadAlerts() {
     const result = res.data;
     const container = document.getElementById("urgentAlertsContainer");
 
-    if (!result.success || result.alerts.length === 0) {
-      container.innerHTML = `
-        <div>No urgent alerts</div>
-      `;
+    // ✅ Check backend status
+    if (result.status !== "success") {
+      throw new Error("Backend error!");
+    }
+
+    const alerts = result.data;
+
+    // ✅ Handle empty data
+    if (!Array.isArray(alerts) || alerts.length === 0) {
+      container.innerHTML = `<div>No urgent alerts</div>`;
       return;
     }
 
-    container.innerHTML = result.alerts
+    // ✅ Render alerts
+
+    container.innerHTML = alerts
       .map((alert) => {
-        const patient = alert.patients;
         const date = new Date(alert.created_at).toLocaleDateString();
 
         return `
         <div class="alert-item danger">
           <div>
-            <b>${alert.predictions.top_cancer_type}</b><br/>
-            ${patient?.first_name || ""} ${patient?.last_name || ""}<br/>
-            ${alert.predictions.top_probability}% risk
+            <b>${alert.cancer_type || "Unknown"}</b><br/>
+            ${alert.full_name || "Unknown Patient"}<br/>
+            ${(alert.confidence * 100).toFixed(0)}% risk
             <small>${date}</small>
           </div>
         </div>
@@ -327,7 +321,8 @@ async function loadAlerts() {
       })
       .join("");
 
-    document.getElementById("notificationBadge").textContent = result.count;
+    // ✅ Notification count
+    document.getElementById("notificationBadge").textContent = alerts.length;
   } catch (err) {
     console.error("Alerts error:", err);
   }

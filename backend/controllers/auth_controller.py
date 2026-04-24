@@ -6,6 +6,8 @@ from database.hospital_queries import create_hospital
 from database.user_queries import get_user_by_email
 from database.user_queries import create_user
 
+DEBUG_MODE = True
+
 
 def register_user():
     try:
@@ -20,8 +22,16 @@ def register_user():
         if existing:
             return jsonify({"success": False, "error": "User already exists"}), 400
 
-        # HASH PASSWORD
-        password_hash = hashlib.sha256(security.get("password").encode()).hexdigest()
+        # # HASH PASSWORD
+        # password_hash = hashlib.sha256(security.get("password").encode()).hexdigest()
+
+        raw_password = security.get("password")
+        if DEBUG_MODE:
+            password_hash = raw_password
+        else:
+            password_hash = hashlib.sha256(
+                security.get("password").encode()
+            ).hexdigest()
 
         # CREATE HOSPITAL
 
@@ -39,7 +49,6 @@ def register_user():
             hospital.get("country"),
             hospital.get("type"),
         )
-
 
         # CREATE USER
         user_id = str(uuid.uuid4())
@@ -84,12 +93,16 @@ def login_user():
                 401,
             )
 
-        # 2 Hash the incoming password
-        password_hash = hashlib.sha256(password.encode()).hexdigest()
+        # # 2 Hash the incoming password
+        # password_hash = hashlib.sha256(password.encode()).hexdigest()
 
         # 3 compare the passwords
+        if DEBUG_MODE:
+            password_to_check = password
+        else:
+            password_to_check = hashlib.sha256(password.encode()).hexdigest()
 
-        if user["password_hash"] != password_hash:
+        if user["password_hash"] != password_to_check:
             return (
                 jsonify({"success": False, "error": "Invalid email or password"}),
                 401,

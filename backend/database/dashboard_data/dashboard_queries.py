@@ -8,60 +8,67 @@ def get_dashboard_stats(hospital_id):
     conn = get_db_connection()
     cursor = conn.cursor()
     try:
-        # Today assessments
+        print("👉 Running TODAY query")
         cursor.execute(
             """
-                select count(*) from assessment
-                where hospital_id=%s
-                and date(created_at) = current_date
-
-             """,
-            (hospital_id,),
-        )
-
-        today = cursor.fetchone()[0]
-
-        # High risk cases
-        cursor.execute(
-            """
-                select count(*) from assessment
-                where hospital_id=%s
-                and risk_level = 'HIGH'
+            SELECT COUNT(*) FROM assessment
+            WHERE hospital_id=%s
+            AND created_at >= CURRENT_DATE
             """,
             (hospital_id,),
         )
-        high_risk = cursor.fetchone()[0]
+        result = cursor.fetchone()
+        print("TODAY RESULT:", result)
+        today = result["count"] if result else 0
 
-        # Cancer detected
+        print("👉 Running HIGH RISK query")
+        cursor.execute(
+            """
+            SELECT COUNT(*) FROM assessment
+            WHERE hospital_id=%s
+            AND risk_level = 'HIGH'
+            """,
+            (hospital_id,),
+        )
+        result = cursor.fetchone()
+        print("HIGH RISK RESULT:", result)
+        high_risk = result["count"] if result else 0
+
+        print("👉 Running CANCER query")
         cursor.execute(
             """
             SELECT COUNT(*) FROM assessment
             WHERE hospital_id = %s AND cancer_type IS NOT NULL
-        """,
+            """,
             (hospital_id,),
         )
-        cancers = cursor.fetchone()[0]
+        result = cursor.fetchone()
+        print("CANCER RESULT:", result)
+        cancers = result["count"] if result else 0
 
-        # Active doctors
+        print("👉 Running DOCTOR query")
         cursor.execute(
             """
             SELECT COUNT(*) FROM users
             WHERE hospital_id = %s AND role = 'doctor'
-        """,
+            """,
             (hospital_id,),
         )
-        doctors = cursor.fetchone()[0]
+        result = cursor.fetchone()
+        print("DOCTOR RESULT:", result)
+        doctors = result["count"] if result else 0
 
-        # Chart data
+        print("👉 Running ASSESSMENTS query")
         cursor.execute(
             """
             SELECT risk_level, cancer_type, confidence
             FROM assessment
             WHERE hospital_id = %s
-        """,
+            """,
             (hospital_id,),
         )
         assessments = cursor.fetchall()
+        print("ASSESSMENTS:", assessments)
 
         return {
             "today": today,
@@ -72,7 +79,9 @@ def get_dashboard_stats(hospital_id):
         }
 
     except Exception as e:
-        pass
+        print("❌ DB ERROR in get_dashboard:", e)
+        return None
+
     finally:
         cursor.close()
         conn.close()
@@ -102,7 +111,7 @@ def get_recent_assessments(hospital_id):
                 u.full_name AS doctors_name
 
             FROM assessment a
-            JOIN patient p ON a.patient_id = p.id  # “For each assessment, attach the patient who was assessed”
+            JOIN patient p ON a.patient_id = p.id  
            
             JOIN users u ON a.doctor_id = u.id
 
@@ -114,6 +123,9 @@ def get_recent_assessments(hospital_id):
         )
 
         return cursor.fetchall()
+    except Exception as e:
+        print("❌ DB ERROR in get_recent_assessments:", e)
+        return None
 
     finally:
         cursor.close()
@@ -145,6 +157,10 @@ def get_alerts(hospital_id):
         )
 
         return cursor.fetchall()
+
+    except Exception as e:
+        print("❌ DB ERROR from get_alerts:", e)
+        return None
 
     finally:
         cursor.close()

@@ -10,7 +10,7 @@ def recent_assement_handler(hospital_id):
     try:
         data = get_recent_assessments(hospital_id)
 
-        return {"status": "success", "data": "data"}
+        return {"status": "success", "data": data}
     except Exception as e:
         return {"status": "error", "message": str(e)}
 
@@ -22,6 +22,9 @@ def dashboard_data_handler(hospital_id):
     total assessments
     high risk count
     """
+
+    print("Hospital ID received:", hospital_id)
+
     stats = get_dashboard_stats(hospital_id)
 
     return {"status": "success", "stats": stats}
