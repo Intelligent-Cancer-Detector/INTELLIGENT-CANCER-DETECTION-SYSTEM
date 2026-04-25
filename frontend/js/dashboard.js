@@ -92,7 +92,7 @@ async function loadDashboardData() {
     if (result.status != "success") {
       throw new Error("Backend error");
     }
-    const data = result.data;
+    const data = result.stats;
 
     // const assessments = result.assessments;
 

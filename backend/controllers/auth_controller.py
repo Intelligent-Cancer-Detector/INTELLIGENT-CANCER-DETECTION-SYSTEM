@@ -2,7 +2,7 @@ import hashlib
 import uuid
 
 from flask import jsonify, request
-from database.hospital_queries import create_hospital
+from database.hospital_queries import create_hospital, get_hospital_by_id
 from database.user_queries import get_user_by_email
 from database.user_queries import create_user
 
@@ -109,6 +109,7 @@ def login_user():
             )
 
         # 4 login success
+        hospital = get_hospital_by_id(user["hospital_id"])
         return (
             jsonify(
                 {
@@ -120,6 +121,7 @@ def login_user():
                         "full_name": user["full_name"],
                         "role": user["role"],
                         "hospital_id": user["hospital_id"],
+                        "hospital": {"name": hospital["name"] if hospital else None},
                     },
                 }
             ),

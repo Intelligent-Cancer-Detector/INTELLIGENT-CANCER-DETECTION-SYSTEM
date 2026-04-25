@@ -52,20 +52,23 @@ async function handleLogin(event) {
 
     if (data.success) {
       // Login successful
-      showAlert("success", `Welcome back, ${data.user.name}! Redirecting...`);
+      showAlert(
+        "success",
+        `Welcome back, ${data.user.full_name}! Redirecting...`,
+      );
 
       // Store login state in localStorage
       localStorage.setItem("icds_logged_in", "true");
       localStorage.setItem("icds_user_id", data.user.id);
       localStorage.setItem("icds_user_email", data.user.email);
-      localStorage.setItem("icds_user_name", data.user.name);
+      localStorage.setItem("icds_user_name", data.user.full_name);
       localStorage.setItem("icds_user_role", data.user.role);
       localStorage.setItem(
         "icds_department",
         data.user.department || "Medical",
       );
       localStorage.setItem("icds_hospital_id", data.user.hospital_id);
-      localStorage.setItem("icds_hospital", data.user.hospital_name);
+      localStorage.setItem("icds_hospital", data.user.hospital.name);
       localStorage.setItem("icds_token", data.token);
 
       if (rememberMe) {
