@@ -1,0 +1,601 @@
+symptom_1,symptom_2,symptom_3,symptom_4,symptom_5,symptom_6,symptom_7,symptom_8,symptom_9,symptom_10,cancer_type
+weakness in limbs,constipation,new-onset diabetes,dark urine,itchy skin,abdominal pain,hearing problems,weight loss,back pain,jaundice,pancreatic
+diarrhea,non-healing sore,bleeding skin,frequent urination,pearly bump,scaly patch,headache,changing mole,skin lesion,crusting,skin
+weight loss,muscle ache,pelvic discomfort,nocturia,weak urine flow,bone pain,burning sensation,blood in urine,jaundice,painful ejaculation,prostate
+speech difficulties,personality changes,sneeze,difficulty starting urination,balance issues,hearing problems,vision problems,back pain,weakness in limbs,headache,brain
+shortness of breath,persistent cough,wheezing,coughing blood,crusting,bloating,lower back pain,loss of appetite,fatigue,bone pain,lung
+pelvic discomfort,blood in urine,nocturia,bone pain,painful ejaculation,weak urine flow,bloating,back pain,difficulty starting urination,frequent urination,prostate
+weak stream,bone pain,painful urination,redness of skin,mild cough,pelvic pain,frequent urination,urgent urination,pain during intercourse,lower back pain,bladder
+vision loss,seizures,burning sensation,memory loss,scaly patch,light sensitivity,shadows,eye pain,floaters,squinting,eye
+burning sensation,fatigue,loss of appetite,back pain,pain during intercourse,frequent urination,constipation,bloating,indigestion,red firm nodule,ovarian
+red firm nodule,pearly bump,abdominal pain,non-healing sore,tiredness,floaters,scaly patch,crusting,dark spots,bleeding skin,skin
+minor bruise,runny nose,dry skin,headache,mild cough,tiredness,sneeze,muscle ache,sore throat,stomach ache,none
+abdominal pain,blood in stool,headache,bloating,constipation,weakness,narrow stool,skin peeling,itchy skin,rectal bleeding,colorectal
+nocturia,difficulty starting urination,pelvic discomfort,weight loss,blood in urine,hearing problems,weak urine flow,loss of appetite,erectile dysfunction,floaters,prostate
+nausea,speech difficulties,hearing problems,personality changes,lymph node changes,weight loss,memory loss,blood in urine,headache,vision problems,brain
+minor bruise,stomach ache,tiredness,sore throat,headache,sneeze,dry skin,mild cough,runny nose,muscle ache,none
+runny nose,mild cough,stomach ache,dry skin,tiredness,headache,sore throat,minor bruise,muscle ache,sneeze,none
+weight loss,weakness,bone pain,coughing blood,loss of appetite,wheezing,skin lesion,narrow stool,hoarseness,shortness of breath,lung
+headache,cramping,diarrhea,narrow stool,blood in stool,rectal bleeding,weight loss,inverted nipple,abdominal pain,flashing lights,colorectal
+loss of appetite,weight loss,cramping,bloating,blood in stool,menstrual changes,weakness,dark urine,diarrhea,constipation,colorectal
+frequent urination,weak urine flow,inability to urinate,bone pain,urgent urination,blurred vision,swollen feet,pelvic pain,red firm nodule,blood in urine,bladder
+tiredness,sore throat,mild cough,minor bruise,dry skin,headache,muscle ache,runny nose,stomach ache,sneeze,none
+weight loss,abdominal pain,blood clots,weight loss,frequent urination,back pain,new-onset diabetes,nausea,dark urine,bloating,pancreatic
+swelling,red firm nodule,changing mole,pearly bump,breast lump,dark spots,headache,non-healing sore,itching,skin lesion,skin
+swelling,indigestion,constipation,frequent urination,pain during intercourse,menstrual changes,loss of appetite,pelvic pain,chest pain,bone pain,ovarian
+cramping,flashing lights,rectal bleeding,abdominal pain,muscle ache,blood in stool,weight loss,bloating,diarrhea,pearly bump,colorectal
+bleeding skin,red firm nodule,muscle ache,crusting,itching,skin lesion,scaly patch,mild cough,weight loss,pearly bump,skin
+bloating,swollen feet,rectal bleeding,cramping,abdominal pain,weight loss,blood clots,eye pain,blood in stool,constipation,colorectal
+frequent urination,breast pain,weight loss,weak urine flow,erectile dysfunction,bone pain,nocturia,jaundice,pelvic discomfort,lymph node changes,prostate
+swelling,nipple discharge,lymph node changes,constipation,pearly bump,skin dimpling,balance issues,breast lump,thickening,inverted nipple,breast
+frequent urination,constipation,weak stream,weakness in limbs,blood in urine,pelvic pain,lower back pain,non-healing sore,inability to urinate,urgent urination,bladder
+dark spots,weight loss,scaly patch,rectal bleeding,changing mole,weight loss,pearly bump,red firm nodule,skin lesion,itching,skin
+eye pain,dark urine,flashing lights,shadows,floaters,urgent urination,squinting,skin peeling,redness,vision loss,eye
+menstrual changes,loss of appetite,new-onset diabetes,nausea,abdominal pain,stomach ache,constipation,blood clots,jaundice,back pain,pancreatic
+burning sensation,light sensitivity,eye pain,wheezing,vision loss,balance issues,flashing lights,squinting,blurred vision,constipation,eye
+loss of appetite,pearly bump,urgent urination,vision problems,frequent urination,pain during intercourse,menstrual changes,indigestion,fatigue,pelvic pain,ovarian
+bone pain,speech difficulties,headache,breast lump,vision problems,balance issues,personality changes,loss of appetite,nausea,memory loss,brain
+wheezing,pearly bump,shortness of breath,changing mole,dark spots,skin lesion,swollen feet,red firm nodule,itching,bleeding skin,skin
+minor bruise,bleeding skin,non-healing sore,inability to urinate,scaly patch,swelling,red firm nodule,dark spots,changing mole,pearly bump,skin
+loss of appetite,indigestion,breast pain,dark urine,new-onset diabetes,weight loss,jaundice,back pain,bleeding skin,nausea,pancreatic
+sore throat,sneeze,dry skin,muscle ache,stomach ache,headache,tiredness,runny nose,minor bruise,mild cough,none
+bleeding skin,non-healing sore,changing mole,blood in stool,scaly patch,dark spots,red firm nodule,bone pain,crusting,wheezing,skin
+dark urine,balance issues,weakness in limbs,seizures,memory loss,headache,fatigue,personality changes,diarrhea,speech difficulties,brain
+weight loss,abdominal pain,narrow stool,blood in stool,cramping,diarrhea,blurred vision,bloating,breast pain,bone pain,colorectal
+back pain,swelling,breast lump,skin peeling,skin dimpling,nausea,redness of skin,lymph node changes,shortness of breath,thickening,breast
+hearing problems,redness,burning sensation,redness of skin,sneeze,light sensitivity,shadows,eye pain,flashing lights,floaters,eye
+vision loss,weight loss,cramping,rectal bleeding,pelvic pain,blood in stool,constipation,narrow stool,bleeding skin,bloating,colorectal
+cramping,urgent urination,skin dimpling,redness of skin,lymph node changes,inverted nipple,nausea,breast pain,breast lump,nipple discharge,breast
+jaundice,new-onset diabetes,balance issues,abdominal pain,blood in urine,back pain,weight loss,bloating,itchy skin,loss of appetite,pancreatic
+personality changes,frequent urination,difficulty starting urination,red firm nodule,inverted nipple,weak urine flow,nocturia,weight loss,painful ejaculation,pelvic discomfort,prostate
+loss of appetite,weak stream,bone pain,chest pain,weight loss,light sensitivity,wheezing,persistent cough,redness of skin,coughing blood,lung
+itchy skin,new-onset diabetes,back pain,weight loss,dark spots,weakness,nausea,abdominal pain,thickening,loss of appetite,pancreatic
+non-healing sore,red firm nodule,changing mole,constipation,nipple discharge,crusting,weight loss,skin lesion,pearly bump,bleeding skin,skin
+loss of appetite,constipation,new-onset diabetes,constipation,menstrual changes,back pain,muscle ache,bloating,fatigue,pelvic pain,ovarian
+weight loss,bloating,constipation,bloating,abdominal pain,cramping,blood in stool,narrow stool,wheezing,muscle ache,colorectal
+painful urination,lower back pain,urgent urination,speech difficulties,blood in urine,frequent urination,swollen feet,vision loss,swelling,bone pain,bladder
+pelvic discomfort,blood in urine,weakness,erectile dysfunction,bone pain,skin dimpling,painful ejaculation,weak urine flow,frequent urination,bleeding skin,prostate
+runny nose,sore throat,mild cough,minor bruise,stomach ache,headache,muscle ache,dry skin,tiredness,sneeze,none
+skin peeling,breast lump,swollen feet,lymph node changes,inverted nipple,narrow stool,thickening,redness of skin,weak stream,swelling,breast
+nausea,loss of appetite,jaundice,blood clots,back pain,nausea,weight loss,dark urine,burning sensation,sore throat,pancreatic
+burning sensation,flashing lights,nausea,floaters,squinting,red firm nodule,light sensitivity,shadows,redness,bleeding skin,eye
+runny nose,dry skin,tiredness,minor bruise,headache,sore throat,stomach ache,sneeze,mild cough,muscle ache,none
+headache,hearing problems,memory loss,nausea,persistent cough,seizures,bone pain,headache,vision problems,speech difficulties,brain
+pelvic pain,speech difficulties,itching,weakness in limbs,frequent urination,balance issues,personality changes,memory loss,vision problems,headache,brain
+dark spots,scaly patch,headache,non-healing sore,crusting,skin lesion,pearly bump,bleeding skin,loss of appetite,blurred vision,skin
+wheezing,skin lesion,coughing blood,muscle ache,shortness of breath,fatigue,weight loss,persistent cough,crusting,chest pain,lung
+weight loss,pelvic discomfort,muscle ache,painful ejaculation,frequent urination,bone pain,vision problems,nocturia,constipation,erectile dysfunction,prostate
+nocturia,indigestion,constipation,non-healing sore,pelvic pain,fatigue,swelling,back pain,loss of appetite,frequent urination,ovarian
+pelvic pain,fatigue,nipple discharge,chest pain,shortness of breath,weight loss,coughing blood,weight loss,hoarseness,persistent cough,lung
+light sensitivity,redness,inverted nipple,floaters,burning sensation,vision problems,squinting,blurred vision,eye pain,frequent urination,eye
+itchy skin,nausea,lower back pain,balance issues,memory loss,seizures,vision problems,weakness in limbs,hearing problems,runny nose,brain
+red firm nodule,nausea,itching,non-healing sore,dark spots,frequent urination,loss of appetite,scaly patch,skin lesion,changing mole,skin
+frequent urination,swollen feet,tiredness,pelvic pain,painful urination,abdominal pain,lower back pain,weak stream,blood in urine,pelvic pain,bladder
+shortness of breath,speech difficulties,persistent cough,fatigue,fatigue,coughing blood,bone pain,loss of appetite,memory loss,weight loss,lung
+hoarseness,inability to urinate,wheezing,weight loss,loss of appetite,shortness of breath,back pain,fatigue,redness of skin,coughing blood,lung
+blood in urine,pelvic discomfort,bone pain,difficulty starting urination,painful ejaculation,nocturia,bleeding skin,abdominal pain,tiredness,frequent urination,prostate
+flashing lights,shadows,eye pain,burning sensation,weak stream,squinting,vision loss,sneeze,light sensitivity,blood in urine,eye
+nocturia,frequent urination,weak urine flow,lymph node changes,stomach ache,erectile dysfunction,bone pain,abdominal pain,weight loss,blood in urine,prostate
+light sensitivity,flashing lights,squinting,blurred vision,shadows,bloating,tiredness,floaters,swollen feet,redness,eye
+personality changes,bone pain,blood in urine,pelvic pain,weak stream,swollen feet,lower back pain,frequent urination,shortness of breath,indigestion,bladder
+mild cough,sneeze,runny nose,stomach ache,sore throat,headache,dry skin,minor bruise,muscle ache,tiredness,none
+frequent urination,nausea,nausea,jaundice,itchy skin,new-onset diabetes,blood clots,back pain,weak stream,loss of appetite,pancreatic
+itching,narrow stool,bloating,constipation,weakness,painful ejaculation,diarrhea,thickening,weight loss,rectal bleeding,colorectal
+mild cough,sore throat,dry skin,sneeze,stomach ache,muscle ache,minor bruise,runny nose,headache,tiredness,none
+blood clots,loss of appetite,nausea,red firm nodule,new-onset diabetes,weight loss,itchy skin,abdominal pain,jaundice,wheezing,pancreatic
+cramping,bloating,diarrhea,constipation,speech difficulties,redness of skin,weakness,abdominal pain,pain during intercourse,blood in stool,colorectal
+rectal bleeding,abdominal pain,abdominal pain,bloating,narrow stool,diarrhea,personality changes,weakness,cramping,thickening,colorectal
+urgent urination,pain during intercourse,inability to urinate,pelvic pain,painful urination,weak urine flow,swollen feet,bone pain,lower back pain,abdominal pain,bladder
+sore throat,weak stream,inability to urinate,pelvic pain,inverted nipple,blood in urine,persistent cough,swollen feet,frequent urination,bone pain,bladder
+burning sensation,frequent urination,red firm nodule,fatigue,vision loss,flashing lights,shadows,blurred vision,light sensitivity,floaters,eye
+difficulty starting urination,nocturia,breast pain,blood in urine,frequent urination,weight loss,thickening,nausea,bone pain,erectile dysfunction,prostate
+urgent urination,blood in urine,lower back pain,painful urination,weak stream,new-onset diabetes,fatigue,bone pain,pelvic pain,back pain,bladder
+shadows,blurred vision,vision loss,light sensitivity,eye pain,mild cough,swollen feet,redness,weakness,floaters,eye
+sneeze,painful urination,constipation,swollen feet,urgent urination,weak stream,frequent urination,constipation,lower back pain,inability to urinate,bladder
+red firm nodule,bleeding skin,dark spots,pearly bump,itching,bloating,wheezing,vision loss,scaly patch,non-healing sore,skin
+floaters,weight loss,itchy skin,minor bruise,back pain,new-onset diabetes,nausea,dark urine,loss of appetite,thickening,pancreatic
+redness of skin,breast pain,thickening,swelling,lymph node changes,light sensitivity,blood clots,skin dimpling,skin peeling,bloating,breast
+headache,runny nose,sneeze,mild cough,stomach ache,muscle ache,tiredness,dry skin,sore throat,minor bruise,none
+erectile dysfunction,nausea,blood clots,itchy skin,loss of appetite,new-onset diabetes,dry skin,weight loss,dark urine,pearly bump,pancreatic
+diarrhea,painful urination,loss of appetite,narrow stool,pelvic pain,blood in urine,frequent urination,swollen feet,weak stream,inability to urinate,bladder
+chest pain,coughing blood,hoarseness,persistent cough,wheezing,weakness,crusting,weight loss,menstrual changes,loss of appetite,lung
+crusting,swollen feet,scaly patch,frequent urination,constipation,red firm nodule,pearly bump,non-healing sore,bleeding skin,itching,skin
+red firm nodule,pelvic pain,non-healing sore,jaundice,itching,crusting,scaly patch,changing mole,redness,skin lesion,skin
+crusting,itching,bleeding skin,skin lesion,headache,sore throat,changing mole,nausea,dark spots,non-healing sore,skin
+blood clots,loss of appetite,jaundice,dark urine,frequent urination,new-onset diabetes,itchy skin,difficulty starting urination,eye pain,weight loss,pancreatic
+sneeze,muscle ache,mild cough,minor bruise,tiredness,runny nose,dry skin,headache,sore throat,stomach ache,none
+runny nose,stomach ache,sore throat,headache,mild cough,tiredness,minor bruise,dry skin,muscle ache,sneeze,none
+blood in urine,weight loss,difficulty starting urination,erectile dysfunction,dry skin,headache,pelvic discomfort,weak urine flow,nocturia,weight loss,prostate
+pelvic discomfort,redness of skin,difficulty starting urination,lymph node changes,blood in urine,painful ejaculation,weight loss,fatigue,erectile dysfunction,weak urine flow,prostate
+constipation,weight loss,nipple discharge,lymph node changes,blood in urine,nocturia,painful ejaculation,pelvic discomfort,difficulty starting urination,frequent urination,prostate
+loss of appetite,chest pain,weight loss,fatigue,hoarseness,menstrual changes,wheezing,coughing blood,shortness of breath,breast lump,lung
+speech difficulties,blurred vision,nausea,weakness in limbs,vision problems,fatigue,difficulty starting urination,memory loss,personality changes,balance issues,brain
+thickening,skin dimpling,diarrhea,breast pain,inverted nipple,lymph node changes,skin peeling,sore throat,headache,redness of skin,breast
+skin lesion,bleeding skin,shortness of breath,non-healing sore,lymph node changes,burning sensation,itching,dark spots,red firm nodule,changing mole,skin
+mild cough,tiredness,runny nose,dry skin,sore throat,stomach ache,headache,sneeze,minor bruise,muscle ache,none
+lower back pain,scaly patch,inability to urinate,bone pain,swollen feet,weak urine flow,blood in urine,dark spots,pelvic pain,weak stream,bladder
+breast lump,urgent urination,inability to urinate,bone pain,memory loss,lower back pain,floaters,pelvic pain,frequent urination,painful urination,bladder
+shadows,eye pain,headache,squinting,loss of appetite,light sensitivity,floaters,weak urine flow,flashing lights,blurred vision,eye
+narrow stool,cramping,abdominal pain,jaundice,squinting,weight loss,diarrhea,rectal bleeding,scaly patch,constipation,colorectal
+loss of appetite,constipation,indigestion,bloating,bloating,headache,menstrual changes,crusting,pelvic pain,fatigue,ovarian
+balance issues,seizures,memory loss,speech difficulties,vision problems,personality changes,wheezing,burning sensation,muscle ache,weakness in limbs,brain
+minor bruise,runny nose,stomach ache,muscle ache,sneeze,headache,sore throat,mild cough,tiredness,dry skin,none
+bone pain,loss of appetite,wheezing,blurred vision,fatigue,weight loss,swelling,chest pain,new-onset diabetes,persistent cough,lung
+mild cough,dry skin,runny nose,sneeze,minor bruise,muscle ache,sore throat,headache,tiredness,stomach ache,none
+bloating,menstrual changes,lower back pain,back pain,pelvic pain,persistent cough,weakness in limbs,constipation,frequent urination,fatigue,ovarian
+frequent urination,cramping,breast lump,weakness,abdominal pain,constipation,rectal bleeding,weak urine flow,bloating,diarrhea,colorectal
+painful ejaculation,difficulty starting urination,weight loss,erectile dysfunction,weak urine flow,thickening,blood in urine,memory loss,nocturia,sneeze,prostate
+weak urine flow,speech difficulties,headache,dark spots,memory loss,stomach ache,seizures,personality changes,nausea,hearing problems,brain
+memory loss,weight loss,erectile dysfunction,nocturia,pelvic discomfort,difficulty starting urination,painful ejaculation,shadows,wheezing,blood in urine,prostate
+bloating,blood in urine,hearing problems,blood in stool,eye pain,narrow stool,weakness,weight loss,constipation,diarrhea,colorectal
+coughing blood,personality changes,weight loss,shortness of breath,wheezing,hoarseness,blood in urine,chest pain,new-onset diabetes,fatigue,lung
+fatigue,eye pain,hoarseness,shortness of breath,loss of appetite,bone pain,memory loss,weight loss,vision problems,chest pain,lung
+personality changes,painful ejaculation,bone pain,weight loss,back pain,pelvic discomfort,erectile dysfunction,blood in urine,difficulty starting urination,weight loss,prostate
+burning sensation,eye pain,squinting,diarrhea,floaters,dark urine,redness of skin,vision loss,redness,flashing lights,eye
+sneeze,runny nose,muscle ache,sore throat,dry skin,headache,tiredness,mild cough,stomach ache,minor bruise,none
+muscle ache,minor bruise,mild cough,stomach ache,sneeze,tiredness,dry skin,sore throat,headache,runny nose,none
+muscle ache,constipation,back pain,fatigue,pain during intercourse,pelvic pain,menstrual changes,weight loss,nocturia,loss of appetite,ovarian
+inverted nipple,burning sensation,light sensitivity,shadows,floaters,redness,squinting,eye pain,pelvic pain,minor bruise,eye
+weakness in limbs,bloating,indigestion,frequent urination,back pain,menstrual changes,weight loss,bone pain,loss of appetite,fatigue,ovarian
+personality changes,itchy skin,weak urine flow,painful ejaculation,erectile dysfunction,headache,blood in urine,difficulty starting urination,weight loss,bone pain,prostate
+headache,mild cough,sore throat,minor bruise,stomach ache,sneeze,dry skin,tiredness,runny nose,muscle ache,none
+dark urine,redness,abdominal pain,weight loss,pelvic discomfort,itchy skin,nausea,blood clots,loss of appetite,thickening,pancreatic
+weight loss,abdominal pain,itchy skin,rectal bleeding,redness,runny nose,dark urine,new-onset diabetes,blood clots,jaundice,pancreatic
+headache,seizures,vision problems,thickening,balance issues,headache,weakness in limbs,constipation,speech difficulties,nausea,brain
+redness,crusting,hoarseness,fatigue,persistent cough,coughing blood,weight loss,chest pain,loss of appetite,bone pain,lung
+red firm nodule,menstrual changes,skin dimpling,back pain,pain during intercourse,constipation,loss of appetite,pelvic pain,bloating,weight loss,ovarian
+headache,sneeze,dry skin,sore throat,mild cough,muscle ache,runny nose,stomach ache,tiredness,minor bruise,none
+new-onset diabetes,dry skin,weight loss,nausea,itchy skin,dark urine,abdominal pain,flashing lights,jaundice,redness,pancreatic
+rectal bleeding,abdominal pain,blood in stool,constipation,scaly patch,weakness,back pain,weight loss,diarrhea,new-onset diabetes,colorectal
+bloating,balance issues,vision problems,weakness in limbs,constipation,headache,difficulty starting urination,seizures,hearing problems,personality changes,brain
+floaters,hearing problems,loss of appetite,indigestion,back pain,bloating,pelvic pain,blurred vision,frequent urination,constipation,ovarian
+loss of appetite,coughing blood,loss of appetite,weight loss,bone pain,persistent cough,hoarseness,shortness of breath,diarrhea,frequent urination,lung
+pelvic pain,bone pain,constipation,swollen feet,blood in urine,painful urination,inability to urinate,weakness in limbs,pain during intercourse,lower back pain,bladder
+weak stream,lower back pain,cramping,frequent urination,urgent urination,hearing problems,seizures,swollen feet,blood in urine,pelvic pain,bladder
+nausea,speech difficulties,weakness in limbs,minor bruise,headache,memory loss,indigestion,constipation,seizures,vision problems,brain
+vision loss,shadows,light sensitivity,wheezing,flashing lights,redness,lymph node changes,burning sensation,red firm nodule,floaters,eye
+weakness,constipation,cramping,narrow stool,rectal bleeding,loss of appetite,breast lump,weight loss,diarrhea,swelling,colorectal
+bleeding skin,skin lesion,changing mole,crusting,frequent urination,pelvic pain,itching,scaly patch,non-healing sore,memory loss,skin
+weakness,persistent cough,seizures,diarrhea,bloating,weight loss,rectal bleeding,constipation,blood in stool,hoarseness,colorectal
+crusting,runny nose,red firm nodule,bleeding skin,frequent urination,itching,non-healing sore,scaly patch,nausea,skin lesion,skin
+sneeze,dry skin,headache,minor bruise,runny nose,sore throat,muscle ache,stomach ache,mild cough,tiredness,none
+runny nose,vision loss,redness,squinting,muscle ache,flashing lights,shadows,burning sensation,headache,eye pain,eye
+shortness of breath,hoarseness,changing mole,wheezing,blood in stool,chest pain,bone pain,loss of appetite,dry skin,weight loss,lung
+dark spots,pearly bump,skin lesion,nausea,inverted nipple,crusting,itching,headache,bleeding skin,scaly patch,skin
+pelvic discomfort,bone pain,menstrual changes,weight loss,difficulty starting urination,nocturia,erectile dysfunction,weak urine flow,minor bruise,new-onset diabetes,prostate
+hearing problems,loss of appetite,weight loss,shortness of breath,redness of skin,hoarseness,floaters,chest pain,persistent cough,fatigue,lung
+weight loss,nocturia,muscle ache,frequent urination,blood in urine,bone pain,headache,erectile dysfunction,weak urine flow,weight loss,prostate
+floaters,vision loss,burning sensation,blurred vision,squinting,light sensitivity,redness,itching,personality changes,diarrhea,eye
+pearly bump,back pain,nipple discharge,red firm nodule,itching,bleeding skin,headache,non-healing sore,skin lesion,dark spots,skin
+loss of appetite,bloating,burning sensation,squinting,constipation,pain during intercourse,fatigue,indigestion,flashing lights,back pain,ovarian
+weak urine flow,difficulty starting urination,painful ejaculation,frequent urination,balance issues,nocturia,weight loss,pelvic discomfort,eye pain,fatigue,prostate
+muscle ache,sore throat,stomach ache,headache,sneeze,dry skin,runny nose,mild cough,tiredness,minor bruise,none
+jaundice,shadows,blurred vision,light sensitivity,hearing problems,burning sensation,nausea,eye pain,flashing lights,vision loss,eye
+back pain,flashing lights,bloating,fatigue,shadows,weakness in limbs,constipation,pelvic pain,frequent urination,menstrual changes,ovarian
+skin dimpling,breast lump,thickening,swelling,loss of appetite,changing mole,skin peeling,inverted nipple,menstrual changes,redness of skin,breast
+flashing lights,vision loss,swelling,squinting,vision problems,shadows,light sensitivity,pelvic pain,burning sensation,eye pain,eye
+skin lesion,persistent cough,pelvic pain,non-healing sore,crusting,changing mole,scaly patch,itching,pearly bump,floaters,skin
+narrow stool,erectile dysfunction,bone pain,frequent urination,weight loss,weak urine flow,pelvic discomfort,hearing problems,blood in urine,red firm nodule,prostate
+burning sensation,pelvic discomfort,bone pain,painful ejaculation,blood clots,weight loss,tiredness,frequent urination,weak urine flow,blood in urine,prostate
+pelvic discomfort,crusting,changing mole,pearly bump,skin lesion,itching,scaly patch,red firm nodule,muscle ache,nausea,skin
+lymph node changes,weakness in limbs,runny nose,speech difficulties,pain during intercourse,vision problems,headache,hearing problems,balance issues,nausea,brain
+nipple discharge,breast lump,lymph node changes,breast pain,crusting,skin dimpling,skin peeling,thickening,blood in urine,hearing problems,breast
+headache,muscle ache,runny nose,dry skin,sore throat,tiredness,sneeze,mild cough,minor bruise,stomach ache,none
+coughing blood,itching,bone pain,minor bruise,indigestion,wheezing,loss of appetite,hoarseness,chest pain,weight loss,lung
+pelvic pain,bone pain,red firm nodule,swelling,inability to urinate,swollen feet,blood in urine,lower back pain,urgent urination,headache,bladder
+itchy skin,sneeze,new-onset diabetes,abdominal pain,weight loss,blood in stool,blood clots,weight loss,jaundice,back pain,pancreatic
+muscle ache,sneeze,headache,sore throat,minor bruise,dry skin,tiredness,mild cough,stomach ache,runny nose,none
+personality changes,headache,weakness in limbs,redness,nausea,memory loss,speech difficulties,sneeze,blood in stool,seizures,brain
+inability to urinate,persistent cough,chest pain,frequent urination,coughing blood,wheezing,floaters,shortness of breath,fatigue,loss of appetite,lung
+abdominal pain,cramping,nausea,weakness,narrow stool,rectal bleeding,red firm nodule,weight loss,shortness of breath,constipation,colorectal
+weak urine flow,inability to urinate,persistent cough,pelvic pain,coughing blood,swollen feet,painful urination,urgent urination,lower back pain,weak stream,bladder
+floaters,headache,chest pain,burning sensation,shadows,flashing lights,light sensitivity,redness,squinting,stomach ache,eye
+menstrual changes,bloating,back pain,chest pain,swollen feet,pain during intercourse,frequent urination,loss of appetite,constipation,back pain,ovarian
+blood clots,red firm nodule,weight loss,fatigue,skin peeling,itchy skin,back pain,abdominal pain,loss of appetite,dark urine,pancreatic
+breast lump,stomach ache,nipple discharge,redness of skin,rectal bleeding,swelling,lymph node changes,inability to urinate,skin peeling,inverted nipple,breast
+jaundice,crusting,nausea,eye pain,weight loss,new-onset diabetes,loss of appetite,hearing problems,dark urine,blood clots,pancreatic
+bloating,fatigue,dry skin,pain during intercourse,thickening,indigestion,squinting,back pain,frequent urination,loss of appetite,ovarian
+rectal bleeding,diarrhea,blood in stool,weight loss,cramping,abdominal pain,constipation,blurred vision,narrow stool,blood in urine,colorectal
+hearing problems,headache,non-healing sore,seizures,vision problems,frequent urination,weakness in limbs,personality changes,nausea,floaters,brain
+vision loss,difficulty starting urination,weight loss,bone pain,pelvic discomfort,nocturia,sneeze,weak urine flow,diarrhea,blood in urine,prostate
+loss of appetite,nausea,abdominal pain,swollen feet,weight loss,back pain,blood clots,new-onset diabetes,weakness in limbs,jaundice,pancreatic
+cramping,nocturia,rectal bleeding,bloating,weight loss,abdominal pain,blood in stool,constipation,weak stream,skin dimpling,colorectal
+breast pain,redness of skin,thickening,lower back pain,blood in urine,lymph node changes,breast lump,urgent urination,skin peeling,swelling,breast
+persistent cough,jaundice,new-onset diabetes,weight loss,itchy skin,back pain,nausea,runny nose,nipple discharge,blood clots,pancreatic
+tiredness,sore throat,mild cough,stomach ache,muscle ache,minor bruise,headache,runny nose,dry skin,sneeze,none
+shortness of breath,swollen feet,bone pain,inability to urinate,frequent urination,blood in urine,weight loss,weak stream,wheezing,painful urination,bladder
+painful urination,inability to urinate,weak stream,dark spots,headache,frequent urination,swollen feet,pelvic pain,hearing problems,lower back pain,bladder
+frequent urination,blood in urine,pelvic pain,pain during intercourse,constipation,back pain,fatigue,jaundice,loss of appetite,fatigue,ovarian
+cramping,skin peeling,thickening,sore throat,redness of skin,swelling,diarrhea,breast lump,lymph node changes,skin dimpling,breast
+skin lesion,scaly patch,red firm nodule,itching,frequent urination,non-healing sore,bleeding skin,lower back pain,shadows,crusting,skin
+wheezing,loss of appetite,lymph node changes,weight loss,persistent cough,coughing blood,hoarseness,blurred vision,loss of appetite,chest pain,lung
+weight loss,bone pain,difficulty starting urination,blood clots,nausea,painful ejaculation,blood in urine,erectile dysfunction,nocturia,weight loss,prostate
+weight loss,persistent cough,shortness of breath,chest pain,coughing blood,bone pain,blood in urine,fatigue,personality changes,squinting,lung
+difficulty starting urination,blood in urine,frequent urination,painful urination,nocturia,weight loss,minor bruise,bone pain,pelvic discomfort,breast lump,prostate
+itching,pearly bump,crusting,changing mole,vision loss,scaly patch,blood in urine,abdominal pain,dark spots,red firm nodule,skin
+runny nose,non-healing sore,blood in stool,weight loss,constipation,bloating,wheezing,abdominal pain,weakness,cramping,colorectal
+seizures,vision problems,personality changes,coughing blood,headache,nausea,memory loss,dark urine,weakness in limbs,indigestion,brain
+swelling,skin dimpling,redness of skin,changing mole,redness,lymph node changes,flashing lights,breast lump,skin peeling,breast pain,breast
+red firm nodule,skin lesion,bone pain,itching,sore throat,changing mole,scaly patch,pearly bump,vision loss,crusting,skin
+chest pain,breast lump,nipple discharge,redness,skin peeling,inverted nipple,breast pain,swelling,thickening,vision loss,breast
+painful urination,inability to urinate,urgent urination,bone pain,weight loss,frequent urination,squinting,blood in urine,redness of skin,lower back pain,bladder
+swelling,inverted nipple,nipple discharge,skin dimpling,skin peeling,breast pain,squinting,lower back pain,redness of skin,nausea,breast
+skin lesion,dark spots,bleeding skin,crusting,persistent cough,changing mole,hearing problems,weakness in limbs,red firm nodule,scaly patch,skin
+shortness of breath,bloating,indigestion,frequent urination,runny nose,pain during intercourse,menstrual changes,dry skin,fatigue,pelvic pain,ovarian
+swollen feet,thickening,breast pain,lymph node changes,skin peeling,skin dimpling,nipple discharge,light sensitivity,breast lump,floaters,breast
+loss of appetite,speech difficulties,fatigue,indigestion,pain during intercourse,menstrual changes,frequent urination,red firm nodule,back pain,weak urine flow,ovarian
+pelvic discomfort,erectile dysfunction,weak urine flow,skin dimpling,nocturia,blood clots,frequent urination,blood in urine,difficulty starting urination,fatigue,prostate
+loss of appetite,shortness of breath,fatigue,chest pain,skin lesion,bone pain,menstrual changes,weight loss,cramping,coughing blood,lung
+blood in urine,swollen feet,weakness in limbs,painful urination,pelvic pain,bone pain,weak stream,breast pain,frequent urination,indigestion,bladder
+bone pain,sneeze,vision loss,frequent urination,weight loss,weakness,blood in urine,erectile dysfunction,difficulty starting urination,nocturia,prostate
+loss of appetite,sneeze,frequent urination,bloating,indigestion,skin dimpling,menstrual changes,loss of appetite,fatigue,pain during intercourse,ovarian
+lymph node changes,breast lump,inverted nipple,menstrual changes,skin dimpling,hoarseness,nipple discharge,breast pain,dark urine,redness of skin,breast
+new-onset diabetes,abdominal pain,blood clots,weight loss,redness of skin,menstrual changes,loss of appetite,back pain,nausea,balance issues,pancreatic
+blood in urine,frequent urination,inverted nipple,abdominal pain,weight loss,flashing lights,bone pain,difficulty starting urination,nocturia,erectile dysfunction,prostate
+tiredness,sneeze,runny nose,muscle ache,minor bruise,sore throat,stomach ache,mild cough,headache,dry skin,none
+tiredness,weak stream,burning sensation,swollen feet,frequent urination,blood in urine,floaters,lower back pain,bone pain,inability to urinate,bladder
+scaly patch,skin peeling,skin lesion,dry skin,thickening,red firm nodule,bleeding skin,dark spots,changing mole,pearly bump,skin
+fatigue,pelvic pain,diarrhea,constipation,indigestion,redness,pain during intercourse,back pain,menstrual changes,bloating,ovarian
+menstrual changes,pain during intercourse,loss of appetite,frequent urination,sneeze,indigestion,fatigue,cramping,constipation,weak urine flow,ovarian
+dry skin,weak urine flow,painful ejaculation,weight loss,erectile dysfunction,bleeding skin,memory loss,frequent urination,blood in urine,nocturia,prostate
+sneeze,headache,muscle ache,sore throat,stomach ache,runny nose,tiredness,dry skin,mild cough,minor bruise,none
+frequent urination,blood in urine,nocturia,pelvic discomfort,persistent cough,pain during intercourse,painful ejaculation,blood in stool,erectile dysfunction,difficulty starting urination,prostate
+memory loss,speech difficulties,blurred vision,weakness in limbs,seizures,hearing problems,personality changes,skin lesion,headache,shortness of breath,brain
+runny nose,mild cough,sneeze,stomach ache,tiredness,dry skin,muscle ache,sore throat,headache,minor bruise,none
+swollen feet,frequent urination,erectile dysfunction,painful ejaculation,hearing problems,weight loss,difficulty starting urination,persistent cough,pelvic discomfort,weak urine flow,prostate
+light sensitivity,eye pain,shadows,redness,painful ejaculation,blurred vision,painful urination,persistent cough,burning sensation,squinting,eye
+vision loss,shadows,cramping,flashing lights,redness,swelling,floaters,bleeding skin,burning sensation,squinting,eye
+loss of appetite,shortness of breath,red firm nodule,weight loss,coughing blood,bloating,fatigue,persistent cough,chest pain,painful urination,lung
+bleeding skin,shadows,squinting,light sensitivity,blurred vision,burning sensation,frequent urination,floaters,itchy skin,eye pain,eye
+squinting,blood clots,itching,blurred vision,crusting,eye pain,floaters,flashing lights,burning sensation,shadows,eye
+breast pain,breast lump,nipple discharge,weight loss,rectal bleeding,redness of skin,nausea,skin peeling,thickening,swelling,breast
+bloating,frequent urination,swollen feet,loss of appetite,weak stream,bone pain,lower back pain,blood in urine,menstrual changes,urgent urination,bladder
+nipple discharge,frequent urination,urgent urination,bone pain,narrow stool,swollen feet,weak stream,difficulty starting urination,inability to urinate,pelvic pain,bladder
+hearing problems,dark spots,skin lesion,skin dimpling,pearly bump,red firm nodule,bleeding skin,scaly patch,wheezing,crusting,skin
+weight loss,flashing lights,jaundice,nausea,loss of appetite,shadows,blood clots,abdominal pain,dark urine,balance issues,pancreatic
+abdominal pain,painful ejaculation,pelvic pain,back pain,weight loss,blood clots,changing mole,jaundice,nausea,loss of appetite,pancreatic
+muscle ache,runny nose,headache,minor bruise,mild cough,sore throat,dry skin,sneeze,tiredness,stomach ache,none
+blurred vision,fatigue,coughing blood,shortness of breath,breast lump,persistent cough,hoarseness,crusting,weight loss,bone pain,lung
+sneeze,stomach ache,muscle ache,mild cough,runny nose,dry skin,tiredness,minor bruise,headache,sore throat,none
+abdominal pain,skin dimpling,itchy skin,dark urine,new-onset diabetes,loss of appetite,weight loss,weight loss,dark spots,back pain,pancreatic
+urgent urination,new-onset diabetes,balance issues,nausea,weakness in limbs,memory loss,runny nose,vision problems,headache,seizures,brain
+nipple discharge,skin dimpling,skin peeling,inverted nipple,breast lump,redness of skin,dark urine,weight loss,shortness of breath,thickening,breast
+skin peeling,weight loss,painful ejaculation,difficulty starting urination,fatigue,blood in urine,frequent urination,inverted nipple,bone pain,erectile dysfunction,prostate
+minor bruise,headache,runny nose,muscle ache,mild cough,sneeze,stomach ache,dry skin,tiredness,sore throat,none
+fatigue,urgent urination,lymph node changes,lower back pain,pelvic pain,swollen feet,bone pain,blood in urine,frequent urination,sneeze,bladder
+eye pain,difficulty starting urination,flashing lights,burning sensation,squinting,blurred vision,tiredness,nausea,light sensitivity,floaters,eye
+dark spots,bleeding skin,itching,sneeze,headache,skin lesion,mild cough,crusting,red firm nodule,changing mole,skin
+runny nose,sore throat,sneeze,mild cough,stomach ache,tiredness,minor bruise,muscle ache,dry skin,headache,none
+headache,sore throat,mild cough,dry skin,muscle ache,minor bruise,sneeze,stomach ache,runny nose,tiredness,none
+new-onset diabetes,itchy skin,dark urine,dry skin,frequent urination,jaundice,loss of appetite,abdominal pain,blood clots,hoarseness,pancreatic
+sore throat,sneeze,tiredness,dry skin,runny nose,mild cough,muscle ache,minor bruise,stomach ache,headache,none
+eye pain,blood clots,loss of appetite,back pain,weakness in limbs,weight loss,non-healing sore,dark urine,abdominal pain,new-onset diabetes,pancreatic
+personality changes,pelvic pain,frequent urination,loss of appetite,skin dimpling,fatigue,menstrual changes,back pain,pain during intercourse,frequent urination,ovarian
+nausea,loss of appetite,swollen feet,abdominal pain,blood clots,blood in stool,dark urine,jaundice,abdominal pain,new-onset diabetes,pancreatic
+skin peeling,breast pain,nipple discharge,lymph node changes,breast lump,non-healing sore,weight loss,thickening,redness of skin,floaters,breast
+light sensitivity,diarrhea,painful ejaculation,squinting,redness,changing mole,blurred vision,floaters,eye pain,flashing lights,eye
+skin peeling,jaundice,skin dimpling,redness of skin,breast pain,breast lump,thickening,vision problems,swelling,blood in urine,breast
+difficulty starting urination,pelvic discomfort,weak urine flow,diarrhea,painful ejaculation,erectile dysfunction,painful urination,weakness,frequent urination,nocturia,prostate
+weak urine flow,painful ejaculation,erectile dysfunction,difficulty starting urination,blood in urine,weight loss,changing mole,bleeding skin,minor bruise,frequent urination,prostate
+weight loss,blood in stool,narrow stool,weight loss,abdominal pain,constipation,frequent urination,diarrhea,weakness,weight loss,colorectal
+blood in urine,painful ejaculation,bloating,bone pain,weight loss,difficulty starting urination,weak urine flow,nocturia,crusting,frequent urination,prostate
+abdominal pain,frequent urination,lower back pain,urgent urination,swollen feet,weak stream,thickening,inability to urinate,erectile dysfunction,bone pain,bladder
+pain during intercourse,menstrual changes,skin dimpling,frequent urination,loss of appetite,constipation,pelvic discomfort,indigestion,non-healing sore,back pain,ovarian
+abdominal pain,dark urine,itchy skin,skin dimpling,new-onset diabetes,back pain,inability to urinate,bleeding skin,jaundice,weight loss,pancreatic
+muscle ache,stomach ache,headache,sneeze,mild cough,sore throat,tiredness,dry skin,runny nose,minor bruise,none
+dark urine,difficulty starting urination,rectal bleeding,new-onset diabetes,loss of appetite,back pain,nausea,blood clots,pelvic discomfort,itchy skin,pancreatic
+persistent cough,light sensitivity,shadows,blurred vision,floaters,flashing lights,redness,wheezing,vision loss,sore throat,eye
+non-healing sore,changing mole,skin lesion,bone pain,scaly patch,pelvic discomfort,itching,swelling,dark spots,red firm nodule,skin
+headache,lower back pain,vision problems,weakness in limbs,weight loss,hearing problems,personality changes,nausea,balance issues,sneeze,brain
+indigestion,fatigue,constipation,pelvic pain,menstrual changes,back pain,scaly patch,bloating,diarrhea,painful ejaculation,ovarian
+narrow stool,nausea,weight loss,blood clots,cramping,rectal bleeding,constipation,eye pain,bloating,abdominal pain,colorectal
+pain during intercourse,sore throat,loss of appetite,hoarseness,fatigue,swollen feet,pelvic pain,indigestion,back pain,menstrual changes,ovarian
+frequent urination,hearing problems,speech difficulties,personality changes,weakness in limbs,vision problems,new-onset diabetes,nipple discharge,memory loss,nausea,brain
+chest pain,dark urine,skin lesion,bone pain,coughing blood,wheezing,persistent cough,loss of appetite,fatigue,dark spots,lung
+skin lesion,bone pain,constipation,bleeding skin,non-healing sore,crusting,bone pain,changing mole,pearly bump,scaly patch,skin
+itchy skin,weakness in limbs,nipple discharge,constipation,nausea,speech difficulties,vision problems,personality changes,seizures,headache,brain
+dark urine,diarrhea,constipation,headache,blood in stool,thickening,weakness,narrow stool,weight loss,cramping,colorectal
+frequent urination,pelvic discomfort,weight loss,weak urine flow,pelvic pain,painful ejaculation,bone pain,rectal bleeding,erectile dysfunction,blood clots,prostate
+nipple discharge,painful ejaculation,breast lump,nausea,swelling,thickening,inverted nipple,skin dimpling,shadows,breast pain,breast
+vision loss,redness,wheezing,blurred vision,eye pain,floaters,loss of appetite,shadows,menstrual changes,squinting,eye
+weakness in limbs,hearing problems,personality changes,weakness,vision problems,headache,memory loss,jaundice,difficulty starting urination,speech difficulties,brain
+hoarseness,skin dimpling,chest pain,wheezing,shortness of breath,coughing blood,loss of appetite,runny nose,bloating,fatigue,lung
+tiredness,frequent urination,weight loss,narrow stool,pelvic discomfort,painful ejaculation,nocturia,weak urine flow,erectile dysfunction,weakness,prostate
+headache,stomach ache,dry skin,sore throat,sneeze,mild cough,tiredness,muscle ache,runny nose,minor bruise,none
+pelvic pain,lower back pain,inability to urinate,frequent urination,fatigue,blood in urine,weak stream,shortness of breath,runny nose,swollen feet,bladder
+constipation,weakness in limbs,diarrhea,weak stream,rectal bleeding,pearly bump,bloating,blood in stool,cramping,weight loss,colorectal
+inability to urinate,pelvic pain,painful urination,redness,urgent urination,weak stream,lower back pain,wheezing,frequent urination,personality changes,bladder
+weak stream,cramping,seizures,personality changes,memory loss,vision problems,weakness in limbs,balance issues,hearing problems,nocturia,brain
+abdominal pain,weak stream,lower back pain,hoarseness,urgent urination,swollen feet,frequent urination,bone pain,pelvic pain,minor bruise,bladder
+mild cough,headache,stomach ache,minor bruise,muscle ache,sore throat,dry skin,tiredness,sneeze,runny nose,none
+breast pain,seizures,nipple discharge,floaters,swelling,redness of skin,nausea,skin dimpling,skin peeling,breast lump,breast
+jaundice,blood in urine,urgent urination,bone pain,inability to urinate,squinting,frequent urination,weak stream,pelvic pain,persistent cough,bladder
+swollen feet,pelvic pain,dry skin,frequent urination,memory loss,bone pain,weak stream,painful urination,skin lesion,inability to urinate,bladder
+crusting,red firm nodule,bone pain,changing mole,frequent urination,inability to urinate,pearly bump,scaly patch,non-healing sore,itching,skin
+headache,bone pain,painful ejaculation,weight loss,non-healing sore,weak urine flow,pelvic discomfort,frequent urination,nocturia,weakness in limbs,prostate
+loss of appetite,dark urine,balance issues,diarrhea,weight loss,chest pain,blood clots,itchy skin,back pain,abdominal pain,pancreatic
+skin dimpling,nipple discharge,itching,redness of skin,weight loss,breast lump,skin peeling,swelling,thickening,tiredness,breast
+abdominal pain,new-onset diabetes,itchy skin,loss of appetite,weight loss,bone pain,dark urine,weight loss,jaundice,personality changes,pancreatic
+floaters,redness,pain during intercourse,vision loss,pelvic discomfort,blurred vision,fatigue,squinting,burning sensation,light sensitivity,eye
+wheezing,bone pain,weight loss,coughing blood,bloating,hoarseness,blood clots,bloating,loss of appetite,shortness of breath,lung
+vision problems,personality changes,headache,bone pain,nausea,crusting,dry skin,seizures,memory loss,weakness in limbs,brain
+mild cough,stomach ache,muscle ache,minor bruise,runny nose,dry skin,sore throat,headache,tiredness,sneeze,none
+flashing lights,loss of appetite,blurred vision,redness,eye pain,shadows,burning sensation,chest pain,squinting,seizures,eye
+thickening,redness of skin,swelling,itchy skin,skin peeling,inverted nipple,crusting,skin dimpling,breast lump,balance issues,breast
+weight loss,blood clots,abdominal pain,light sensitivity,jaundice,dark urine,bloating,nausea,back pain,stomach ache,pancreatic
+chest pain,frequent urination,non-healing sore,hoarseness,eye pain,persistent cough,fatigue,wheezing,loss of appetite,coughing blood,lung
+itchy skin,new-onset diabetes,weight loss,nausea,shortness of breath,jaundice,persistent cough,dark urine,loss of appetite,back pain,pancreatic
+abdominal pain,weakness,weak urine flow,cramping,narrow stool,rectal bleeding,diarrhea,runny nose,non-healing sore,constipation,colorectal
+chest pain,weight loss,bone pain,cramping,blood in stool,bloating,abdominal pain,constipation,weakness,balance issues,colorectal
+painful ejaculation,pain during intercourse,shortness of breath,blood in urine,weight loss,frequent urination,difficulty starting urination,erectile dysfunction,weight loss,bone pain,prostate
+dry skin,mild cough,sneeze,tiredness,headache,minor bruise,muscle ache,runny nose,sore throat,stomach ache,none
+difficulty starting urination,burning sensation,pelvic discomfort,pelvic pain,weak urine flow,nocturia,frequent urination,blood in urine,painful ejaculation,bone pain,prostate
+pearly bump,bloating,floaters,blurred vision,shadows,squinting,non-healing sore,burning sensation,eye pain,vision loss,eye
+urgent urination,bone pain,frequent urination,nausea,blurred vision,shortness of breath,swollen feet,inability to urinate,weak stream,pelvic pain,bladder
+bleeding skin,persistent cough,weight loss,redness of skin,bone pain,wheezing,fatigue,weak stream,hoarseness,loss of appetite,lung
+runny nose,minor bruise,mild cough,tiredness,sore throat,sneeze,stomach ache,muscle ache,headache,dry skin,none
+weight loss,headache,breast pain,abdominal pain,frequent urination,jaundice,loss of appetite,itchy skin,back pain,nausea,pancreatic
+stomach ache,swelling,skin peeling,menstrual changes,itching,nipple discharge,lymph node changes,redness of skin,breast lump,inverted nipple,breast
+thickening,skin peeling,breast lump,fatigue,weakness in limbs,indigestion,breast pain,lymph node changes,skin dimpling,redness of skin,breast
+red firm nodule,shadows,dark spots,runny nose,pearly bump,vision problems,crusting,itching,skin lesion,bleeding skin,skin
+shortness of breath,coughing blood,dark urine,bone pain,chest pain,hoarseness,weight loss,persistent cough,dry skin,skin dimpling,lung
+dry skin,mild cough,headache,stomach ache,runny nose,muscle ache,sore throat,minor bruise,sneeze,tiredness,none
+urgent urination,cramping,weight loss,weakness,weakness in limbs,diarrhea,abdominal pain,erectile dysfunction,narrow stool,blood in stool,colorectal
+loss of appetite,nausea,memory loss,painful ejaculation,headache,speech difficulties,vision problems,balance issues,seizures,back pain,brain
+fatigue,floaters,non-healing sore,red firm nodule,dark spots,crusting,scaly patch,changing mole,nausea,skin lesion,skin
+diarrhea,vision problems,breast pain,narrow stool,weight loss,rectal bleeding,constipation,weakness,bloating,floaters,colorectal
+balance issues,frequent urination,hearing problems,memory loss,speech difficulties,blurred vision,seizures,menstrual changes,vision problems,weakness in limbs,brain
+dry skin,tiredness,minor bruise,stomach ache,sneeze,mild cough,sore throat,runny nose,headache,muscle ache,none
+urgent urination,pearly bump,weak stream,crusting,blood in urine,scaly patch,inability to urinate,painful urination,swollen feet,pelvic pain,bladder
+headache,blurred vision,loss of appetite,vision problems,seizures,nausea,hearing problems,personality changes,balance issues,hoarseness,brain
+headache,tiredness,dry skin,muscle ache,mild cough,sore throat,runny nose,sneeze,stomach ache,minor bruise,none
+hearing problems,memory loss,personality changes,muscle ache,nausea,back pain,balance issues,seizures,headache,frequent urination,brain
+bone pain,eye pain,difficulty starting urination,constipation,personality changes,nocturia,erectile dysfunction,painful ejaculation,weak urine flow,frequent urination,prostate
+sneeze,mild cough,muscle ache,headache,sore throat,stomach ache,runny nose,tiredness,minor bruise,dry skin,none
+wheezing,shortness of breath,chest pain,mild cough,hoarseness,bone pain,coughing blood,flashing lights,persistent cough,rectal bleeding,lung
+breast pain,redness of skin,breast lump,inverted nipple,nipple discharge,weakness in limbs,lymph node changes,tiredness,bone pain,thickening,breast
+vision problems,weakness in limbs,speech difficulties,balance issues,headache,itching,pelvic discomfort,nausea,personality changes,frequent urination,brain
+floaters,redness,light sensitivity,redness of skin,flashing lights,muscle ache,vision loss,eye pain,squinting,bloating,eye
+lymph node changes,skin peeling,stomach ache,skin dimpling,swelling,breast pain,diarrhea,weak stream,thickening,breast lump,breast
+personality changes,redness of skin,breast pain,balance issues,breast lump,bloating,inverted nipple,lymph node changes,skin dimpling,nipple discharge,breast
+frequent urination,inability to urinate,pelvic pain,urgent urination,blood in urine,red firm nodule,constipation,bone pain,swelling,weak stream,bladder
+pelvic pain,back pain,menstrual changes,indigestion,persistent cough,constipation,frequent urination,pearly bump,loss of appetite,nausea,ovarian
+breast lump,chest pain,hoarseness,coughing blood,persistent cough,urgent urination,bone pain,wheezing,eye pain,fatigue,lung
+redness,weak urine flow,squinting,weak stream,blurred vision,eye pain,light sensitivity,bone pain,vision loss,floaters,eye
+vision loss,skin lesion,hearing problems,pearly bump,crusting,itching,headache,dark spots,red firm nodule,non-healing sore,skin
+seizures,coughing blood,weight loss,bone pain,loss of appetite,itchy skin,fatigue,wheezing,bone pain,persistent cough,lung
+scaly patch,pearly bump,red firm nodule,pelvic pain,non-healing sore,frequent urination,weakness in limbs,skin lesion,crusting,dark spots,skin
+weakness,narrow stool,itchy skin,blood in stool,abdominal pain,constipation,swelling,cramping,shadows,bloating,colorectal
+crusting,pearly bump,non-healing sore,red firm nodule,itching,inability to urinate,lymph node changes,skin lesion,pelvic discomfort,scaly patch,skin
+lymph node changes,shortness of breath,fatigue,loss of appetite,weight loss,hoarseness,scaly patch,coughing blood,wheezing,nausea,lung
+frequent urination,seizures,balance issues,swelling,weight loss,hearing problems,personality changes,nausea,headache,vision problems,brain
+redness of skin,breast pain,lower back pain,urgent urination,bone pain,inability to urinate,light sensitivity,pelvic pain,painful urination,frequent urination,bladder
+headache,minor bruise,runny nose,muscle ache,tiredness,sneeze,mild cough,sore throat,dry skin,stomach ache,none
+light sensitivity,painful ejaculation,redness,burning sensation,vision loss,floaters,blurred vision,lower back pain,redness of skin,squinting,eye
+mild cough,chest pain,bone pain,wheezing,light sensitivity,shortness of breath,memory loss,loss of appetite,hoarseness,persistent cough,lung
+urgent urination,swollen feet,new-onset diabetes,light sensitivity,frequent urination,lower back pain,lymph node changes,painful urination,weak stream,bone pain,bladder
+pelvic pain,blood in urine,difficulty starting urination,bone pain,cramping,pelvic discomfort,weak urine flow,nocturia,erectile dysfunction,pearly bump,prostate
+loss of appetite,bone pain,shortness of breath,fatigue,persistent cough,weight loss,painful urination,bone pain,hoarseness,difficulty starting urination,lung
+floaters,loss of appetite,bloating,frequent urination,redness,indigestion,dark urine,menstrual changes,fatigue,constipation,ovarian
+stomach ache,muscle ache,dry skin,mild cough,tiredness,headache,sore throat,runny nose,minor bruise,sneeze,none
+constipation,red firm nodule,abdominal pain,vision loss,itchy skin,weight loss,cramping,rectal bleeding,blood in stool,weakness,colorectal
+changing mole,loss of appetite,pain during intercourse,menstrual changes,bloating,frequent urination,headache,hoarseness,fatigue,indigestion,ovarian
+bone pain,chest pain,nausea,hoarseness,persistent cough,shortness of breath,sneeze,fatigue,coughing blood,lymph node changes,lung
+breast pain,swollen feet,redness,nipple discharge,redness of skin,inverted nipple,breast lump,thickening,skin dimpling,blood in urine,breast
+stomach ache,headache,tiredness,dry skin,runny nose,sore throat,minor bruise,sneeze,muscle ache,mild cough,none
+weak stream,frequent urination,non-healing sore,swollen feet,bone pain,inability to urinate,fatigue,blood in urine,weight loss,urgent urination,bladder
+blood in stool,bleeding skin,skin lesion,scaly patch,non-healing sore,weak stream,changing mole,dark spots,pain during intercourse,red firm nodule,skin
+breast lump,memory loss,inverted nipple,dark spots,redness of skin,lymph node changes,breast pain,nipple discharge,thickening,runny nose,breast
+new-onset diabetes,back pain,burning sensation,minor bruise,jaundice,nausea,scaly patch,loss of appetite,weight loss,blood clots,pancreatic
+floaters,blurred vision,chest pain,vision loss,weight loss,redness,seizures,burning sensation,shadows,squinting,eye
+sneeze,runny nose,minor bruise,tiredness,dry skin,stomach ache,sore throat,muscle ache,headache,mild cough,none
+bone pain,changing mole,red firm nodule,breast pain,itching,scaly patch,crusting,dark spots,bleeding skin,nipple discharge,skin
+crusting,scaly patch,non-healing sore,pearly bump,dark spots,changing mole,pelvic pain,breast pain,burning sensation,red firm nodule,skin
+rectal bleeding,chest pain,itchy skin,hearing problems,blood clots,dark urine,nausea,back pain,loss of appetite,new-onset diabetes,pancreatic
+nausea,personality changes,memory loss,weakness in limbs,nipple discharge,vision problems,balance issues,changing mole,red firm nodule,headache,brain
+blurred vision,new-onset diabetes,flashing lights,redness,shadows,sneeze,floaters,squinting,light sensitivity,shortness of breath,eye
+light sensitivity,flashing lights,frequent urination,floaters,vision loss,breast lump,redness,squinting,skin peeling,shadows,eye
+diarrhea,constipation,abdominal pain,shortness of breath,blood in stool,weight loss,dry skin,weakness,blood in urine,rectal bleeding,colorectal
+inability to urinate,erectile dysfunction,pain during intercourse,frequent urination,nipple discharge,nocturia,weak urine flow,blood in urine,painful ejaculation,weight loss,prostate
+weight loss,frequent urination,headache,cramping,diarrhea,narrow stool,pelvic discomfort,rectal bleeding,weakness,bloating,colorectal
+wheezing,hoarseness,nocturia,thickening,chest pain,coughing blood,shortness of breath,bone pain,bone pain,loss of appetite,lung
+blood in urine,frequent urination,urgent urination,narrow stool,blood clots,eye pain,painful urination,pelvic pain,bone pain,inability to urinate,bladder
+scaly patch,minor bruise,bleeding skin,itching,dark spots,skin lesion,non-healing sore,skin dimpling,crusting,dry skin,skin
+constipation,diarrhea,blood in stool,cramping,narrow stool,new-onset diabetes,weight loss,lymph node changes,bloating,coughing blood,colorectal
+constipation,abdominal pain,narrow stool,nausea,weakness,coughing blood,cramping,weak stream,bloating,diarrhea,colorectal
+blood clots,pelvic discomfort,frequent urination,loss of appetite,speech difficulties,erectile dysfunction,blood in urine,painful ejaculation,nocturia,weak urine flow,prostate
+runny nose,sneeze,tiredness,minor bruise,muscle ache,headache,dry skin,mild cough,stomach ache,sore throat,none
+weakness in limbs,tiredness,seizures,headache,personality changes,weak stream,nausea,hoarseness,hearing problems,speech difficulties,brain
+bloating,erectile dysfunction,lower back pain,fatigue,pelvic pain,blood in urine,frequent urination,pain during intercourse,loss of appetite,indigestion,ovarian
+swollen feet,nausea,blood in urine,frequent urination,light sensitivity,weak stream,urgent urination,balance issues,lower back pain,inability to urinate,bladder
+lower back pain,skin peeling,skin dimpling,redness of skin,lymph node changes,swelling,blood clots,thickening,bone pain,nipple discharge,breast
+headache,sore throat,runny nose,muscle ache,tiredness,minor bruise,stomach ache,mild cough,dry skin,sneeze,none
+frequent urination,indigestion,constipation,cramping,difficulty starting urination,back pain,bloating,painful ejaculation,pelvic pain,pain during intercourse,ovarian
+blood in urine,blood in urine,weak stream,nipple discharge,pelvic pain,back pain,urgent urination,swollen feet,lower back pain,frequent urination,bladder
+loss of appetite,back pain,indigestion,itchy skin,abdominal pain,new-onset diabetes,weight loss,painful urination,loss of appetite,blood clots,pancreatic
+eye pain,blurred vision,fatigue,light sensitivity,blood in urine,vision loss,flashing lights,redness,burning sensation,sore throat,eye
+blurred vision,flashing lights,loss of appetite,eye pain,floaters,squinting,shadows,redness,diarrhea,new-onset diabetes,eye
+breast lump,skin dimpling,nipple discharge,skin peeling,thickening,weight loss,redness of skin,lymph node changes,non-healing sore,dry skin,breast
+hoarseness,difficulty starting urination,shortness of breath,itchy skin,loss of appetite,weight loss,menstrual changes,coughing blood,fatigue,chest pain,lung
+weight loss,weakness in limbs,bone pain,eye pain,painful ejaculation,weak urine flow,difficulty starting urination,blood in urine,erectile dysfunction,speech difficulties,prostate
+blurred vision,weakness,balance issues,personality changes,dry skin,memory loss,seizures,hearing problems,nausea,headache,brain
+swollen feet,loss of appetite,blood in urine,inability to urinate,hoarseness,bone pain,pelvic pain,dark urine,frequent urination,lower back pain,bladder
+speech difficulties,new-onset diabetes,weight loss,itchy skin,jaundice,weight loss,blood clots,back pain,loss of appetite,mild cough,pancreatic
+weight loss,shortness of breath,coughing blood,back pain,skin dimpling,loss of appetite,fatigue,crusting,chest pain,bone pain,lung
+headache,hearing problems,breast lump,balance issues,nipple discharge,memory loss,vision problems,personality changes,seizures,back pain,brain
+vision loss,loss of appetite,dark urine,blood clots,nausea,weak stream,jaundice,non-healing sore,weight loss,itchy skin,pancreatic
+blood in stool,diarrhea,constipation,weight loss,difficulty starting urination,abdominal pain,narrow stool,bone pain,urgent urination,cramping,colorectal
+abdominal pain,bloating,dark urine,diarrhea,blood in stool,abdominal pain,weight loss,nausea,weakness,narrow stool,colorectal
+erectile dysfunction,difficulty starting urination,coughing blood,pelvic discomfort,nocturia,sore throat,frequent urination,weight loss,nipple discharge,weak urine flow,prostate
+flashing lights,loss of appetite,fatigue,dark urine,menstrual changes,constipation,bone pain,pain during intercourse,frequent urination,indigestion,ovarian
+painful urination,flashing lights,pelvic discomfort,abdominal pain,inability to urinate,blood in urine,lower back pain,bone pain,pelvic pain,frequent urination,bladder
+headache,vision problems,speech difficulties,hearing problems,itchy skin,bloating,balance issues,pain during intercourse,personality changes,weakness in limbs,brain
+fatigue,frequent urination,bone pain,bone pain,painful urination,blood in urine,memory loss,inability to urinate,lower back pain,weak stream,bladder
+floaters,dry skin,vision loss,frequent urination,shadows,weight loss,flashing lights,redness,burning sensation,squinting,eye
+loss of appetite,coughing blood,hoarseness,fatigue,bone pain,chest pain,nocturia,new-onset diabetes,wheezing,narrow stool,lung
+erectile dysfunction,changing mole,frequent urination,nocturia,weak urine flow,weight loss,blood in urine,narrow stool,skin peeling,painful ejaculation,prostate
+new-onset diabetes,weight loss,swelling,dark urine,nausea,jaundice,blood in stool,itchy skin,erectile dysfunction,loss of appetite,pancreatic
+blood in stool,loss of appetite,wheezing,persistent cough,shortness of breath,loss of appetite,hoarseness,chest pain,loss of appetite,coughing blood,lung
+menstrual changes,squinting,flashing lights,eye pain,blurred vision,vision loss,pelvic pain,light sensitivity,nocturia,shadows,eye
+frequent urination,runny nose,breast pain,lymph node changes,bone pain,weight loss,erectile dysfunction,painful ejaculation,pelvic discomfort,weak urine flow,prostate
+loss of appetite,new-onset diabetes,headache,blood in urine,weak stream,urgent urination,frequent urination,bone pain,pelvic pain,swollen feet,bladder
+weight loss,frequent urination,bone pain,nocturia,hearing problems,skin peeling,blood clots,erectile dysfunction,blood in urine,painful ejaculation,prostate
+fatigue,menstrual changes,indigestion,back pain,bloating,pelvic pain,weak urine flow,loss of appetite,erectile dysfunction,dark spots,ovarian
+redness of skin,skin dimpling,thickening,nipple discharge,breast lump,seizures,constipation,swelling,diarrhea,lymph node changes,breast
+lower back pain,weight loss,narrow stool,mild cough,squinting,cramping,diarrhea,bloating,blood in stool,rectal bleeding,colorectal
+tiredness,muscle ache,headache,minor bruise,stomach ache,mild cough,dry skin,runny nose,sneeze,sore throat,none
+skin dimpling,breast pain,sneeze,lymph node changes,swelling,crusting,inverted nipple,skin peeling,thickening,hoarseness,breast
+pelvic discomfort,scaly patch,jaundice,new-onset diabetes,blood clots,abdominal pain,nausea,dark urine,seizures,weight loss,pancreatic
+fatigue,pelvic pain,frequent urination,indigestion,constipation,blood in urine,bloating,pelvic pain,loss of appetite,menstrual changes,ovarian
+nausea,new-onset diabetes,blurred vision,eye pain,squinting,floaters,burning sensation,vision loss,redness,scaly patch,eye
+burning sensation,floaters,shadows,vision loss,sore throat,blurred vision,bloating,light sensitivity,squinting,bleeding skin,eye
+persistent cough,frequent urination,hoarseness,coughing blood,nausea,bloating,wheezing,fatigue,chest pain,weight loss,lung
+pearly bump,red firm nodule,scaly patch,nipple discharge,pain during intercourse,erectile dysfunction,changing mole,skin lesion,crusting,bleeding skin,skin
+pelvic discomfort,blood in urine,weak urine flow,speech difficulties,nocturia,painful ejaculation,hoarseness,frequent urination,skin lesion,bone pain,prostate
+difficulty starting urination,pain during intercourse,breast pain,nocturia,weight loss,bone pain,erectile dysfunction,pelvic discomfort,frequent urination,persistent cough,prostate
+itchy skin,nausea,dark urine,fatigue,weakness in limbs,new-onset diabetes,weight loss,abdominal pain,back pain,pelvic pain,pancreatic
+blood clots,vision problems,itchy skin,nausea,loss of appetite,jaundice,abdominal pain,weight loss,bone pain,dark urine,pancreatic
+painful urination,inability to urinate,lower back pain,blood in urine,frequent urination,bone pain,coughing blood,urgent urination,swelling,menstrual changes,bladder
+tiredness,wheezing,difficulty starting urination,bone pain,thickening,frequent urination,pelvic discomfort,blood in urine,weak urine flow,painful ejaculation,prostate
+weight loss,pelvic pain,abdominal pain,dry skin,dark urine,itchy skin,new-onset diabetes,blood in stool,loss of appetite,back pain,pancreatic
+bloating,nausea,weight loss,itchy skin,new-onset diabetes,blood clots,erectile dysfunction,back pain,indigestion,loss of appetite,pancreatic
+scaly patch,balance issues,personality changes,seizures,redness of skin,vision problems,weakness in limbs,pelvic discomfort,speech difficulties,nausea,brain
+changing mole,red firm nodule,pearly bump,skin lesion,headache,itching,non-healing sore,scaly patch,redness of skin,bone pain,skin
+scaly patch,non-healing sore,breast pain,itching,changing mole,dark spots,bleeding skin,inverted nipple,abdominal pain,red firm nodule,skin
+weight loss,bone pain,erectile dysfunction,weak urine flow,pelvic discomfort,difficulty starting urination,painful ejaculation,chest pain,weakness,bone pain,prostate
+swollen feet,urgent urination,blood in urine,lower back pain,pelvic pain,frequent urination,coughing blood,bloating,weak stream,redness of skin,bladder
+changing mole,abdominal pain,diarrhea,bloating,constipation,weight loss,weakness,lower back pain,swelling,blood in stool,colorectal
+hearing problems,balance issues,weakness in limbs,painful ejaculation,nausea,seizures,nocturia,vision problems,headache,skin peeling,brain
+hoarseness,jaundice,abdominal pain,dark urine,inability to urinate,new-onset diabetes,weight loss,scaly patch,blood clots,loss of appetite,pancreatic
+loss of appetite,frequent urination,chest pain,constipation,indigestion,loss of appetite,pain during intercourse,sneeze,menstrual changes,fatigue,ovarian
+mild cough,minor bruise,headache,sore throat,tiredness,runny nose,stomach ache,muscle ache,sneeze,dry skin,none
+squinting,blood clots,weight loss,jaundice,new-onset diabetes,loss of appetite,speech difficulties,muscle ache,back pain,itchy skin,pancreatic
+new-onset diabetes,skin peeling,weak stream,swelling,lymph node changes,breast pain,redness of skin,inverted nipple,skin dimpling,fatigue,breast
+blood clots,non-healing sore,back pain,dark urine,constipation,itchy skin,new-onset diabetes,jaundice,fatigue,nausea,pancreatic
+abdominal pain,weak urine flow,constipation,eye pain,diarrhea,loss of appetite,bloating,cramping,weight loss,narrow stool,colorectal
+dry skin,headache,speech difficulties,memory loss,abdominal pain,nausea,balance issues,personality changes,lymph node changes,vision problems,brain
+fatigue,frequent urination,bloating,floaters,menstrual changes,diarrhea,loss of appetite,back pain,pelvic pain,pelvic pain,ovarian
+bloating,diarrhea,redness,headache,weight loss,constipation,stomach ache,weakness,cramping,narrow stool,colorectal
+constipation,wheezing,hoarseness,loss of appetite,chest pain,shortness of breath,bone pain,loss of appetite,bloating,weight loss,lung
+itching,changing mole,speech difficulties,light sensitivity,pearly bump,crusting,bleeding skin,skin lesion,pelvic pain,dark spots,skin
+squinting,skin dimpling,inverted nipple,lymph node changes,vision loss,weight loss,redness of skin,breast lump,breast pain,swelling,breast
+crusting,persistent cough,pearly bump,itching,red firm nodule,non-healing sore,scaly patch,pelvic discomfort,dark spots,weight loss,skin
+floaters,blurred vision,eye pain,flashing lights,weakness,redness,indigestion,shadows,burning sensation,frequent urination,eye
+mild cough,swelling,skin dimpling,breast pain,burning sensation,breast lump,thickening,nausea,lymph node changes,nipple discharge,breast
+dark urine,back pain,weight loss,weight loss,abdominal pain,minor bruise,itchy skin,new-onset diabetes,nausea,painful ejaculation,pancreatic
+chest pain,persistent cough,weight loss,wheezing,shortness of breath,hoarseness,weight loss,bone pain,coughing blood,speech difficulties,lung
+frequent urination,muscle ache,inability to urinate,swollen feet,weak stream,nipple discharge,painful urination,lower back pain,blood in urine,skin lesion,bladder
+hoarseness,shadows,wheezing,chest pain,skin peeling,painful urination,loss of appetite,persistent cough,bone pain,shortness of breath,lung
+indigestion,menstrual changes,skin lesion,non-healing sore,seizures,constipation,frequent urination,loss of appetite,pelvic pain,fatigue,ovarian
+constipation,nausea,jaundice,weight loss,changing mole,blood clots,loss of appetite,new-onset diabetes,itchy skin,back pain,pancreatic
+blood clots,loss of appetite,back pain,sneeze,abdominal pain,weight loss,itchy skin,frequent urination,redness of skin,nausea,pancreatic
+weight loss,cramping,rectal bleeding,weakness,itchy skin,bloating,blood in urine,narrow stool,pearly bump,abdominal pain,colorectal
+itching,non-healing sore,red firm nodule,crusting,erectile dysfunction,dark spots,bleeding skin,pearly bump,frequent urination,minor bruise,skin
+bloating,indigestion,fatigue,hoarseness,frequent urination,pain during intercourse,back pain,menstrual changes,burning sensation,abdominal pain,ovarian
+frequent urination,constipation,red firm nodule,bloating,back pain,loss of appetite,fatigue,headache,weak stream,menstrual changes,ovarian
+shortness of breath,bone pain,weight loss,wheezing,loss of appetite,redness of skin,fatigue,itching,pelvic discomfort,coughing blood,lung
+tiredness,headache,muscle ache,runny nose,mild cough,dry skin,minor bruise,stomach ache,sneeze,sore throat,none
+hearing problems,speech difficulties,eye pain,balance issues,nausea,weakness in limbs,personality changes,memory loss,chest pain,pelvic pain,brain
+constipation,bloating,rectal bleeding,bone pain,fatigue,cramping,blood in stool,back pain,weight loss,weakness,colorectal
+dry skin,runny nose,stomach ache,tiredness,sneeze,headache,minor bruise,sore throat,muscle ache,mild cough,none
+seizures,headache,nausea,pelvic pain,sneeze,vision problems,hearing problems,balance issues,memory loss,frequent urination,brain
+rectal bleeding,pearly bump,abdominal pain,shortness of breath,blood in stool,weakness in limbs,bloating,diarrhea,weakness,cramping,colorectal
+weak stream,pain during intercourse,fatigue,frequent urination,constipation,bloating,back pain,frequent urination,pelvic pain,memory loss,ovarian
+sneeze,shortness of breath,weak urine flow,persistent cough,menstrual changes,wheezing,weight loss,fatigue,loss of appetite,bone pain,lung
+blood in stool,bloating,abdominal pain,constipation,narrow stool,weight loss,nipple discharge,diarrhea,weight loss,wheezing,colorectal
+constipation,frequent urination,menstrual changes,minor bruise,back pain,bloating,cramping,indigestion,pain during intercourse,new-onset diabetes,ovarian
+memory loss,seizures,speech difficulties,loss of appetite,muscle ache,vision problems,headache,hearing problems,redness of skin,balance issues,brain
+itchy skin,loss of appetite,constipation,jaundice,balance issues,weight loss,blood clots,dark urine,nausea,bloating,pancreatic
+hearing problems,nausea,vision problems,floaters,seizures,headache,loss of appetite,skin peeling,balance issues,weakness in limbs,brain
+weight loss,fatigue,loss of appetite,indigestion,pelvic pain,nipple discharge,bloating,frequent urination,menstrual changes,minor bruise,ovarian
+redness of skin,nipple discharge,mild cough,difficulty starting urination,inverted nipple,breast lump,skin peeling,breast pain,bone pain,swelling,breast
+breast pain,nipple discharge,thickening,lymph node changes,skin peeling,swelling,erectile dysfunction,dark urine,breast lump,eye pain,breast
+dark spots,itchy skin,red firm nodule,vision problems,weight loss,changing mole,non-healing sore,crusting,pearly bump,itching,skin
+vision problems,weight loss,new-onset diabetes,abdominal pain,painful ejaculation,itchy skin,jaundice,blood clots,nausea,fatigue,pancreatic
+loss of appetite,bleeding skin,skin lesion,back pain,frequent urination,red firm nodule,non-healing sore,itching,crusting,scaly patch,skin
+dark urine,abdominal pain,itchy skin,blurred vision,dry skin,jaundice,erectile dysfunction,blood clots,nausea,back pain,pancreatic
+scaly patch,non-healing sore,speech difficulties,weak urine flow,crusting,itching,pearly bump,dark spots,diarrhea,red firm nodule,skin
+vision loss,frequent urination,weak stream,lower back pain,swollen feet,inability to urinate,thickening,painful urination,urgent urination,changing mole,bladder
+itchy skin,back pain,blood in urine,minor bruise,loss of appetite,dark urine,changing mole,weight loss,new-onset diabetes,blood clots,pancreatic
+weight loss,cramping,narrow stool,rectal bleeding,dark spots,blood in stool,bloating,constipation,swollen feet,weakness in limbs,colorectal
+cramping,frequent urination,blood in urine,painful ejaculation,nocturia,erectile dysfunction,balance issues,weight loss,bone pain,lymph node changes,prostate
+bloating,personality changes,constipation,indigestion,menstrual changes,frequent urination,pelvic pain,pelvic discomfort,shadows,loss of appetite,ovarian
+minor bruise,stomach ache,runny nose,tiredness,muscle ache,dry skin,headache,sneeze,sore throat,mild cough,none
+non-healing sore,constipation,light sensitivity,skin lesion,vision loss,eye pain,shadows,redness,floaters,squinting,eye
+personality changes,pearly bump,abdominal pain,bleeding skin,dark spots,skin lesion,changing mole,crusting,red firm nodule,itchy skin,skin
+nipple discharge,swollen feet,urgent urination,pelvic pain,inverted nipple,frequent urination,weak stream,light sensitivity,lower back pain,inability to urinate,bladder
+tiredness,mild cough,sneeze,muscle ache,dry skin,headache,sore throat,minor bruise,runny nose,stomach ache,none
+personality changes,headache,nausea,hearing problems,memory loss,weak urine flow,seizures,light sensitivity,vision problems,loss of appetite,brain
+red firm nodule,seizures,headache,bleeding skin,frequent urination,itching,pearly bump,non-healing sore,skin lesion,crusting,skin
+blood in urine,frequent urination,weak urine flow,weight loss,menstrual changes,erectile dysfunction,indigestion,itching,nocturia,difficulty starting urination,prostate
+blood in urine,shortness of breath,mild cough,hoarseness,fatigue,wheezing,coughing blood,chest pain,persistent cough,swollen feet,lung
+breast lump,inverted nipple,painful urination,thickening,frequent urination,skin peeling,eye pain,redness of skin,breast pain,skin dimpling,breast
+bloating,cramping,narrow stool,squinting,constipation,blood in stool,back pain,abdominal pain,rectal bleeding,nausea,colorectal
+itchy skin,pelvic pain,jaundice,dark urine,weight loss,loss of appetite,dark spots,blood clots,back pain,menstrual changes,pancreatic
+weight loss,difficulty starting urination,nausea,loss of appetite,weak urine flow,painful ejaculation,bone pain,dry skin,nocturia,frequent urination,prostate
+weight loss,bone pain,difficulty starting urination,nocturia,painful urination,crusting,pelvic discomfort,weak urine flow,erectile dysfunction,redness,prostate
+runny nose,seizures,lower back pain,weakness in limbs,personality changes,headache,skin lesion,speech difficulties,hearing problems,memory loss,brain
+inability to urinate,frequent urination,skin lesion,dark urine,lower back pain,weak stream,urgent urination,lymph node changes,painful urination,swollen feet,bladder
+crusting,pearly bump,bleeding skin,scaly patch,pain during intercourse,loss of appetite,changing mole,fatigue,itching,skin lesion,skin
+painful ejaculation,nocturia,painful urination,erectile dysfunction,pelvic pain,weight loss,pelvic discomfort,frequent urination,bone pain,burning sensation,prostate
+narrow stool,weak urine flow,frequent urination,bone pain,lower back pain,pelvic pain,blood in urine,weak stream,painful urination,jaundice,bladder
+shadows,vision loss,flashing lights,swollen feet,light sensitivity,eye pain,blurred vision,pearly bump,wheezing,redness,eye
+abdominal pain,weakness,blurred vision,inverted nipple,rectal bleeding,constipation,diarrhea,weak urine flow,narrow stool,cramping,colorectal
+hearing problems,memory loss,seizures,headache,weakness in limbs,light sensitivity,breast pain,vision problems,nausea,weight loss,brain
+blood in urine,pelvic pain,cramping,weak stream,bone pain,hearing problems,redness of skin,painful urination,frequent urination,urgent urination,bladder
+jaundice,back pain,abdominal pain,new-onset diabetes,changing mole,blood clots,itchy skin,loss of appetite,breast pain,persistent cough,pancreatic
+nausea,weight loss,hoarseness,urgent urination,dark urine,loss of appetite,headache,itchy skin,back pain,new-onset diabetes,pancreatic
+persistent cough,weight loss,dark spots,coughing blood,shortness of breath,wheezing,loss of appetite,flashing lights,bone pain,sneeze,lung
+fatigue,floaters,light sensitivity,squinting,blurred vision,shadows,minor bruise,redness,eye pain,bone pain,eye
+dry skin,stomach ache,minor bruise,muscle ache,mild cough,headache,tiredness,sneeze,sore throat,runny nose,none
+balance issues,nausea,seizures,weakness in limbs,vision problems,mild cough,shortness of breath,skin dimpling,hearing problems,personality changes,brain
+dry skin,sore throat,mild cough,runny nose,tiredness,stomach ache,headache,muscle ache,minor bruise,sneeze,none
+back pain,loss of appetite,jaundice,new-onset diabetes,painful urination,weight loss,dark urine,fatigue,urgent urination,abdominal pain,pancreatic
+floaters,minor bruise,light sensitivity,burning sensation,pelvic pain,eye pain,flashing lights,redness,lymph node changes,shadows,eye
+light sensitivity,redness,vision loss,squinting,lymph node changes,painful urination,burning sensation,blurred vision,thickening,flashing lights,eye
+mild cough,runny nose,sore throat,minor bruise,headache,tiredness,dry skin,sneeze,stomach ache,muscle ache,none
+non-healing sore,itching,dark spots,seizures,changing mole,weakness,pearly bump,red firm nodule,scaly patch,itchy skin,skin
+abdominal pain,blood in stool,lower back pain,dark spots,diarrhea,weakness,rectal bleeding,constipation,cramping,new-onset diabetes,colorectal
+bone pain,swelling,weak urine flow,pelvic discomfort,blood in urine,dry skin,nocturia,vision loss,painful ejaculation,weight loss,prostate
+indigestion,fatigue,pain during intercourse,urgent urination,jaundice,loss of appetite,frequent urination,back pain,constipation,constipation,ovarian
+jaundice,coughing blood,persistent cough,wheezing,weight loss,fatigue,indigestion,shortness of breath,hoarseness,abdominal pain,lung
+thickening,inverted nipple,skin dimpling,skin peeling,non-healing sore,itchy skin,balance issues,nipple discharge,redness of skin,breast pain,breast
+weight loss,abdominal pain,rectal bleeding,narrow stool,weakness,diarrhea,weight loss,seizures,skin dimpling,blood in stool,colorectal
+frequent urination,persistent cough,weight loss,hoarseness,redness of skin,fatigue,chest pain,coughing blood,wheezing,bone pain,lung
+nipple discharge,difficulty starting urination,redness of skin,breast lump,skin peeling,swelling,lymph node changes,inverted nipple,speech difficulties,painful urination,breast
+shortness of breath,hoarseness,wheezing,weight loss,coughing blood,chest pain,loss of appetite,bone pain,bone pain,indigestion,lung
+weight loss,red firm nodule,nocturia,difficulty starting urination,pelvic discomfort,erectile dysfunction,pearly bump,painful ejaculation,frequent urination,loss of appetite,prostate
+dark urine,pelvic pain,bone pain,frequent urination,loss of appetite,nausea,blood in urine,weak stream,lower back pain,inability to urinate,bladder
+menstrual changes,swollen feet,inability to urinate,erectile dysfunction,weak stream,urgent urination,blood in urine,lower back pain,painful urination,shortness of breath,bladder
+loss of appetite,weight loss,lower back pain,bone pain,inability to urinate,swollen feet,shortness of breath,painful urination,weak stream,pelvic pain,bladder
+frequent urination,red firm nodule,erectile dysfunction,bone pain,painful ejaculation,pelvic discomfort,vision problems,weak urine flow,abdominal pain,blood in urine,prostate
+balance issues,speech difficulties,vision problems,memory loss,lymph node changes,headache,blood in urine,pelvic discomfort,nausea,hearing problems,brain
+abdominal pain,weight loss,nausea,new-onset diabetes,bloating,pearly bump,weight loss,jaundice,blood clots,back pain,pancreatic
+crusting,itching,bleeding skin,scaly patch,non-healing sore,minor bruise,dark spots,constipation,skin lesion,abdominal pain,skin
+muscle ache,sneeze,stomach ache,dry skin,runny nose,tiredness,minor bruise,mild cough,sore throat,headache,none
+itching,pearly bump,red firm nodule,changing mole,burning sensation,abdominal pain,bleeding skin,crusting,non-healing sore,inverted nipple,skin
+vision problems,frequent urination,speech difficulties,personality changes,seizures,fatigue,memory loss,loss of appetite,weakness in limbs,hearing problems,brain
+headache,memory loss,personality changes,balance issues,weakness in limbs,blood in stool,painful urination,nausea,seizures,speech difficulties,brain
+pelvic pain,nausea,swollen feet,new-onset diabetes,frequent urination,weight loss,weak stream,painful urination,blood in urine,lower back pain,bladder
+pelvic pain,blood in urine,weak stream,pearly bump,inability to urinate,swollen feet,urgent urination,pelvic discomfort,new-onset diabetes,lower back pain,bladder
+menstrual changes,pelvic pain,blood in stool,new-onset diabetes,back pain,constipation,bloating,pearly bump,pain during intercourse,frequent urination,ovarian
+vision problems,shortness of breath,speech difficulties,pelvic discomfort,bleeding skin,memory loss,balance issues,nausea,hearing problems,personality changes,brain
+diarrhea,abdominal pain,breast pain,rectal bleeding,weight loss,blood in stool,narrow stool,persistent cough,pelvic pain,bloating,colorectal
+sneeze,sore throat,headache,minor bruise,mild cough,muscle ache,runny nose,dry skin,tiredness,stomach ache,none
+rectal bleeding,light sensitivity,blurred vision,loss of appetite,vision loss,redness,dry skin,burning sensation,shadows,squinting,eye
+abdominal pain,diarrhea,weakness,narrow stool,rectal bleeding,weight loss,speech difficulties,weakness in limbs,constipation,cramping,colorectal
+pain during intercourse,frequent urination,indigestion,pelvic pain,back pain,bloating,fatigue,menstrual changes,loss of appetite,abdominal pain,ovarian
+non-healing sore,blood in stool,crusting,bleeding skin,seizures,pearly bump,itching,skin lesion,changing mole,light sensitivity,skin
+frequent urination,bloating,nocturia,bone pain,weak urine flow,weight loss,redness,painful ejaculation,chest pain,difficulty starting urination,prostate
+wheezing,hoarseness,chest pain,bone pain,vision loss,inability to urinate,loss of appetite,skin dimpling,shortness of breath,coughing blood,lung
+crusting,persistent cough,fatigue,eye pain,chest pain,hoarseness,bone pain,shortness of breath,bone pain,coughing blood,lung
+chest pain,coughing blood,bloating,weight loss,breast lump,persistent cough,fatigue,bone pain,wheezing,eye pain,lung
+weakness,weight loss,coughing blood,menstrual changes,cramping,blood in stool,constipation,narrow stool,constipation,diarrhea,colorectal
+fatigue,menstrual changes,fatigue,back pain,constipation,frequent urination,pelvic pain,painful urination,weak urine flow,bloating,ovarian
+inability to urinate,thickening,lower back pain,blood in urine,pelvic pain,weak stream,bone pain,seizures,urgent urination,weakness,bladder
+rectal bleeding,bloating,abdominal pain,weakness,painful urination,weight loss,cramping,diarrhea,erectile dysfunction,tiredness,colorectal
+bloating,menstrual changes,pain during intercourse,pelvic pain,red firm nodule,back pain,abdominal pain,persistent cough,indigestion,loss of appetite,ovarian
+frequent urination,erectile dysfunction,weight loss,painful ejaculation,weight loss,fatigue,nocturia,bone pain,difficulty starting urination,itchy skin,prostate
+loss of appetite,seizures,personality changes,memory loss,weakness in limbs,light sensitivity,hearing problems,nausea,skin peeling,vision problems,brain
+abdominal pain,blood clots,itchy skin,weight loss,loss of appetite,loss of appetite,new-onset diabetes,jaundice,dark urine,weakness in limbs,pancreatic
+minor bruise,tiredness,inverted nipple,frequent urination,inability to urinate,weak stream,swollen feet,lower back pain,painful urination,pelvic pain,bladder

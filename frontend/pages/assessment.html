@@ -1,269 +1,119 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ICDS - Patient Assessment</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../css/assessment.css" />
-
-    <!-- Supabase JS Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  </head>
-  <body>
-    <div class="container">
-      <div class="sidebar">
-        <div class="sidebar-header">
-          <i class="fas fa-microscope"></i>
-          <div>
-            <h3>ICDS</h3>
-            <span>Cancer Detection</span>
-          </div>
-        </div>
-        <div class="hospital-info">
-          <h4 id="hospitalName">--</h4>
-          <p><i class="fas fa-user-md"></i> <span id="doctorName">--</span></p>
-          <p>
-            <i class="fas fa-envelope"></i> <span id="doctorEmail">--</span>
-          </p>
-        </div>
-        <div class="sidebar-menu">
-          <a href="dashboard.html" class="menu-item"
-            ><i class="fas fa-home"></i
-            ><span class="menu-text">Dashboard</span></a
-          >
-          <a href="assessment.html" class="menu-item active"
-            ><i class="fas fa-notes-medical"></i
-            ><span class="menu-text">New Assessment</span></a
-          >
-          <a href="patient-history.html" class="menu-item"
-            ><i class="fas fa-history"></i
-            ><span class="menu-text">Patient History</span></a
-          >
-          <a href="analytics.html" class="menu-item"
-            ><i class="fas fa-chart-bar"></i
-            ><span class="menu-text">Analytics</span></a
-          >
-          <a href="manage-users.html" class="menu-item"
-            ><i class="fas fa-users"></i
-            ><span class="menu-text">Manage Users</span></a
-          >
-          <a href="hospital-profile.html" class="menu-item"
-            ><i class="fas fa-hospital"></i
-            ><span class="menu-text">Hospital Profile</span></a
-          >
-          <a href="settings.html" class="menu-item"
-            ><i class="fas fa-cog"></i
-            ><span class="menu-text">Settings</span></a
-          >
-        </div>
-        <div class="sidebar-footer">
-          <a href="login.html" class="logout-btn" onclick="logout()"
-            ><i class="fas fa-sign-out-alt"></i> Logout</a
-          >
-        </div>
-      </div>
-
-      <div class="main-content">
-        <div class="top-nav">
-          <div class="page-title">
-            <h2>New Patient Assessment</h2>
-            <p>
-              Enter patient details and symptoms - AI will analyze cancer risk
-            </p>
-          </div>
-          <div class="user-profile" onclick="showUserProfile()">
-            <div class="user-avatar" id="userAvatar">--</div>
-            <div>
-              <h4 id="userNameDisplay">--</h4>
-              <p>Medical Director</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Assessment | ICDS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/assessment.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-microscope"></i>
+                <div>
+                    <h3>ICDS</h3>
+                    <span>Intelligent Cancer Detection</span>
+                </div>
             </div>
-          </div>
-        </div>
-
-        <div class="assessment-header">
-          <div class="header-left">
-            <h1>Patient Symptom Assessment</h1>
-            <p>
-              Fill in all details. AI analyzes 10 cancer types using trained ML
-              model.
-            </p>
-          </div>
-          <div>
-            <button class="btn btn-outline" onclick="clearForm()">
-              <i class="fas fa-trash"></i> Clear All
-            </button>
-          </div>
-        </div>
-
-        <!-- Status Messages -->
-        <div id="apiError" class="api-error">
-          <i class="fas fa-exclamation-circle"></i>
-          <span id="apiErrorMessage">Error message</span>
-        </div>
-        <div id="successMessage" class="success-message">
-          <i class="fas fa-check-circle"></i>
-          <span id="successText">Assessment saved successfully!</span>
-        </div>
-
-        <div class="assessment-grid">
-          <div class="patient-card">
-            <h3 class="card-title">
-              <i class="fas fa-user-injured"></i> Patient Information
-            </h3>
-            <div class="form-group">
-              <label>Patient ID</label
-              ><input type="text" id="patientId" readonly />
+            <div class="hospital-info">
+                <h4 id="hospitalName">Loading...</h4>
+                <p><i class="fas fa-user-md"></i> <span id="adminName">...</span></p>
+                <p><i class="fas fa-envelope"></i> <span id="adminEmail">...</span></p>
+                <small><i class="fas fa-shield-alt"></i> Verified Institution</small>
             </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label>Full Name *</label
-                ><input
-                  type="text"
-                  id="patientName"
-                  placeholder="Enter patient name"
-                />
-              </div>
-              <div class="form-group">
-                <label>Age *</label
-                ><input type="number" id="patientAge" placeholder="Age" />
-              </div>
+            <div class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item">
+                    <i class="fas fa-home"></i>
+                    <span class="menu-text">Dashboard</span>
+                </a>
+                <a href="assessment.html" class="menu-item active">
+                    <i class="fas fa-notes-medical"></i>
+                    <span class="menu-text">New Assessment</span>
+                </a>
+                <a href="patient-history.html" class="menu-item">
+                    <i class="fas fa-history"></i>
+                    <span class="menu-text">Patient History</span>
+                </a>
+                <a href="analytics.html" class="menu-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span class="menu-text">Analytics</span>
+                </a>
+                <a href="manage-users.html" class="menu-item">
+                    <i class="fas fa-users"></i>
+                    <span class="menu-text">Manage Users</span>
+                </a>
+                <a href="hospital-profile.html" class="menu-item">
+                    <i class="fas fa-hospital"></i>
+                    <span class="menu-text">Hospital Profile</span>
+                </a>
+                <a href="settings.html" class="menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span class="menu-text">Settings</span>
+                </a>
             </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label>Gender *</label>
-                <select id="patientGender">
-                  <option value="">Select</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Contact</label
-                ><input
-                  type="tel"
-                  id="patientContact"
-                  placeholder="Phone number"
-                />
-              </div>
+            <div class="sidebar-footer">
+                <a href="#" class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </div>
-            <div class="form-group">
-              <label>Risk Factors</label>
-              <div style="display: flex; gap: 15px; flex-wrap: wrap">
-                <label><input type="checkbox" id="riskSmoker" /> Smoker</label>
-                <label
-                  ><input type="checkbox" id="riskFamilyHistory" /> Family
-                  History</label
-                >
-                <label
-                  ><input type="checkbox" id="riskAlcohol" /> Alcohol</label
-                >
-                <label
-                  ><input type="checkbox" id="riskObesity" /> Obesity</label
-                >
-                <label
-                  ><input type="checkbox" id="riskDiabetes" /> Diabetes</label
-                >
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Notes</label
-              ><textarea
-                id="patientNotes"
-                rows="3"
-                placeholder="Additional notes..."
-              ></textarea>
-            </div>
-          </div>
+        </nav>
 
-          <div class="symptom-card">
-            <h3 class="card-title">
-              <i class="fas fa-stethoscope"></i> Presenting Symptoms
-            </h3>
-            <div>
-              <label>Enter symptoms (type and press Enter)</label>
-              <div style="display: flex; gap: 10px">
-                <input
-                  type="text"
-                  id="symptomInput"
-                  placeholder="e.g., cough, fatigue, weight loss"
-                  onkeypress="handleSymptomInput(event)"
-                />
-                <button class="btn btn-primary" onclick="addSymptom()">
-                  Add
-                </button>
-              </div>
+        <main class="main-content">
+            <header class="top-nav">
+                <div class="nav-left">
+                    <button class="hamburger" id="hamburgerBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2>Patient Assessment</h2>
+                    <p>ID: <span id="displayPatientID" class="text-primary">Generating...</span></p>
+                </div>
+                <div class="user-profile">
+                    <div class="user-avatar" id="avatarInitials">--</div>
+                    <div class="user-info">
+                        <h4 id="topNavDocName">Doctor Name</h4>
+                        <p id="docRole">Medical Professional</p>
+                    </div>
+                </div>
+            </header>
+
+            <div class="form-scroll-area">
+                <div class="assessment-form-wrapper">
+                    <div class="form-card">
+                        <h3><i class="fas fa-user-circle"></i> Patient Profile</h3>
+                        <div class="profile-grid">
+                            <div class="input-group"><label>Full Name</label><input type="text" id="pName" placeholder="Enter patient name"></div>
+                            <div class="input-group"><label>Age</label><input type="number" id="pAge" placeholder="Years"></div>
+                            <div class="input-group"><label>Gender</label>
+                                <select id="pGender"><option>Male</option><option>Female</option></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-card">
+                        <h3><i class="fas fa-clipboard-check"></i> Clinical Screening (Warning Signs)</h3>
+                        <div class="screening-grid">
+                            <label><input type="checkbox" class="cancer-flag"> Unexplained Weight Loss</label>
+                            <label><input type="checkbox" class="cancer-flag"> Persistent Night Sweats</label>
+                            <label><input type="checkbox" class="cancer-flag"> Palpable Lumps/Masses</label>
+                            <label><input type="checkbox" class="cancer-flag"> Chronic Unexplained Pain</label>
+                            <label><input type="checkbox" class="cancer-flag"> Skin or Mole Changes</label>
+                            <label><input type="checkbox" class="cancer-flag"> Unusual Bleeding</label>
+                        </div>
+                    </div>
+
+                    <div class="form-card">
+                        <h3><i class="fas fa-list-ol"></i> Presenting Symptoms (10 Required)</h3>
+                        <div class="symptom-input-grid" id="symptomGrid"></div>
+                    </div>
+
+                    <button class="btn-analyze" onclick="processAssessment()">
+                        <i class="fas fa-microscope"></i> Run Intelligent Risk Analysis
+                    </button>
+                </div>
             </div>
-            <div class="symptom-tags" id="symptomTags"></div>
-            <div class="form-row" style="margin-top: 20px">
-              <div class="form-group">
-                <label>Symptom Duration</label>
-                <select id="symptomDuration">
-                  <option value="days">Few days</option>
-                  <option value="weeks" selected>Few weeks</option>
-                  <option value="months">Few months</option>
-                  <option value="years">Years</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Symptom Severity</label>
-                <select id="symptomSeverity">
-                  <option value="mild">Mild</option>
-                  <option value="moderate" selected>Moderate</option>
-                  <option value="severe">Severe</option>
-                </select>
-              </div>
-            </div>
-            <button
-              class="btn btn-primary"
-              onclick="analyzeSymptoms()"
-              style="width: 100%; margin-top: 10px"
-            >
-              <i class="fas fa-robot"></i> Analyze with AI
-            </button>
-          </div>
-        </div>
-
-        <div class="loading" id="loading">
-          <div class="spinner"></div>
-          <p id="loadingText">AI analyzing symptoms...</p>
-        </div>
-
-        <div class="risk-panel" id="riskPanel">
-          <div class="risk-header">
-            <h3><i class="fas fa-chart-pie"></i> Cancer Risk Assessment</h3>
-            <span class="risk-badge" id="overallRisk">-</span>
-          </div>
-          <div class="cancer-grid" id="cancerGrid"></div>
-          <div
-            id="reasoning"
-            style="background: #f8fafc; padding: 15px; border-radius: 12px"
-          ></div>
-        </div>
-
-        <div class="action-buttons">
-          <button class="btn btn-outline" onclick="clearForm()">
-            <i class="fas fa-trash"></i> Clear All
-          </button>
-          <button
-            class="btn btn-success"
-            id="saveBtn"
-            onclick="saveAssessment()"
-            disabled
-          >
-            <i class="fas fa-save"></i> Save Assessment
-          </button>
-        </div>
-      </div>
+        </main>
     </div>
-  </body>
-  <script src="../js/assessment.js"></script>
+    <script src="../js/assessment.js"></script>
+</body>
 </html>
