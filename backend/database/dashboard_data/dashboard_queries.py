@@ -107,6 +107,9 @@ def get_recent_assessments(hospital_id):
                 p.full_name AS patient_name,
                 p.age,
                 p.gender,
+                p.contact,
+                p.id,
+
 
                 u.full_name AS doctors_name
 

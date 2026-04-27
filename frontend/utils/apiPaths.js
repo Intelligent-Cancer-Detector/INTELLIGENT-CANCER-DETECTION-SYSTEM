@@ -11,4 +11,8 @@ export const API_PATHS = {
       `/dashboard/${hospitalId}/recent-assessments`,
     ALERTS: (hospitalId) => `/dashboard/${hospitalId}/alerts`,
   },
+  PATIENT_HISTORY_DATA: {
+    PATIENT_ASSESSMENT: (hospitalId) =>
+      `/patient_assessment/patient-history/${hospitalId}`,
+  },
 };

@@ -1,4 +1,5 @@
-
+import { API_PATHS } from "../utils/apiPaths.js";
+import api from "../utils/axiosInstance.js";
 
 // Global variables
 let allAssessments = [];
@@ -51,66 +52,58 @@ async function loadAssessments() {
   }
 
   try {
-    const { data: assessments, error } = await supabase
-      .from("assessments")
-      .select(
-        `
-                    id,
-                    status,
-                    symptoms,
-                    risk_factors,
-                    notes,
-                    created_at,
-                    patients (
-                        id,
-                        first_name,
-                        last_name,
-                        age,
-                        gender,
-                        phone
-                    ),
-                    users (
-                        id,
-                        full_name
-                    ),
-                    predictions (
-                        top_cancer_type,
-                        top_probability
-                    )
-                `,
-      )
-      .eq("hospital_id", currentHospitalId)
-      .order("created_at", { ascending: false });
-
-    if (error) throw error;
+    const res = await api.get(
+      API_PATHS.PATIENT_HISTORY_DATA.PATIENT_ASSESSMENT(currentHospitalId),
+    );
+    const result = res.data;
+    if (result.status !== "success") {
+      throw new Error("Backend error!");
+    }
+    const assessments = result.data;
 
     // Process assessments into display format
     allAssessments = assessments.map((assessment) => {
-      const patient = assessment.patients;
-      const doctor = assessment.users;
-      const prediction = assessment.predictions?.[0];
+      const patient = {
+        full_name: assessment.patient_name,
+        age: assessment.age,
+        contact: assessment.contact,
+        gender:assessment.gender,
+        id:assessment.id
+      };
+      const doctor = assessment.doctors_name;
+      let symptomsArray = [];
+
+      if (assessment.symptoms_json) {
+        try {
+          const parsed = JSON.parse(assessment.symptoms_json);
+
+          // Convert object keys → array
+          symptomsArray = Object.keys(parsed);
+        } catch (e) {
+          console.warn("Invalid JSON:", assessment.symptoms_json);
+        }
+      }
+      // const prediction = assessment.predictions?.[0];
 
       return {
         id: assessment.id,
         patientId: patient?.id,
-        patientName: patient
-          ? `${patient.first_name} ${patient.last_name}`
-          : "Unknown",
-        age: patient?.age || "?",
+        patientName: patient ? patient.full_name : "Unknown",
+        age: patient.age || "?",
         gender: patient?.gender || "?",
-        contact: patient?.phone || "—",
+        contact: patient?.contact || "—",
         symptoms:
-          assessment.symptoms?.slice(0, 3).join(", ") +
-            (assessment.symptoms?.length > 3 ? "..." : "") || "No symptoms",
-        riskLevel: getRiskLevel(prediction?.top_probability || 0),
-        cancerType: prediction?.top_cancer_type || "None",
-        probability: prediction?.top_probability
-          ? `${prediction.top_probability}%`
+          symptomsArray.slice(0, 3).join(", ") +
+            (symptomsArray.length > 3 ? "..." : "") || "No symptoms",
+        riskLevel: assessment.risk_level || "Unknown",
+        cancerType: assessment.cancer_type || "None",
+        probability: assessment.confidence
+          ? `${assessment.confidence * 100}%`
           : "—",
-        doctor: doctor?.full_name || "Unknown",
+        doctor: doctor || "Unknown",
         date: assessment.created_at,
-        notes: assessment.notes || "No additional notes",
-        status: assessment.status || "Completed",
+        // notes: assessment.notes || "No additional notes",
+        // status: assessment.status || "Completed",
       };
     });
 
@@ -517,3 +510,6 @@ window.addEventListener("resize", () => {
     document.getElementById("mainContent").classList.remove("expanded");
   }
 });
+
+window.toggleSidebar = toggleSidebar;
+window.loadAssessments = loadAssessments;
