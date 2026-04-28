@@ -482,6 +482,9 @@ td {
   color: var(--gray-700);
   font-size: 14px;
 }
+/* #probability-th{
+  width: 10px !important;
+} */
 
 .patient-info {
   display: flex;
