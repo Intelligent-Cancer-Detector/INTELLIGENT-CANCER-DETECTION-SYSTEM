@@ -1,11 +1,4 @@
-// ============================================
-// SUPABASE CONFIGURATION
-// ============================================
-const SUPABASE_URL = "https://tgrrmzusqjzzvhevmmbt.supabase.co";
-const SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRncnJtenVzcWp6enZoZXZtbWJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyOTg4NDUsImV4cCI6MjA5MDg3NDg0NX0.nmD117ohEA-pMV4YnNluPxJGT4N-HFJxPaRRyGFyyks";
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Global variables
 let assessmentsData = [];
@@ -77,7 +70,7 @@ function setDefaultDates() {
 }
 
 // ============================================
-// LOAD DATA FROM SUPABASE
+// LOAD DATA FROM BACKEND
 // ============================================
 async function loadAnalyticsData() {
   if (!currentHospitalId) {
