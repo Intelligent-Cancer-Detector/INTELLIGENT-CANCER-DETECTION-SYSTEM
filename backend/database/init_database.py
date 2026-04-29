@@ -390,3 +390,13 @@ def reset_database():
     conn.close()
 
     print("✅ All tables dropped!")
+    # ... (all your existing functions like initialize_database and seed_database)
+
+# ADD THIS AT THE VERY BOTTOM:
+if __name__ == "__main__":
+    try:
+        initialize_database()
+        seed_database()
+        print("🚀 Database initialization and seeding complete!")
+    except Exception as e:
+        print(f"❌ An error occurred: {e}")

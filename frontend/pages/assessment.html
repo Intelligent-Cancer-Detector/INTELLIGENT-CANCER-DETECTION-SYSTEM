@@ -3,117 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Assessment | ICDS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <title>Clinical Assessment | ICDS</title>
     <link rel="stylesheet" href="../css/assessment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="app-container">
-        <nav class="sidebar" id="sidebar">
+        <nav class="sidebar">
             <div class="sidebar-header">
-                <i class="fas fa-microscope"></i>
-                <div>
-                    <h3>ICDS</h3>
-                    <span>Intelligent Cancer Detection</span>
+                <i class="fas fa-dna"></i>
+                <div><h3>ICDS</h3><small>Intelligent Cancer Detection</small></div>
+            </div>
+            
+            <div class="hospital-info-card">
+                <h4 id="displayHospitalName">Nairobi General Hospital</h4>
+                <div class="doc-details">
+                    <p><i class="fas fa-user-md"></i> <span id="displayDoctorName">Dr. John Smith</span></p>
+                    <p><i class="fas fa-envelope"></i> <span id="displayDoctorEmail">john@hospital.com</span></p>
                 </div>
+                <div class="status-verify"><i class="fas fa-shield-alt"></i> Verified Institution</div>
             </div>
-            <div class="hospital-info">
-                <h4 id="hospitalName">Loading...</h4>
-                <p><i class="fas fa-user-md"></i> <span id="adminName">...</span></p>
-                <p><i class="fas fa-envelope"></i> <span id="adminEmail">...</span></p>
-                <small><i class="fas fa-shield-alt"></i> Verified Institution</small>
-            </div>
+
             <div class="sidebar-menu">
-                <a href="dashboard.html" class="menu-item">
-                    <i class="fas fa-home"></i>
-                    <span class="menu-text">Dashboard</span>
-                </a>
-                <a href="assessment.html" class="menu-item active">
-                    <i class="fas fa-notes-medical"></i>
-                    <span class="menu-text">New Assessment</span>
-                </a>
-                <a href="patient-history.html" class="menu-item">
-                    <i class="fas fa-history"></i>
-                    <span class="menu-text">Patient History</span>
-                </a>
-                <a href="analytics.html" class="menu-item">
-                    <i class="fas fa-chart-bar"></i>
-                    <span class="menu-text">Analytics</span>
-                </a>
-                <a href="manage-users.html" class="menu-item">
-                    <i class="fas fa-users"></i>
-                    <span class="menu-text">Manage Users</span>
-                </a>
-                <a href="hospital-profile.html" class="menu-item">
-                    <i class="fas fa-hospital"></i>
-                    <span class="menu-text">Hospital Profile</span>
-                </a>
-                <a href="settings.html" class="menu-item">
-                    <i class="fas fa-cog"></i>
-                    <span class="menu-text">Settings</span>
-                </a>
+                <a href="dashboard.html" class="menu-item"><i class="fas fa-th-large"></i> Dashboard</a>
+                <a href="assessment.html" class="menu-item active"><i class="fas fa-stethoscope"></i> New Assessment</a>
+                <a href="patient-history.html" class="menu-item"><i class="fas fa-history"></i> Patient History</a>
+                <a href="analytics.html" class="menu-item"><i class="fas fa-chart-line"></i> Analytics</a>
+                <a href="manage-users.html" class="menu-item"><i class="fas fa-users-cog"></i> Manage Users</a>
+                <a href="hospital-profile.html" class="menu-item"><i class="fas fa-hospital"></i> Hospital Profile</a>
+                <a href="settings.html" class="menu-item"><i class="fas fa-cog"></i> Settings</a>
             </div>
             <div class="sidebar-footer">
-                <a href="#" class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="#" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
             </div>
         </nav>
 
         <main class="main-content">
             <header class="top-nav">
                 <div class="nav-left">
-                    <button class="hamburger" id="hamburgerBtn">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <h2>Patient Assessment</h2>
-                    <p>ID: <span id="displayPatientID" class="text-primary">Generating...</span></p>
+                    <h2>New Patient Assessment</h2>
+                    <p>Clinical Screening Registry</p>
                 </div>
-                <div class="user-profile">
-                    <div class="user-avatar" id="avatarInitials">--</div>
-                    <div class="user-info">
-                        <h4 id="topNavDocName">Doctor Name</h4>
-                        <p id="docRole">Medical Professional</p>
-                    </div>
-                </div>
+                <div id="currentDate" class="date-display"></div>
             </header>
 
-            <div class="form-scroll-area">
-                <div class="assessment-form-wrapper">
-                    <div class="form-card">
-                        <h3><i class="fas fa-user-circle"></i> Patient Profile</h3>
-                        <div class="profile-grid">
-                            <div class="input-group"><label>Full Name</label><input type="text" id="pName" placeholder="Enter patient name"></div>
-                            <div class="input-group"><label>Age</label><input type="number" id="pAge" placeholder="Years"></div>
-                            <div class="input-group"><label>Gender</label>
-                                <select id="pGender"><option>Male</option><option>Female</option></select>
-                            </div>
-                        </div>
-                    </div>
+            <div class="stepper">
+                <div class="step active" id="s1"><span>1</span> Patient Info</div>
+                <div class="step" id="s2"><span>2</span> Symptoms</div>
+                <div class="step" id="s3"><span>3</span> Refinement</div>
+                <div class="step" id="s4"><span>4</span> Results</div>
+            </div>
 
-                    <div class="form-card">
-                        <h3><i class="fas fa-clipboard-check"></i> Clinical Screening (Warning Signs)</h3>
-                        <div class="screening-grid">
-                            <label><input type="checkbox" class="cancer-flag"> Unexplained Weight Loss</label>
-                            <label><input type="checkbox" class="cancer-flag"> Persistent Night Sweats</label>
-                            <label><input type="checkbox" class="cancer-flag"> Palpable Lumps/Masses</label>
-                            <label><input type="checkbox" class="cancer-flag"> Chronic Unexplained Pain</label>
-                            <label><input type="checkbox" class="cancer-flag"> Skin or Mole Changes</label>
-                            <label><input type="checkbox" class="cancer-flag"> Unusual Bleeding</label>
-                        </div>
-                    </div>
+            <div class="card anim-in" id="step1">
+                <div class="card-header-flex">
+                    <h3>Patient Registration</h3>
+                    <div class="id-badge">System ID: <strong id="autoPatientId">------</strong></div>
+                </div>
+                <div class="form-grid">
+                    <div class="group"><label>Full Name</label><input type="text" id="pName" placeholder="Full Name"></div>
+                    <div class="group"><label>Age</label><input type="number" id="pAge" placeholder="Age"></div>
+                    <div class="group"><label>Gender</label><select id="pGender"><option>Male</option><option>Female</option></select></div>
+                </div>
+                <button class="btn-main" onclick="goToStep(2)">Proceed to Symptoms <i class="fas fa-arrow-right"></i></button>
+            </div>
 
-                    <div class="form-card">
-                        <h3><i class="fas fa-list-ol"></i> Presenting Symptoms (10 Required)</h3>
-                        <div class="symptom-input-grid" id="symptomGrid"></div>
-                    </div>
+            <div class="card hidden anim-in" id="step2">
+                <h3>Initial Observations</h3>
+                <textarea id="sympInput" placeholder="Enter findings (e.g., blurred vision, dark spot on iris...)"></textarea>
+                <div class="btn-row">
+                    <button class="btn-sub" onclick="goToStep(1)">Back</button>
+                    <button class="btn-main" onclick="generateFollowUps()">Check Indicators</button>
+                </div>
+            </div>
 
-                    <button class="btn-analyze" onclick="processAssessment()">
-                        <i class="fas fa-microscope"></i> Run Intelligent Risk Analysis
-                    </button>
+            <div class="card hidden anim-in" id="step3">
+                <h3>Clinical Refinement</h3>
+                <div id="dynamicQuestions" class="questions-container"></div>
+                <div class="btn-row">
+                    <button class="btn-sub" onclick="goToStep(2)">Back</button>
+                    <button class="btn-main" onclick="runFinalAnalysis()">Generate Final Diagnosis</button>
+                </div>
+            </div>
+
+            <div class="card hidden anim-in" id="step4">
+                <div class="res-header">
+                    <div>
+                        <h3 id="resName">...</h3>
+                        <span id="resIdDisplay" style="color: #64748b; font-size: 0.9em;"></span>
+                    </div>
+                    <div id="statusBadge" class="badge">Processing...</div>
+                </div>
+
+                <div class="results-grid" id="finalProbList"></div>
+
+                <div id="saveSection" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                    <div id="saveSuccessMessage" class="hidden" style="color: #10b981; margin-bottom: 15px; font-weight: 600;">
+                        <i class="fas fa-check-circle"></i> Record successfully archived to Supabase!
+                    </div>
+                    
+                    <div class="btn-row">
+                        <button id="saveBtn" class="btn-main" onclick="triggerDatabaseSave()">
+                            <i class="fas fa-cloud-upload-alt"></i> Save to Patient History
+                        </button>
+                        <button class="btn-sub" onclick="window.location.reload()">
+                            <i class="fas fa-redo"></i> New Assessment
+                        </button>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
-    <script src="../js/assessment.js"></script>
+    <script type="module" src="../js/assessment.js"></script>
 </body>
 </html>

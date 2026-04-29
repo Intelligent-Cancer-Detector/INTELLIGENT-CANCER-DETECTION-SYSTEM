@@ -1,0 +1,165 @@
+<header class="main-system-header">
+    <div class="header-inner">
+        
+        <div class="hosp-identity">
+            <h2 id="dbHospitalName">Syncing Registry...</h2>
+            <div class="meta-row">
+                <span id="liveClock"></span>
+                <div class="db-status">
+                    <span class="status-pulse"></span>
+                    <span id="syncText">Verified Session</span>
+                </div>
+            </div>
+        </div>
+
+        <nav class="center-nav">
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="assessment.html" class="nav-link active">New Assessment</a>
+            <a href="patient-history.html" class="nav-link">History</a>
+            <a href="analytics.html" class="nav-link">Analytics</a>
+            <a href="manage-users.html" class="nav-link">Users</a>
+            <a href="hospital-profile.html" class="nav-link">Profile</a>
+        </nav>
+
+        <div class="doc-profile">
+            <div class="doc-info">
+                <span id="dbDoctorName" class="name">Staff...</span>
+                <span class="label">Doctor in Charge</span>
+            </div>
+            <div class="avatar-holder">
+                <img id="dbHospLogo" src="https://via.placeholder.com/45" alt="Hosp Logo">
+            </div>
+        </div>
+
+    </div>
+</header>
+
+<style>
+    .main-system-header {
+        background: #ffffff;
+        border-bottom: 1px solid #e2e8f0;
+        height: 85px;
+        /* LEAVES SPACE FOR SIDEBAR */
+        margin-left: 280px; 
+        display: flex;
+        align-items: center;
+        padding: 0 40px;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    /* Branding */
+    .hosp-identity h2 {
+        color: #1a2b4b; /* Your Midnight Blue */
+        font-size: 19px;
+        font-weight: 800;
+        margin: 0;
+    }
+
+    .meta-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 12px;
+        color: #64748b;
+        margin-top: 4px;
+    }
+
+    .db-status {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #10b981; /* Medical Green */
+        font-weight: 700;
+        border-left: 1px solid #e2e8f0;
+        padding-left: 12px;
+    }
+
+    .status-pulse {
+        width: 7px;
+        height: 7px;
+        background: #10b981;
+        border-radius: 50%;
+        animation: blink 2s infinite;
+    }
+
+    /* Navigation */
+    .center-nav { display: flex; gap: 10px; }
+    
+    .nav-link {
+        text-decoration: none;
+        color: #64748b;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 10px 15px;
+        border-radius: 8px;
+        transition: 0.2s;
+    }
+
+    .nav-link:hover { color: #1a2b4b; background: #f1f5f9; }
+    .nav-link.active { color: #1a2b4b; border-bottom: 2px solid #10b981; }
+
+    /* Profile */
+    .doc-profile {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        border-left: 1px solid #e2e8f0;
+        padding-left: 20px;
+    }
+
+    .doc-info { text-align: right; }
+    .name { display: block; font-weight: 700; color: #1a2b4b; font-size: 14px; }
+    .label { font-size: 11px; color: #10b981; font-weight: 700; text-transform: uppercase; }
+
+    .avatar-holder img {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #f8fafc;
+    }
+
+    @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+</style>
+
+<script>
+    async function syncHeaderWithDatabase() {
+        // These IDs come from the session when the user logged in
+        const hospId = localStorage.getItem("icds_hospital_id");
+        const docNameFromSession = localStorage.getItem("icds_user_name");
+
+        // Set the clock
+        const now = new Date();
+        document.getElementById('liveClock').textContent = now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+
+        if (!hospId) return;
+
+        try {
+            // CALL THE API to get the "REGISTERED" name
+            const response = await fetch(`http://localhost:5000/api/hospitals/${hospId}`);
+            const data = await response.json();
+
+            if (data.success) {
+                // Update the UI with the ORIGINAL database data
+                document.getElementById('dbHospitalName').textContent = data.hospital.name;
+                document.getElementById('dbDoctorName').textContent = docNameFromSession;
+                
+                if (data.hospital.logo_url) {
+                    document.getElementById('dbHospLogo').src = data.hospital.logo_url;
+                }
+            }
+        } catch (e) {
+            console.log("Offline mode - using session cache");
+            document.getElementById('dbHospitalName').textContent = localStorage.getItem("icds_hospital_name");
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', syncHeaderWithDatabase);
+</script>

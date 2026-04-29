@@ -1,0 +1,198 @@
+<aside class="app-sidebar">
+    <div class="sidebar-header">
+        <div class="brand-logo">
+            <i class="fas fa-dna"></i>
+            <div class="brand-text">
+                <span class="brand-name">ICDS</span>
+                <span class="brand-sub">Intelligent Cancer Detection</span>
+            </div>
+        </div>
+
+        <div class="hospital-identity">
+            <h4 id="sideHospName">Loading Registry...</h4>
+            <div class="identity-item">
+                <i class="fas fa-user-md"></i> 
+                <span id="sideDocName">...</span>
+            </div>
+            <div class="identity-item">
+                <i class="fas fa-envelope"></i> 
+                <span id="sideDocEmail">...</span>
+            </div>
+            <div class="identity-item verified">
+                <i class="fas fa-shield-alt"></i> Verified Institution
+            </div>
+        </div>
+    </div>
+
+    <nav class="sidebar-menu">
+        <a href="dashboard.html" class="menu-link">
+            <i class="fas fa-th-large"></i> Dashboard
+        </a>
+        <a href="assessment.html" class="menu-link active">
+            <i class="fas fa-stethoscope"></i> New Assessment
+        </a>
+        <a href="patient-history.html" class="menu-link">
+            <i class="fas fa-history"></i> Patient History
+        </a>
+        <a href="analytics.html" class="menu-link">
+            <i class="fas fa-chart-line"></i> Analytics
+        </a>
+        <a href="manage-users.html" class="menu-link">
+            <i class="fas fa-users-cog"></i> Manage Users
+        </a>
+        <a href="hospital-profile.html" class="menu-link">
+            <i class="fas fa-hospital"></i> Hospital Profile
+        </a>
+        <a href="settings.html" class="menu-link">
+            <i class="fas fa-cog"></i> Settings
+        </a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <a href="#" onclick="handleLogout()" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    </div>
+</aside>
+
+<style>
+    .app-sidebar {
+        width: 280px;
+        height: 100vh;
+        background-color: #1a2b4b; /* Exact Deep Blue from your image */
+        color: white;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        left: 0;
+        top: 0;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .sidebar-header {
+        padding: 30px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .brand-logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 30px;
+    }
+
+    .brand-logo i {
+        font-size: 24px;
+        color: #10b981; /* DNA Green */
+    }
+
+    .brand-name { display: block; font-weight: 800; font-size: 18px; }
+    .brand-sub { font-size: 10px; color: #94a3b8; }
+
+    /* Hospital Info Styles */
+    .hospital-identity h4 {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: white;
+    }
+
+    .identity-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        color: #cbd5e1;
+        margin-bottom: 8px;
+    }
+
+    .identity-item.verified {
+        color: #10b981;
+        font-weight: 600;
+        margin-top: 15px;
+    }
+
+    /* Menu Arrangement */
+    .sidebar-menu {
+        flex-grow: 1;
+        padding: 20px 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .menu-link {
+        display: flex;
+        align-items: center;
+        padding: 12px 15px;
+        color: #cbd5e1;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: 0.2s;
+    }
+
+    .menu-link i {
+        width: 20px;
+        margin-right: 12px;
+        text-align: center;
+    }
+
+    .menu-link:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: white;
+    }
+
+    .menu-link.active {
+        background-color: #064e3b; /* Dark Green from image */
+        color: white;
+    }
+
+    /* Logout Section */
+    .sidebar-footer {
+        padding: 20px 15px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .logout-btn {
+        display: flex;
+        align-items: center;
+        color: #ef4444; /* Logout Red */
+        text-decoration: none;
+        font-weight: 600;
+        padding: 12px 15px;
+    }
+</style>
+
+<script>
+    async function syncSidebarRegistry() {
+        const hospId = localStorage.getItem("icds_hospital_id");
+        
+        // These come from the login session
+        document.getElementById('sideDocName').textContent = localStorage.getItem("icds_user_name") || "Medical Staff";
+        document.getElementById('sideDocEmail').textContent = localStorage.getItem("icds_user_email") || "staff@hosp.com";
+
+        if (!hospId) return;
+
+        try {
+            // Fetch the "Original" registered name from your database
+            const response = await fetch(`http://localhost:5000/api/hospitals/${hospId}`);
+            const data = await response.json();
+
+            if (data.success) {
+                document.getElementById('sideHospName').textContent = data.hospital.name;
+            }
+        } catch (e) {
+            console.log("Offline mode - using session cache");
+            document.getElementById('sideHospName').textContent = localStorage.getItem("icds_hospital_name");
+        }
+    }
+
+    function handleLogout() {
+        localStorage.clear();
+        window.location.href = "login.html";
+    }
+
+    document.addEventListener('DOMContentLoaded', syncSidebarRegistry);
+</script>
