@@ -1,25 +1,8 @@
+import uuid
 from flask import Blueprint, request, jsonify
 from database.config import get_db_connection
-from services.ml_service import predict_cancer # Your trained model logic
-import uuid
-import json
 
 assessment_bp = Blueprint('assessment', __name__)
-
-@assessment_bp.route('/predict', list=['POST'])
-def predict():
-    data = request.json
-    symptoms = data.get('symptoms', [])
-    
-    # Call your ML model
-    prediction_result = predict_cancer(symptoms) 
-    
-    # If confidence is too low, override to "None/No Cancer"
-    if prediction_result['confidence'] < 30.0:
-        prediction_result['top_prediction'] = "None"
-        prediction_result['risk_level'] = "LOW"
-
-    return jsonify(prediction_result)
 
 @assessment_bp.route('/save', methods=['POST'])
 def save_assessment():
@@ -28,29 +11,50 @@ def save_assessment():
     cur = conn.cursor()
 
     try:
-        assessment_id = f"AS-{uuid.uuid4().hex[:6].upper()}"
+        # 1. Register/Update Patient
+        # We use the 6-digit ID from your JS as the Primary Key
+        cur.execute("""
+            INSERT INTO patient (id, hospital_id, full_name, age, gender)
+            VALUES (%s, %s, %s, %s, %s)
+            ON CONFLICT (id) DO UPDATE SET 
+                full_name = EXCLUDED.full_name,
+                age = EXCLUDED.age;
+        """, (
+            data.get('patient_id'),
+            data.get('hospital_id', 'hosp_1'), # Defaults to Nairobi General
+            data.get('patient_name'),
+            data.get('age'),
+            data.get('gender')
+        ))
+
+        # 2. Save Assessment Results
+        # Generate a unique ID for the assessment record itself
+        assessment_uuid = f"AS-{uuid.uuid4().hex[:6].upper()}"
         
         cur.execute("""
-            INSERT INTO assessment (
-                id, hospital_id, patient_id, doctor_id, 
-                risk_level, confidence, cancer_type, symptoms_json
-            ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            INSERT INTO assessment (id, hospital_id, patient_id, risk_level, confidence, cancer_type, symptoms_json)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
         """, (
-            assessment_id,
-            data['hospital_id'],
-            data['patient_id'],
-            data['doctor_id'],
-            data['risk_level'].upper(),
-            data['confidence'],
-            data['cancer_type'],
-            json.dumps(data['symptoms'])
+            assessment_uuid,
+            data.get('hospital_id', 'hosp_1'),
+            data.get('patient_id'),
+            data.get('risk_level'),
+            data.get('confidence'),
+            data.get('cancer_type'),
+            data.get('symptoms_summary')
         ))
-        
+
         conn.commit()
-        return jsonify({"status": "success", "id": assessment_id})
+        return jsonify({
+            "success": True, 
+            "message": "Clinical data archived successfully",
+            "assessment_id": assessment_uuid
+        }), 201
+
     except Exception as e:
         conn.rollback()
-        return jsonify({"status": "error", "message": str(e)}), 500
+        print(f"Database Error: {e}")
+        return jsonify({"success": False, "error": str(e)}), 500
     finally:
         cur.close()
         conn.close()
