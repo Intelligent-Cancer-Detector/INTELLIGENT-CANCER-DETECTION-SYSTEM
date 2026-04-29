@@ -6,10 +6,15 @@ This is for initializing all tables!
 """
 
 
+import json
+
 from psycopg2.extras import RealDictCursor
 from dotenv import load_dotenv
-from datetime import datetime
 from database.config import get_db_connection
+
+import random
+import uuid
+from datetime import datetime, timedelta
 
 load_dotenv()
 
@@ -88,12 +93,39 @@ def initialize_database():
             patient_id TEXT REFERENCES patient(id),
             doctor_id TEXT REFERENCES users(id),
             risk_level TEXT,          -- HIGH, MEDIUM, LOW
-            confidence FLOAT,
-            cancer_type TEXT,
             symptoms_json TEXT,
             created_at TIMESTAMPTZ DEFAULT NOW()
         )
     """
+    )
+    # 5. PREDICTION TABLE
+    cur.execute(
+        """
+        CREATE TABLE IF NOT EXISTS predictions (
+            pr_id TEXT PRIMARY KEY,
+
+            -- Link to assessment
+            assessment_id TEXT UNIQUE REFERENCES assessment(id) ON DELETE CASCADE,
+
+            -- Main result
+            top_cancer_type TEXT,
+            top_probability FLOAT,
+
+            -- Detailed probabilities (AI output)
+            lung_cancer_prob FLOAT,
+            breast_cancer_prob FLOAT,
+            colorectal_cancer_prob FLOAT,
+            prostate_cancer_prob FLOAT,
+            liver_cancer_prob FLOAT,
+            cervical_cancer_prob FLOAT,
+            brain_cancer_prob FLOAT,
+            skin_cancer_prob FLOAT,
+            pancreatic_cancer_prob FLOAT,
+            eye_cancer_prob FLOAT,
+
+            created_at TIMESTAMPTZ DEFAULT NOW()
+        );
+        """
     )
 
     # 5. OTPCode Table (Important for registration & login)
@@ -160,6 +192,13 @@ def initialize_database():
     """
     )
 
+    cur.execute(
+        """
+        CREATE INDEX IF NOT EXISTS idx_predictions_assessment
+        ON predictions(assessment_id);
+    """
+    )
+
     conn.commit()
     cur.close()
     conn.close()
@@ -172,72 +211,164 @@ def seed_database():
     conn = get_db_connection()
     cur = conn.cursor()
 
-    print("🌱 Seeding database...")
+    print("🌱 Seeding MASSIVE realistic dataset...")
 
-    # =========================
+    hospital_id = "hosp_1"
+
+    # -------------------------
     # 1. HOSPITAL
-    # =========================
+    # -------------------------
     cur.execute(
         """
-        INSERT INTO hospital (id, name, email, hospital_type, city, country, phone)
-        VALUES 
-        ('hosp_1', 'Nairobi General Hospital', 'info@nairobigh.com', 'public', 'Nairobi', 'Kenya', '0712345678')
+        INSERT INTO hospital (id, name, city, country)
+        VALUES (%s, %s, %s, %s)
         ON CONFLICT (id) DO NOTHING;
-    """
+    """,
+        (hospital_id, "Nairobi General Hospital", "Nairobi", "Kenya"),
     )
 
-    # =========================
-    # 2. USERS (DOCTORS)
-    # =========================
-    cur.execute(
-        """
-        INSERT INTO users (id, hospital_id, full_name, email, password_hash, role, department)
-        VALUES
-        ('doc_1', 'hosp_1', 'Dr. John Smith', 'john@hospital.com', 'hashedpass', 'doctor', 'Oncology'),
-        ('doc_2', 'hosp_1', 'Dr. Alice Wanjiku', 'alice@hospital.com', 'hashedpass', 'doctor', 'Radiology')
-        ON CONFLICT (id) DO NOTHING;
-    """
-    )
+    # -------------------------
+    # 2. DOCTORS
+    # -------------------------
+    doctors = []
+    for i in range(8):
+        doc_id = f"doc_{i}"
+        doctors.append(doc_id)
 
-    # =========================
-    # 3. PATIENTS
-    # =========================
-    cur.execute(
-        """
-        INSERT INTO patient (id, hospital_id, full_name, age, gender, contact)
-        VALUES
-        ('pat_1', 'hosp_1', 'Peter Mwangi', 45, 'Male', '0700000001'),
-        ('pat_2', 'hosp_1', 'Mary Atieno', 38, 'Female', '0700000002'),
-        ('pat_3', 'hosp_1', 'James Otieno', 60, 'Male', '0700000003'),
-        ('pat_4', 'hosp_1', 'Faith Njeri', 29, 'Female', '0700000004')
-        ON CONFLICT (id) DO NOTHING;
-    """
-    )
-
-    # =========================
-    # 4. ASSESSMENTS
-    # =========================
-    cur.execute(
-        """
-        INSERT INTO assessment (
-            id, hospital_id, patient_id, doctor_id,
-            risk_level, confidence, cancer_type, symptoms_json
+        cur.execute(
+            """
+            INSERT INTO users (id, hospital_id, full_name, email, password_hash, role)
+            VALUES (%s, %s, %s, %s, %s, %s)
+            ON CONFLICT (id) DO NOTHING;
+        """,
+            (
+                doc_id,
+                hospital_id,
+                f"Dr. Doctor {i}",
+                f"doc{i}@hospital.com",
+                "hashedpass",
+                "doctor",
+            ),
         )
-        VALUES
-        ('assess_1', 'hosp_1', 'pat_1', 'doc_1', 'HIGH', 0.92, 'Lung Cancer', '{"cough": true, "chest_pain": true}'),
-        ('assess_2', 'hosp_1', 'pat_2', 'doc_2', 'LOW', 0.30, NULL, '{"fatigue": true}'),
-        ('assess_3', 'hosp_1', 'pat_3', 'doc_1', 'MEDIUM', 0.65, 'Colon Cancer', '{"weight_loss": true}'),
-        ('assess_4', 'hosp_1', 'pat_4', 'doc_2', 'HIGH', 0.88, 'Breast Cancer', '{"lump": true}'),
-        ('assess_5', 'hosp_1', 'pat_1', 'doc_2', 'LOW', 0.20, NULL, '{"headache": true}')
-        ON CONFLICT (id) DO NOTHING;
-    """
-    )
+
+    # -------------------------
+    # 3. PATIENTS
+    # -------------------------
+    patients = []
+    for i in range(100):
+        patient_id = f"pat_{i}"
+        patients.append(patient_id)
+
+        cur.execute(
+            """
+            INSERT INTO patient (id, hospital_id, full_name, age, gender, contact)
+            VALUES (%s, %s, %s, %s, %s, %s)
+            ON CONFLICT (id) DO NOTHING;
+        """,
+            (
+                patient_id,
+                hospital_id,
+                f"Patient {i}",
+                random.randint(18, 85),
+                random.choice(["Male", "Female"]),
+                f"07{random.randint(10000000, 99999999)}",
+            ),
+        )
+
+    # -------------------------
+    # 4. CANCER TYPES
+    # -------------------------
+    cancers = [
+        "Lung Cancer",
+        "Breast Cancer",
+        "Colorectal Cancer",
+        "Prostate Cancer",
+        "Liver Cancer",
+        "Cervical Cancer",
+        "Brain Cancer",
+        "Skin Cancer",
+        "Pancreatic Cancer",
+        "Eye Cancer",
+    ]
+
+    possible_symptoms = [
+        "headache",
+        "fatigue",
+        "cough",
+        "weight_loss",
+        "fever",
+        "chest_pain",
+        "nausea",
+    ]
+
+    # -------------------------
+    # 5. ASSESSMENTS + PREDICTIONS
+    # -------------------------
+    for i in range(500):
+
+        selected = random.sample(possible_symptoms, k=random.randint(1, 4))
+        symptoms = {s: True for s in selected}
+
+        assess_id = f"assess_{uuid.uuid4().hex[:8]}"
+        patient_id = random.choice(patients)
+        doctor_id = random.choice(doctors)
+
+        created_at = datetime.now() - timedelta(days=random.randint(0, 365))
+
+        # Insert assessment
+        cur.execute(
+            """
+            INSERT INTO assessment (
+                id, hospital_id, patient_id, doctor_id,
+                risk_level, symptoms_json, created_at
+            )
+            VALUES (%s,%s,%s,%s,%s,%s,%s)
+            ON CONFLICT (id) DO NOTHING;
+        """,
+            (
+                assess_id,
+                hospital_id,
+                patient_id,
+                doctor_id,
+                random.choice(["LOW", "MEDIUM", "HIGH"]),
+                json.dumps(symptoms),
+                created_at,
+            ),
+        )
+
+        # Generate prediction
+        probs = [random.random() for _ in range(len(cancers))]
+        # _ just means “I don’t care about the variable”
+        total = sum(probs)
+        probs = [p / total for p in probs]  # normalize
+
+        top_index = probs.index(max(probs))
+        top_cancer = cancers[top_index]
+        top_prob = round(max(probs), 2)
+
+        # Insert prediction
+        cur.execute(
+            """
+            INSERT INTO predictions (
+                pr_id, assessment_id,
+                top_cancer_type, top_probability,
+                lung_cancer_prob, breast_cancer_prob,
+                colorectal_cancer_prob, prostate_cancer_prob,
+                liver_cancer_prob, cervical_cancer_prob,
+                brain_cancer_prob, skin_cancer_prob,
+                pancreatic_cancer_prob, eye_cancer_prob
+            )
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+            ON CONFLICT (assessment_id) DO NOTHING;
+        """,
+            (str(uuid.uuid4()), assess_id, top_cancer, top_prob, *probs),
+        )
 
     conn.commit()
     cur.close()
     conn.close()
 
-    print("✅ Seed data inserted successfully!")
+    print("🔥 MASSIVE DATA INSERTED SUCCESSFULLY!")
 
 
 # function to drop all tables

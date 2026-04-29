@@ -136,7 +136,7 @@ async function loadCancerChart(assessments) {
   };
 
   assessments.forEach((assessment) => {
-    const cancerType = assessment.cancer_type;
+    const cancerType = assessment.top_cancer_type;
     if (cancerType && cancerCounts[cancerType] !== undefined) {
       cancerCounts[cancerType]++;
     }
@@ -268,8 +268,8 @@ async function loadRecentAssessments() {
           <td>${a.age ?? "?"}/${a.gender ?? "?"}</td>
           <td>${a.symptoms_json || "No symptoms"}</td>
           <td>${a.risk_level}</td>
-          <td>${a.cancer_type || "N/A"}</td>
-          <td>${a.doctors_name || "Unknown"}</td>
+          <td>${a.top_cancer_type || "N/A"}</td>
+          <td>${a.doctor_name || "Unknown"}</td>
           <td>${date}</td>
         </tr>
       `;

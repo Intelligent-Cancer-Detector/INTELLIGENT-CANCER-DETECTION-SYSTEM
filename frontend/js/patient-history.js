@@ -70,7 +70,7 @@ async function loadAssessments() {
         gender:assessment.gender,
         id:assessment.id
       };
-      const doctor = assessment.doctors_name;
+      const doctor = assessment.doctor_name;
       let symptomsArray = [];
 
       if (assessment.symptoms_json) {
@@ -96,9 +96,9 @@ async function loadAssessments() {
           symptomsArray.slice(0, 3).join(", ") +
             (symptomsArray.length > 3 ? "..." : "") || "No symptoms",
         riskLevel: assessment.risk_level || "Unknown",
-        cancerType: assessment.cancer_type || "None",
-        probability: assessment.confidence
-          ? `${assessment.confidence * 100}%`
+        cancerType: assessment.top_cancer_type || "None",
+        probability: assessment.top_probability
+          ? `${assessment.top_probability * 100}%`
           : "—",
         doctor: doctor || "Unknown",
         date: assessment.created_at,

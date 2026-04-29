@@ -11,7 +11,7 @@ def get_dashboard_stats(hospital_id):
         print("👉 Running TODAY query")
         cursor.execute(
             """
-            SELECT COUNT(*) FROM assessment
+            SELECT COUNT(*) AS count FROM assessment
             WHERE hospital_id=%s
             AND created_at >= CURRENT_DATE
             """,
@@ -24,7 +24,7 @@ def get_dashboard_stats(hospital_id):
         print("👉 Running HIGH RISK query")
         cursor.execute(
             """
-            SELECT COUNT(*) FROM assessment
+            SELECT COUNT(*) AS count FROM assessment
             WHERE hospital_id=%s
             AND risk_level = 'HIGH'
             """,
@@ -37,8 +37,12 @@ def get_dashboard_stats(hospital_id):
         print("👉 Running CANCER query")
         cursor.execute(
             """
-            SELECT COUNT(*) FROM assessment
-            WHERE hospital_id = %s AND cancer_type IS NOT NULL
+            SELECT COUNT(*) AS count 
+            FROM predictions
+
+            JOIN assessment on predictions.assessment_id =assessment.id
+            WHERE assessment.hospital_id = %s 
+            AND predictions.top_cancer_type IS NOT NULL
             """,
             (hospital_id,),
         )
@@ -49,7 +53,7 @@ def get_dashboard_stats(hospital_id):
         print("👉 Running DOCTOR query")
         cursor.execute(
             """
-            SELECT COUNT(*) FROM users
+            SELECT COUNT(*) AS count FROM users
             WHERE hospital_id = %s AND role = 'doctor'
             """,
             (hospital_id,),
@@ -58,12 +62,20 @@ def get_dashboard_stats(hospital_id):
         print("DOCTOR RESULT:", result)
         doctors = result["count"] if result else 0
 
+        # assessments query
         print("👉 Running ASSESSMENTS query")
         cursor.execute(
             """
-            SELECT risk_level, cancer_type, confidence
+            SELECT 
+                assessment.risk_level, 
+
+                predictions.top_cancer_type, 
+                predictions.top_probability
             FROM assessment
-            WHERE hospital_id = %s
+
+            JOIN predictions ON predictions.assessment_id =assessment.id
+
+            WHERE assessment.hospital_id = %s
             """,
             (hospital_id,),
         )
@@ -97,33 +109,40 @@ def get_recent_assessments(hospital_id):
         cursor.execute(
             """
             SELECT 
-                a.id,
-                a.created_at,
-                a.risk_level,
-                a.cancer_type,
-                a.confidence,
-                a.symptoms_json,
+                assessment.id,
+                assessment.created_at,
+                assessment.risk_level,
+                assessment.symptoms_json,
 
-                p.full_name AS patient_name,
-                p.age,
-                p.gender,
-                p.contact,
-                p.id,
+                patient.full_name AS patient_name,
+                patient.age,
+                patient.gender,
+                patient.contact,
 
+                users.full_name AS doctor_name,
 
-                u.full_name AS doctors_name
+                predictions.top_cancer_type,
+                predictions.top_probability
+            
+            FROM assessment
 
-            FROM assessment a
-            JOIN patient p ON a.patient_id = p.id  
-           
-            JOIN users u ON a.doctor_id = u.id
+            JOIN patient ON assessment.patient_id=patient.id
+            JOIN users ON assessment.doctor_id=users.id
+            JOIN predictions ON predictions.assessment_id=assessment.id
 
-            WHERE a.hospital_id = %s
-            ORDER BY a.created_at DESC
+         
+
+            WHERE assessment.hospital_id =%s
+            ORDER BY assessment.created_at DESC
             LIMIT 10
+
+
+
         """,
             (hospital_id,),
         )
+
+        # basically it means join table 2 predictions with its child id prediction.assessment_id  with table one mother table id assessment.id
 
         return cursor.fetchall()
     except Exception as e:
@@ -146,10 +165,15 @@ def get_alerts(hospital_id):
             """
             SELECT 
                 a.created_at,
-                a.cancer_type,
-                a.confidence,
+                
+                predictions.top_cancer_type,
+                predictions.top_probability,
+
                 p.full_name
             FROM assessment a
+
+            
+            JOIN predictions predictions ON predictions.assessment_id = a.id
             JOIN patient p ON a.patient_id = p.id
             WHERE a.hospital_id = %s
             AND a.risk_level = 'HIGH'
