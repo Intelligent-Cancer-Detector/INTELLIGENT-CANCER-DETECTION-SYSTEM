@@ -2,7 +2,6 @@ from flask import Blueprint, request
 
 from controllers.auth_controller import login_user, register_user
 
-
 auth_bp = Blueprint("auth", __name__)
 
 
@@ -11,7 +10,7 @@ def register():
     print("✅ auth routes loaded")
     data = request.get_json()
     print("Incoming data:", data)
-    
+
     return register_user()
 
 
@@ -24,4 +23,3 @@ def login():
 """
 router.post("/register", registerUser)
 """
-

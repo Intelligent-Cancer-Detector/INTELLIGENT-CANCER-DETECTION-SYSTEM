@@ -1,0 +1,21 @@
+/* ===== SIDEBAR RESPONSIVE LAYOUT FIX ===== */
+
+/* DEFAULT */
+.main-content {
+  margin-left: 270px !important;
+  transition: 0.3s ease;
+}
+
+/* .main-system-header {
+  margin-left: 0px !important;
+  transition: 0.3s ease;
+} */
+
+/* COLLAPSED STATE */
+body.sidebar-collapsed .main-content {
+  margin-left: 80px !important;
+}
+
+/* body.sidebar-collapsed .main-system-header {
+  margin-left: 0px !important;
+} */

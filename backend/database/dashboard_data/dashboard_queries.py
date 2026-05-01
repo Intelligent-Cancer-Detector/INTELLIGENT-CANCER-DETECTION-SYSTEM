@@ -80,7 +80,7 @@ def get_dashboard_stats(hospital_id):
             (hospital_id,),
         )
         assessments = cursor.fetchall()
-        print("ASSESSMENTS:", assessments)
+        # print("ASSESSMENTS:", assessments)
 
         return {
             "today": today,

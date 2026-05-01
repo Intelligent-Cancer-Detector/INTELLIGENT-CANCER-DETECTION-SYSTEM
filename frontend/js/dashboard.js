@@ -7,21 +7,39 @@ let riskChart = null;
 let currentHospitalId = null;
 
 // Load dashboard data on page load
-window.onload = async function () {
+// window.onload = async function () {
+//   checkAuth();
+//   await loadUserData();
+
+//   const btn = document.getElementById("toggleSidebarBtn");
+//   btn?.addEventListener("click", () => {
+//     toggleSidebar();
+//   });
+
+//   await Promise.all([
+//     loadDashboardData(),
+//     loadRecentAssessments(),
+//     loadAlerts(),
+//   ]);
+// };
+
+
+
+export async function initDashboard() {
   checkAuth();
   await loadUserData();
 
-  const btn = document.getElementById("toggleSidebarBtn");
-  btn?.addEventListener("click", () => {
-    toggleSidebar();
-  });
+  // const btn = document.getElementById("toggleSidebarBtn");
+  // btn?.addEventListener("click", () => {
+  //   toggleSidebar();
+  // });
 
   await Promise.all([
     loadDashboardData(),
     loadRecentAssessments(),
     loadAlerts(),
   ]);
-};
+}
 
 // document.addEventListener("DOMContentLoaded", () => {
 //   const btn = document.getElementById("toggleSidebarBtn");
@@ -44,34 +62,16 @@ function checkAuth() {
   }
 }
 
-// Load user data from localStorage and Supabase
 async function loadUserData() {
-  const userId = localStorage.getItem("icds_user_id");
   const hospitalId = getHospitalId();
-  const name = localStorage.getItem("icds_user_name");
-  const email = localStorage.getItem("icds_user_email");
-  const hospital = localStorage.getItem("icds_hospital");
-
   currentHospitalId = hospitalId;
 
-  document.getElementById("hospitalName").textContent = hospital || "--";
-  document.getElementById("adminName").textContent = name || "--";
-  document.getElementById("adminEmail").textContent = email || "--";
-
-  const firstName = name
-    ? name.replace("Dr.", "").trim().split(" ")[0]
-    : "Guest";
-  document.getElementById("greetingName").textContent = firstName;
-  document.getElementById("userDisplayName").textContent = name || "--";
-
-  const initials = name
-    ? name
-        .split(" ")
-        .map((n) => n[0])
-        .join("")
-        .substring(0, 2)
-    : "--";
-  document.getElementById("userAvatar").textContent = initials.toUpperCase();
+  // 🔒 ONLY store data — DO NOT touch UI here
+  return {
+    name: localStorage.getItem("icds_user_name"),
+    email: localStorage.getItem("icds_user_email"),
+    hospital: localStorage.getItem("icds_hospital"),
+  };
 }
 
 // Load all dashboard statistics
@@ -333,19 +333,19 @@ function viewAssessment(assessmentId) {
   window.location.href = `view-assessment.html?id=${assessmentId}`;
 }
 
-// Toggle sidebar
-function toggleSidebar() {
-  const sidebar = document.getElementById("sidebar");
-  const mainContent = document.getElementById("mainContent");
+// // Toggle sidebar
+// function toggleSidebar() {
+//   const sidebar = document.getElementById("sidebar");
+//   const mainContent = document.getElementById("mainContent");
 
-  sidebar.classList.toggle("collapsed");
+//   sidebar.classList.toggle("collapsed");
 
-  if (sidebar.classList.contains("collapsed")) {
-    mainContent.classList.add("expanded");
-  } else {
-    mainContent.classList.remove("expanded");
-  }
-}
+//   if (sidebar.classList.contains("collapsed")) {
+//     mainContent.classList.add("expanded");
+//   } else {
+//     mainContent.classList.remove("expanded");
+//   }
+// }
 
 // Logout
 function logout() {
@@ -408,7 +408,7 @@ window.addEventListener("resize", function () {
   }
 });
 
-window.toggleSidebar = toggleSidebar;
+// window.toggleSidebar = toggleSidebar;
 // window.logout = logout;
 // window.newAssessment = newAssessment;
 // window.viewReports = viewReports;
