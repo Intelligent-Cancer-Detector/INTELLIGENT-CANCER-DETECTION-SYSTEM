@@ -1,17 +1,13 @@
 # Supabase with Raw SQL
 
-
 """
 This is for initializing all tables!
 """
 
-
 import json
-
 from psycopg2.extras import RealDictCursor
 from dotenv import load_dotenv
 from database.config import get_db_connection
-
 import random
 import uuid
 from datetime import datetime, timedelta
@@ -48,6 +44,7 @@ def initialize_database():
         )
     """
     )
+    print("✅ Hospital table created")
 
     # 2. User Table (Doctors & Admins)
     cur.execute(
@@ -68,6 +65,7 @@ def initialize_database():
         )
     """
     )
+    print("✅ Users table created")
 
     # 3. Patient Table
     cur.execute(
@@ -77,12 +75,13 @@ def initialize_database():
             hospital_id TEXT REFERENCES hospital(id),
             full_name TEXT NOT NULL,
             age INTEGER,
-            gender TEXT,           -- 1 = Male, 0 = Female
+            gender TEXT,
             contact TEXT,
             created_at TIMESTAMPTZ DEFAULT NOW()
         )
     """
     )
+    print("✅ Patient table created")
 
     # 4. Assessment Table (ML Prediction Results)
     cur.execute(
@@ -92,26 +91,22 @@ def initialize_database():
             hospital_id TEXT REFERENCES hospital(id),
             patient_id TEXT REFERENCES patient(id),
             doctor_id TEXT REFERENCES users(id),
-            risk_level TEXT,          -- HIGH, MEDIUM, LOW
+            risk_level TEXT,
             symptoms_json TEXT,
             created_at TIMESTAMPTZ DEFAULT NOW()
         )
     """
     )
+    print("✅ Assessment table created")
+
     # 5. PREDICTION TABLE
     cur.execute(
         """
         CREATE TABLE IF NOT EXISTS predictions (
             pr_id TEXT PRIMARY KEY,
-
-            -- Link to assessment
             assessment_id TEXT UNIQUE REFERENCES assessment(id) ON DELETE CASCADE,
-
-            -- Main result
             top_cancer_type TEXT,
             top_probability FLOAT,
-
-            -- Detailed probabilities (AI output)
             lung_cancer_prob FLOAT,
             breast_cancer_prob FLOAT,
             colorectal_cancer_prob FLOAT,
@@ -122,28 +117,29 @@ def initialize_database():
             skin_cancer_prob FLOAT,
             pancreatic_cancer_prob FLOAT,
             eye_cancer_prob FLOAT,
-
             created_at TIMESTAMPTZ DEFAULT NOW()
-        );
-        """
+        )
+    """
     )
+    print("✅ Predictions table created")
 
-    # 5. OTPCode Table (Important for registration & login)
+    # 6. OTPCode Table (Important for registration & login)
     cur.execute(
         """
         CREATE TABLE IF NOT EXISTS otp_code (
             id SERIAL PRIMARY KEY,
             email TEXT NOT NULL,
             code TEXT NOT NULL,
-            purpose TEXT,                    -- 'registration', 'login', 'reset_password'
+            purpose TEXT,
             expires_at TIMESTAMPTZ NOT NULL,
             used BOOLEAN DEFAULT false,
             created_at TIMESTAMPTZ DEFAULT NOW()
         )
     """
     )
+    print("✅ OTP Code table created")
 
-    # 6. AuditLog Table (Optional but good for security)
+    # 7. AuditLog Table (Optional but good for security)
     cur.execute(
         """
         CREATE TABLE IF NOT EXISTS audit_log (
@@ -159,6 +155,43 @@ def initialize_database():
         )
     """
     )
+    print("✅ Audit Log table created")
+
+    # ============================================
+    # HOSPITAL PROFILE TABLES (NEW)
+    # ============================================
+
+    # 8. Departments Table
+    cur.execute(
+        """
+        CREATE TABLE IF NOT EXISTS departments (
+            id SERIAL PRIMARY KEY,
+            hospital_id TEXT REFERENCES hospital(id) ON DELETE CASCADE,
+            name VARCHAR(200) NOT NULL,
+            head VARCHAR(200),
+            description TEXT,
+            location VARCHAR(200),
+            created_at TIMESTAMPTZ DEFAULT NOW(),
+            updated_at TIMESTAMPTZ DEFAULT NOW()
+        )
+    """
+    )
+    print("✅ Departments table created")
+
+    # 9. User Departments Table (junction table - connects users to departments)
+    cur.execute(
+        """
+        CREATE TABLE IF NOT EXISTS user_departments (
+            id SERIAL PRIMARY KEY,
+            user_id TEXT REFERENCES users(id) ON DELETE CASCADE,
+            department_id INTEGER REFERENCES departments(id) ON DELETE CASCADE,
+            position_in_dept VARCHAR(100),
+            join_date DATE,
+            created_at TIMESTAMPTZ DEFAULT NOW()
+        )
+    """
+    )
+    print("✅ User Departments table created")
 
     # =========================
     # INDEXES (PERFORMANCE)
@@ -199,6 +232,28 @@ def initialize_database():
     """
     )
 
+    # New indexes for hospital profile
+    cur.execute(
+        """
+        CREATE INDEX IF NOT EXISTS idx_departments_hospital 
+        ON departments(hospital_id);
+    """
+    )
+
+    cur.execute(
+        """
+        CREATE INDEX IF NOT EXISTS idx_user_departments_user 
+        ON user_departments(user_id);
+    """
+    )
+
+    cur.execute(
+        """
+        CREATE INDEX IF NOT EXISTS idx_user_departments_dept 
+        ON user_departments(department_id);
+    """
+    )
+
     conn.commit()
     cur.close()
     conn.close()
@@ -220,34 +275,42 @@ def seed_database():
     # -------------------------
     cur.execute(
         """
-        INSERT INTO hospital (id, name, city, country)
-        VALUES (%s, %s, %s, %s)
+        INSERT INTO hospital (id, name, city, country, phone, email, address)
+        VALUES (%s, %s, %s, %s, %s, %s, %s)
         ON CONFLICT (id) DO NOTHING;
     """,
-        (hospital_id, "Nairobi General Hospital", "Nairobi", "Kenya"),
+        (hospital_id, "Nairobi General Hospital", "Nairobi", "Kenya", 
+         "+254 700 123456", "contact@nairobiGeneral.com", "123 Hospital Road, Nairobi"),
     )
 
     # -------------------------
     # 2. DOCTORS
     # -------------------------
     doctors = []
+    doctor_names = [
+        "Dr. Sarah Johnson", "Dr. Michael Chen", "Dr. Emily Rodriguez", 
+        "Dr. James Wilson", "Dr. Lisa Adams", "Dr. Robert Kim", 
+        "Dr. Maria Garcia", "Dr. David Brown"
+    ]
+    
     for i in range(8):
         doc_id = f"doc_{i}"
         doctors.append(doc_id)
 
         cur.execute(
             """
-            INSERT INTO users (id, hospital_id, full_name, email, password_hash, role)
-            VALUES (%s, %s, %s, %s, %s, %s)
+            INSERT INTO users (id, hospital_id, full_name, email, password_hash, role, phone)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (id) DO NOTHING;
         """,
             (
                 doc_id,
                 hospital_id,
-                f"Dr. Doctor {i}",
+                doctor_names[i],
                 f"doc{i}@hospital.com",
                 "hashedpass",
                 "doctor",
+                f"+254 700 {100000 + i}",
             ),
         )
 
@@ -276,7 +339,53 @@ def seed_database():
         )
 
     # -------------------------
-    # 4. CANCER TYPES
+    # 4. DEPARTMENTS
+    # -------------------------
+    departments_list = [
+        ("Cardiology", "Dr. James Wilson", "Heart and cardiovascular care", "3rd Floor"),
+        ("Oncology", "Dr. Sarah Johnson", "Cancer diagnosis and treatment", "2nd Floor"),
+        ("Radiology", "Dr. Michael Chen", "Medical imaging and scans", "1st Floor"),
+        ("Emergency", "Dr. Emily Rodriguez", "24/7 emergency care", "Ground Floor"),
+        ("Pediatrics", "Dr. Lisa Adams", "Child healthcare", "2nd Floor"),
+        ("Neurology", "Dr. Robert Kim", "Brain and nervous system", "4th Floor"),
+        ("Orthopedics", "Dr. David Brown", "Bone and joint care", "3rd Floor"),
+    ]
+    
+    for dept_name, dept_head, dept_desc, dept_loc in departments_list:
+        cur.execute(
+            """
+            INSERT INTO departments (hospital_id, name, head, description, location)
+            VALUES (%s, %s, %s, %s, %s)
+            ON CONFLICT DO NOTHING
+        """,
+            (hospital_id, dept_name, dept_head, dept_desc, dept_loc),
+        )
+    
+    # Get department IDs to assign to users
+    cur.execute("SELECT id, name FROM departments WHERE hospital_id = %s", (hospital_id,))
+    departments_data = cur.fetchall()
+    dept_map = {dept['name']: dept['id'] for dept in departments_data}
+    
+    # -------------------------
+    # 5. CONNECT USERS TO DEPARTMENTS
+    # -------------------------
+    for i, doc_id in enumerate(doctors):
+        # Assign departments based on doctor index
+        if i < len(departments_list):
+            dept_name = departments_list[i][0]
+            dept_id = dept_map.get(dept_name)
+            if dept_id:
+                cur.execute(
+                    """
+                    INSERT INTO user_departments (user_id, department_id, position_in_dept, join_date)
+                    VALUES (%s, %s, %s, %s)
+                    ON CONFLICT DO NOTHING
+                """,
+                    (doc_id, dept_id, "Doctor", datetime.now().date()),
+                )
+
+    # -------------------------
+    # 6. CANCER TYPES
     # -------------------------
     cancers = [
         "Lung Cancer",
@@ -302,10 +411,9 @@ def seed_database():
     ]
 
     # -------------------------
-    # 5. ASSESSMENTS + PREDICTIONS
+    # 7. ASSESSMENTS + PREDICTIONS
     # -------------------------
     for i in range(500):
-
         selected = random.sample(possible_symptoms, k=random.randint(1, 4))
         symptoms = {s: True for s in selected}
 
@@ -338,9 +446,8 @@ def seed_database():
 
         # Generate prediction
         probs = [random.random() for _ in range(len(cancers))]
-        # _ just means “I don’t care about the variable”
         total = sum(probs)
-        probs = [p / total for p in probs]  # normalize
+        probs = [p / total for p in probs]
 
         top_index = probs.index(max(probs))
         top_cancer = cancers[top_index]
@@ -378,6 +485,9 @@ def reset_database():
 
     print("⚠️ Dropping all tables...")
 
+    cur.execute("DROP TABLE IF EXISTS user_departments CASCADE;")
+    cur.execute("DROP TABLE IF EXISTS departments CASCADE;")
+    cur.execute("DROP TABLE IF EXISTS predictions CASCADE;")
     cur.execute("DROP TABLE IF EXISTS assessment CASCADE;")
     cur.execute("DROP TABLE IF EXISTS patient CASCADE;")
     cur.execute("DROP TABLE IF EXISTS users CASCADE;")
@@ -390,7 +500,7 @@ def reset_database():
     conn.close()
 
     print("✅ All tables dropped!")
-    # ... (all your existing functions like initialize_database and seed_database)
+
 
 # ADD THIS AT THE VERY BOTTOM:
 if __name__ == "__main__":
