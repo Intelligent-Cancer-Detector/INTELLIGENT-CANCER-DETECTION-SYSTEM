@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime, timezone
 from database.config import query
 
 
@@ -17,12 +17,17 @@ def create_hospital(
     country,
     hospital_type,
     license_number=None,
+    hospital_logo=None,
+    description=None,
+    verified=True,
+    active=True,
 ):
     sql = """
         INSERT INTO hospital (
             id,
             name,
             email,
+            hospital_logo,
             license_number,
             hospital_type,
             address,
@@ -31,11 +36,17 @@ def create_hospital(
             postal_code,
             country,
             phone,
-            created_at
+            description,
+            verified,
+            active,
+            created_at,
+            updated_at
         )
-        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
         RETURNING *
     """
+
+    now = datetime.now(timezone.utc)
 
     result = query(
         sql,
@@ -43,6 +54,7 @@ def create_hospital(
             hospital_id,
             name,
             email,
+            hospital_logo,
             license_number,
             hospital_type,
             address,
@@ -51,7 +63,11 @@ def create_hospital(
             postal_code,
             country,
             phone,
-            datetime.datetime.utcnow(),
+            description,
+            verified,
+            active,
+            now,
+            now,
         ],
     )
 
@@ -62,7 +78,10 @@ def create_hospital(
 # GET ALL HOSPITALS
 # ======================
 def get_all_hospitals():
-    sql = "SELECT * FROM hospital ORDER BY created_at DESC"
+    sql = """
+        SELECT * FROM hospital 
+        WHERE active = true 
+        ORDER BY created_at DESC"""
     return query(sql)
 
 
@@ -70,7 +89,7 @@ def get_all_hospitals():
 # GET HOSPITAL BY ID
 # ======================
 def get_hospital_by_id(hospital_id):
-    sql = "SELECT * FROM hospital WHERE id = %s"
+    sql = "SELECT * FROM hospital WHERE id = %s AND active = true"
     result = query(sql, [hospital_id])
     return result[0] if result else None
 
@@ -91,25 +110,35 @@ def update_hospital(
     hospital_id,
     name=None,
     email=None,
-    phone=None,
+    hospital_logo=None,
+    license_number=None,
+    hospital_type=None,
     address=None,
     city=None,
     state=None,
     postal_code=None,
     country=None,
-    hospital_type=None,
+    phone=None,
+    description=None,
+    verified=None,
+    active=None,
 ):
     sql = """
         UPDATE hospital SET
             name = COALESCE(%s, name),
             email = COALESCE(%s, email),
-            phone = COALESCE(%s, phone),
+            hospital_logo = COALESCE(%s, hospital_logo),
+            license_number = COALESCE(%s, license_number),
+            hospital_type = COALESCE(%s, hospital_type),
             address = COALESCE(%s, address),
             city = COALESCE(%s, city),
             state = COALESCE(%s, state),
             postal_code = COALESCE(%s, postal_code),
             country = COALESCE(%s, country),
-            hospital_type = COALESCE(%s, hospital_type),
+            phone = COALESCE(%s, phone),
+            description = COALESCE(%s, description),
+            verified = COALESCE(%s, verified),
+            active = COALESCE(%s, active),
             updated_at = %s
         WHERE id = %s
         RETURNING *
@@ -120,14 +149,19 @@ def update_hospital(
         [
             name,
             email,
-            phone,
+            hospital_logo,
+            license_number,
+            hospital_type,
             address,
             city,
             state,
             postal_code,
             country,
-            hospital_type,
-            datetime.datetime.utcnow(),
+            phone,
+            description,
+            verified,
+            active,
+            datetime.now(timezone.utc),
             hospital_id,
         ],
     )
@@ -139,5 +173,11 @@ def update_hospital(
 # DELETE HOSPITAL
 # ======================
 def delete_hospital(hospital_id):
-    sql = "DELETE FROM hospital WHERE id = %s"
-    return query(sql, [hospital_id])
+    sql = """
+        UPDATE hospital
+        SET active = false, updated_at = %s
+        WHERE id = %s
+        RETURNING *
+    """
+    result = query(sql, [datetime.now(timezone.utc), hospital_id])
+    return result[0] if result else None

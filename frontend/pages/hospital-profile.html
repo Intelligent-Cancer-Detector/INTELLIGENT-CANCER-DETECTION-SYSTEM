@@ -18,7 +18,7 @@
     />
 
     <!-- CSS Files -->
-     
+
     <link rel="stylesheet" href="../css/global.css" />
     <link rel="stylesheet" href="../css/hospital-profile.css" />
   </head>
@@ -296,12 +296,17 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="../js/sidebar.js"></script>
-    <script src="../js/header.js"></script>
-    <script type="module" src="../js/hospital-profile.js"></script>
+    <script src="../utils/env.js"></script>
+    <script type="module" src="../js/sidebar.js"></script>
+    <script type="module" src="../js/header.js"></script>
     <script type="module">
       import { loadLayout } from "../js/loader.js";
+      import "../js/hospital-profile.js";
+
       await loadLayout();
+
+      // trigger manually after layout
+      window.dispatchEvent(new Event("layoutLoaded"));
     </script>
     <script>
       // Handle logout

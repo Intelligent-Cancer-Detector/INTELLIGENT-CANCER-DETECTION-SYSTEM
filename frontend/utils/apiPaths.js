@@ -15,4 +15,9 @@ export const API_PATHS = {
     PATIENT_ASSESSMENT: (hospitalId) =>
       `/patient_assessment/patient-history/${hospitalId}`,
   },
+  HOSPITAL: {
+    ADD_STAFF: (hospitalId) => `/hospital/${hospitalId}/add-staff`,
+    GET_HOSPITAL: (hospitalId) => `/hospital/${hospitalId}`,
+    UPDATE_HOSPITAL: (hospitalId) => `/hospital/${hospitalId}/update-hospital`,
+  },
 };

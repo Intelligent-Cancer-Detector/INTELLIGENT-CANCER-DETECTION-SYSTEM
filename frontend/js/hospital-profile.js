@@ -2,26 +2,31 @@
    HOSPITAL PROFILE - FRONTEND READY FOR API
    ============================================ */
 
+import { API_PATHS } from "../utils/apiPaths.js";
+
 // Import API utilities (when backend is ready)
-// import api from "../utils/axiosInstance.js";
+import api from "../utils/axiosInstance.js";
 // import { API_PATHS } from "../utils/apiPaths.js";
 
 let currentHospitalId = null;
 let editing = false;
 
 // ===== INITIALIZATION =====
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("Initializing Hospital Profile...");
+window.addEventListener("layoutLoaded", async function () {
+  console.log("Layout ready. Initializing...");
 
   loadUserData();
-  loadHospitalProfile();
-  loadStaffList();
-  loadDepartments();
-  loadStats();
-  setupEventListeners();
+
+  await loadHospitalProfile();
+  await loadDepartments();
+  await loadDepartmentsIntoSelect();
+
+  await loadStaffList();
+  await loadStats();
+
+  setupEventListeners(); // guaranteed to work now
   setupEditMode();
   updateClock();
-  loadDepartmentsIntoSelect();
 });
 
 // ===== LOAD USER DATA FROM LOCALSTORAGE =====
@@ -41,17 +46,21 @@ function loadUserData() {
 // ===== LOAD HOSPITAL PROFILE (API Ready) =====
 async function loadHospitalProfile() {
   // TODO: Uncomment when backend is ready
-  /*
+
   try {
-    const response = await api.get(API_PATHS.HOSPITAL.GET_HOSPITAL(currentHospitalId));
+    const response = await api.get(
+      API_PATHS.HOSPITAL.GET_HOSPITAL(currentHospitalId),
+    );
+    console.log("Response is: ", response);
     const data = response.data;
-    
+    console.log("Data is: ", data);
+
     document.getElementById("hospitalName").value = data.name || "";
     document.getElementById("hospitalEmail").value = data.email || "";
     document.getElementById("phone").value = data.phone || "";
     document.getElementById("location").value = data.location || "";
     document.getElementById("description").value = data.description || "";
-    
+
     if (data.logo_url) {
       document.getElementById("hospitalLogo").src = data.logo_url;
       document.getElementById("sidebarLogo").src = data.logo_url;
@@ -60,7 +69,6 @@ async function loadHospitalProfile() {
   } catch (error) {
     console.error("Error loading hospital profile:", error);
   }
-  */
 
   // Temporary placeholder - remove when API is ready
   console.log("Waiting for API connection...");
@@ -189,22 +197,29 @@ async function saveHospitalProfile() {
   };
 
   // TODO: Uncomment when backend is ready
-  /*
+
   try {
-    await api.put(API_PATHS.HOSPITAL.UPDATE_HOSPITAL(currentHospitalId), updateData);
-    
+    await api.put(
+      API_PATHS.HOSPITAL.UPDATE_HOSPITAL(currentHospitalId),
+      updateData,
+    );
+
     // Update localStorage
     localStorage.setItem("icds_hospital", updateData.name);
-    document.getElementById("displayHospitalName").textContent = updateData.name;
-    
+    document.getElementById("displayHospitalName").textContent =
+      updateData.name;
+
     // Handle logo upload if exists
-    if (currentLogoFile) {
-      const formData = new FormData();
-      formData.append("logo", currentLogoFile);
-      await api.post(API_PATHS.HOSPITAL.UPLOAD_LOGO(currentHospitalId), formData);
-      currentLogoFile = null;
-    }
-    
+    // if (currentLogoFile) {
+    //   const formData = new FormData();
+    //   formData.append("logo", currentLogoFile);
+    //   await api.post(
+    //     API_PATHS.HOSPITAL.UPLOAD_LOGO(currentHospitalId),
+    //     formData,
+    //   );
+    //   currentLogoFile = null;
+    // }
+
     showSuccess("Profile updated successfully!");
     return true;
   } catch (error) {
@@ -212,10 +227,10 @@ async function saveHospitalProfile() {
     showError("Failed to update profile");
     return false;
   }
-  */
 
   // Temporary for frontend testing
   console.log("Save profile data:", updateData);
+
   localStorage.setItem("icds_hospital", updateData.name);
   document.getElementById("displayHospitalName").textContent = updateData.name;
   showSuccess("Profile updated successfully! (API will be connected soon)");
@@ -225,7 +240,8 @@ async function saveHospitalProfile() {
 // ===== ADD NEW STAFF (API Ready) =====
 async function addStaff(staffData) {
   // TODO: Uncomment when backend is ready
-  /*
+  currentHospitalId = localStorage.getItem("icds_hospital_id");
+
   try {
     await api.post(API_PATHS.HOSPITAL.ADD_STAFF(currentHospitalId), staffData);
     showSuccess(`Staff ${staffData.name} added successfully!`);
@@ -237,13 +253,12 @@ async function addStaff(staffData) {
     showError("Failed to add staff");
     return false;
   }
-  */
 
-  // Temporary for frontend testing
-  console.log("Add staff data:", staffData);
-  showSuccess(
-    `Staff ${staffData.name} added successfully! (API will be connected soon)`,
-  );
+  // // Temporary for frontend testing
+  // console.log("Add staff data:", staffData);
+  // showSuccess(
+  //   `Staff ${staffData.name} added successfully! (API will be connected soon)`,
+  // );
   return true;
 }
 

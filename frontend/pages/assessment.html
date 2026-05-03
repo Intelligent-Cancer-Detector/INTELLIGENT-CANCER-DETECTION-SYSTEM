@@ -26,10 +26,18 @@
         <div id="header-container"></div>
         <div class="dashboard-content">
           <div class="stepper">
-            <div class="step active" id="s1"><span>1</span> Patient Info</div>
-            <div class="step" id="s2"><span>2</span> Symptoms</div>
-            <div class="step" id="s3"><span>3</span> Refinement</div>
-            <div class="step" id="s4"><span>4</span> Results</div>
+            <div class="step active" id="s1">
+              <span><b>Step 1:</b></span> Patient Info
+            </div>
+            <div class="step" id="s2">
+              <span><b>Step 2:</b></span> Symptoms
+            </div>
+            <div class="step" id="s3">
+              <span><b>Step 3:</b></span> Refinement
+            </div>
+            <div class="step" id="s4">
+              <span><b>Step 4:</b></span> Results
+            </div>
           </div>
 
           <div class="card anim-in" id="step1">
@@ -136,8 +144,8 @@
       </div>
     </div>
     <script src="../utils/env.js"></script>
-    <script src="../js/sidebar.js"></script>
-    <script src="../js/header.js"></script>
+    <script type="module" src="../js/sidebar.js"></script>
+    <script type="module" src="../js/header.js"></script>
     <script type="module">
       import { loadLayout } from "../js/loader.js";
       await loadLayout();

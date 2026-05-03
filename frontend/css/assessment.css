@@ -49,8 +49,6 @@ body {
   min-height: 100vh;
 }
 
-
-
 .dashboard-content {
   padding: 30px;
 }
@@ -73,6 +71,11 @@ body {
   border-radius: 8px;
   font-size: 13px;
   color: var(--text-muted);
+}
+
+.step span {
+  font-size: 15px;
+  font-weight: 1000;
 }
 
 .step.active {

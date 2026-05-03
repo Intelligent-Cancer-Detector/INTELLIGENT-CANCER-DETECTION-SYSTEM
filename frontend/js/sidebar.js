@@ -3,6 +3,9 @@
 //   const sidebar = document.querySelector(".app-sidebar");
 //   const mainContent = document.getElementById("mainContent");
 
+import { API_PATHS } from "../utils/apiPaths.js";
+import api from "../utils/axiosInstance.js";
+
 //   if (!sidebar) return;
 
 //   sidebar.classList.toggle("collapsed");
@@ -112,8 +115,8 @@ async function syncSidebarRegistry() {
 
   try {
     // Fetch the "Original" registered name from your database
-    const response = await fetch(
-      `http://localhost:5000/api/hospitals/${hospId}`,
+    const response = await api.get(
+      API_PATHS.HOSPITAL.GET_HOSPITAL(currentHospitalId),
     );
     const data = await response.json();
 
