@@ -10,9 +10,9 @@ let currentHospitalId = null;
 let editing = false;
 
 // ===== INITIALIZATION =====
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener("DOMContentLoaded", function () {
   console.log("Initializing Hospital Profile...");
-  
+
   loadUserData();
   loadHospitalProfile();
   loadStaffList();
@@ -28,9 +28,10 @@ document.addEventListener('DOMContentLoaded', function() {
 function loadUserData() {
   currentHospitalId = localStorage.getItem("icds_hospital_id");
   const userName = localStorage.getItem("icds_user_name") || "Medical Staff";
-  const userEmail = localStorage.getItem("icds_user_email") || "staff@hospital.com";
+  const userEmail =
+    localStorage.getItem("icds_user_email") || "staff@hospital.com";
   const hospitalName = localStorage.getItem("icds_hospital") || "City Hospital";
-  
+
   document.getElementById("displayDoctorName").textContent = userName;
   document.getElementById("displayDoctorEmail").textContent = userEmail;
   document.getElementById("displayHospitalName").textContent = hospitalName;
@@ -60,7 +61,7 @@ async function loadHospitalProfile() {
     console.error("Error loading hospital profile:", error);
   }
   */
-  
+
   // Temporary placeholder - remove when API is ready
   console.log("Waiting for API connection...");
 }
@@ -68,7 +69,7 @@ async function loadHospitalProfile() {
 // ===== LOAD STAFF LIST (API Ready) =====
 async function loadStaffList() {
   const container = document.getElementById("usersList");
-  
+
   // TODO: Uncomment when backend is ready
   /*
   try {
@@ -97,7 +98,7 @@ async function loadStaffList() {
     container.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Error loading staff. Please try again.</p></div>`;
   }
   */
-  
+
   // Temporary placeholder
   container.innerHTML = `<div class="empty-state"><i class="fas fa-user-plus"></i><p>No staff found. Click "Add User" to get started.</p></div>`;
 }
@@ -105,7 +106,7 @@ async function loadStaffList() {
 // ===== LOAD DEPARTMENTS (API Ready) =====
 async function loadDepartments() {
   const container = document.getElementById("deptList");
-  
+
   // TODO: Uncomment when backend is ready
   /*
   try {
@@ -135,7 +136,7 @@ async function loadDepartments() {
     container.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Error loading departments. Please try again.</p></div>`;
   }
   */
-  
+
   // Temporary placeholder
   container.innerHTML = `<div class="empty-state"><i class="fas fa-building"></i><p>No departments found. Click "Add Department" to get started.</p></div>`;
 }
@@ -143,7 +144,7 @@ async function loadDepartments() {
 // ===== LOAD DEPARTMENTS INTO SELECT DROPDOWN =====
 async function loadDepartmentsIntoSelect() {
   const deptSelect = document.getElementById("staffDepartment");
-  
+
   // TODO: Uncomment when backend is ready
   /*
   try {
@@ -184,9 +185,9 @@ async function saveHospitalProfile() {
     email: document.getElementById("hospitalEmail").value,
     phone: document.getElementById("phone").value,
     location: document.getElementById("location").value,
-    description: document.getElementById("description").value
+    description: document.getElementById("description").value,
   };
-  
+
   // TODO: Uncomment when backend is ready
   /*
   try {
@@ -212,7 +213,7 @@ async function saveHospitalProfile() {
     return false;
   }
   */
-  
+
   // Temporary for frontend testing
   console.log("Save profile data:", updateData);
   localStorage.setItem("icds_hospital", updateData.name);
@@ -237,10 +238,12 @@ async function addStaff(staffData) {
     return false;
   }
   */
-  
+
   // Temporary for frontend testing
   console.log("Add staff data:", staffData);
-  showSuccess(`Staff ${staffData.name} added successfully! (API will be connected soon)`);
+  showSuccess(
+    `Staff ${staffData.name} added successfully! (API will be connected soon)`,
+  );
   return true;
 }
 
@@ -261,15 +264,17 @@ async function addDepartment(deptData) {
     return false;
   }
   */
-  
+
   // Temporary for frontend testing
   console.log("Add department data:", deptData);
-  showSuccess(`Department ${deptData.name} added successfully! (API will be connected soon)`);
+  showSuccess(
+    `Department ${deptData.name} added successfully! (API will be connected soon)`,
+  );
   return true;
 }
 
 // ===== DELETE STAFF (API Ready) =====
-window.deleteStaff = async function(staffId) {
+window.deleteStaff = async function (staffId) {
   if (confirm("Are you sure you want to remove this staff member?")) {
     // TODO: Uncomment when backend is ready
     /*
@@ -283,14 +288,14 @@ window.deleteStaff = async function(staffId) {
       showError("Failed to remove staff");
     }
     */
-    
+
     console.log("Delete staff ID:", staffId);
     showSuccess("Staff removed successfully! (API will be connected soon)");
   }
 };
 
 // ===== DELETE DEPARTMENT (API Ready) =====
-window.deleteDepartment = async function(deptId) {
+window.deleteDepartment = async function (deptId) {
   if (confirm("Are you sure you want to remove this department?")) {
     // TODO: Uncomment when backend is ready
     /*
@@ -305,9 +310,11 @@ window.deleteDepartment = async function(deptId) {
       showError("Failed to remove department");
     }
     */
-    
+
     console.log("Delete department ID:", deptId);
-    showSuccess("Department removed successfully! (API will be connected soon)");
+    showSuccess(
+      "Department removed successfully! (API will be connected soon)",
+    );
   }
 };
 
@@ -315,14 +322,16 @@ window.deleteDepartment = async function(deptId) {
 function setupEditMode() {
   const btn = document.getElementById("editBtn");
   const changeLogoBtn = document.getElementById("changeLogoBtn");
-  const fields = document.querySelectorAll("#hospitalName, #hospitalEmail, #phone, #location, #description");
-  
+  const fields = document.querySelectorAll(
+    "#hospitalName, #hospitalEmail, #phone, #location, #description",
+  );
+
   if (!btn) return;
-  
+
   btn.onclick = async () => {
     editing = !editing;
-    
-    fields.forEach(field => {
+
+    fields.forEach((field) => {
       if (editing) {
         field.removeAttribute("readonly");
         field.style.background = "white";
@@ -331,11 +340,11 @@ function setupEditMode() {
         field.style.background = "#fafbfc";
       }
     });
-    
+
     if (changeLogoBtn) {
       changeLogoBtn.style.display = editing ? "inline-block" : "none";
     }
-    
+
     if (!editing) {
       const success = await saveHospitalProfile();
       if (success) {
@@ -354,7 +363,7 @@ function setupEventListeners() {
   // Logo upload
   const changeLogoBtn = document.getElementById("changeLogoBtn");
   const logoInput = document.getElementById("logoInput");
-  
+
   if (changeLogoBtn && logoInput) {
     changeLogoBtn.addEventListener("click", () => logoInput.click());
     logoInput.addEventListener("change", (e) => {
@@ -369,40 +378,42 @@ function setupEventListeners() {
       }
     });
   }
-  
+
   // Add Staff Modal
   const addUserBtn = document.getElementById("addUserBtn");
   const addStaffModal = document.getElementById("addStaffModal");
-  
+
   if (addUserBtn && addStaffModal) {
     addUserBtn.addEventListener("click", () => {
       addStaffModal.style.display = "flex";
     });
   }
-  
+
   // Add Department Modal
   const addDeptBtn = document.getElementById("addDeptBtn");
   const addDeptModal = document.getElementById("addDeptModal");
-  
+
   if (addDeptBtn && addDeptModal) {
     addDeptBtn.addEventListener("click", () => {
       addDeptModal.style.display = "flex";
     });
   }
-  
+
   // Close modals
-  document.querySelectorAll(".close-modal").forEach(btn => {
+  document.querySelectorAll(".close-modal").forEach((btn) => {
     btn.addEventListener("click", () => {
-      document.querySelectorAll(".modal").forEach(modal => modal.style.display = "none");
+      document
+        .querySelectorAll(".modal")
+        .forEach((modal) => (modal.style.display = "none"));
     });
   });
-  
+
   window.addEventListener("click", (e) => {
     if (e.target.classList.contains("modal")) {
       e.target.style.display = "none";
     }
   });
-  
+
   // Save Staff
   const saveStaffBtn = document.getElementById("saveStaffBtn");
   if (saveStaffBtn) {
@@ -413,15 +424,15 @@ function setupEventListeners() {
       const position = document.getElementById("staffPosition").value;
       const department = document.getElementById("staffDepartment").value;
       const joinDate = document.getElementById("staffJoinDate").value;
-      
+
       if (!name || !email || !position) {
         showError("Please fill all required fields");
         return;
       }
-      
+
       const staffData = { name, email, phone, position, department, joinDate };
       await addStaff(staffData);
-      
+
       document.getElementById("addStaffModal").style.display = "none";
       document.getElementById("staffName").value = "";
       document.getElementById("staffEmail").value = "";
@@ -431,7 +442,7 @@ function setupEventListeners() {
       document.getElementById("staffJoinDate").value = "";
     });
   }
-  
+
   // Save Department
   const saveDeptBtn = document.getElementById("saveDeptBtn");
   if (saveDeptBtn) {
@@ -440,15 +451,15 @@ function setupEventListeners() {
       const head = document.getElementById("deptHead").value.trim();
       const description = document.getElementById("deptDesc").value.trim();
       const location = document.getElementById("deptLocation").value.trim();
-      
+
       if (!name) {
         showError("Please enter department name");
         return;
       }
-      
+
       const deptData = { name, head, description, location };
       await addDepartment(deptData);
-      
+
       document.getElementById("addDeptModal").style.display = "none";
       document.getElementById("deptName").value = "";
       document.getElementById("deptHead").value = "";
@@ -456,12 +467,12 @@ function setupEventListeners() {
       document.getElementById("deptLocation").value = "";
     });
   }
-  
+
   // Cancel buttons
   document.getElementById("cancelStaffBtn")?.addEventListener("click", () => {
     document.getElementById("addStaffModal").style.display = "none";
   });
-  
+
   document.getElementById("cancelDeptBtn")?.addEventListener("click", () => {
     document.getElementById("addDeptModal").style.display = "none";
   });
@@ -470,10 +481,10 @@ function setupEventListeners() {
 // ===== UTILITY FUNCTIONS =====
 function escapeHtml(str) {
   if (!str) return "";
-  return str.replace(/[&<>]/g, function(m) {
-    if (m === '&') return '&amp;';
-    if (m === '<') return '&lt;';
-    if (m === '>') return '&gt;';
+  return str.replace(/[&<>]/g, function (m) {
+    if (m === "&") return "&amp;";
+    if (m === "<") return "&lt;";
+    if (m === ">") return "&gt;";
     return m;
   });
 }

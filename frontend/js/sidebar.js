@@ -77,7 +77,6 @@ function sidebarCollapser() {
 
     if (!sidebar) return;
 
-    // 👉 Check if click is OUTSIDE sidebar AND not toggle button
     const isClickInsideSidebar = sidebar.contains(e.target);
     const isToggleButton = toggleBtn && toggleBtn.contains(e.target);
 

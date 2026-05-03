@@ -1,5 +1,3 @@
-
-
 // Global variables
 let assessmentsData = [];
 let patientsData = [];
@@ -646,10 +644,10 @@ function exportCSV() {
   exportAnalytics();
 }
 
-function toggleSidebar() {
-  document.getElementById("sidebar").classList.toggle("collapsed");
-  document.getElementById("mainContent").classList.toggle("expanded");
-}
+// function toggleSidebar() {
+//   document.getElementById("sidebar").classList.toggle("collapsed");
+//   document.getElementById("mainContent").classList.toggle("expanded");
+// }
 
 function logout() {
   [
@@ -673,4 +671,4 @@ window.addEventListener("resize", () => {
   Object.values(charts).forEach((c) => c?.resize());
 });
 
-window.toggleSidebar = toggleSidebar;
+// window.toggleSidebar = toggleSidebar;

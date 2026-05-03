@@ -29,20 +29,20 @@ async function loadUserData() {
   const role = localStorage.getItem("icds_user_role") || "Doctor";
   currentHospitalId = localStorage.getItem("icds_hospital_id");
 
-  document.getElementById("hospitalName").textContent = hospital || "—";
-  document.getElementById("doctorName").textContent = name || "—";
-  document.getElementById("doctorEmail").textContent = email || "—";
-  document.getElementById("userDisplayName").textContent = name || "—";
-  document.getElementById("userRole").textContent = role;
+  // // document.getElementById("hospitalName").textContent = hospital || "—";
+  // document.getElementById("doctorName").textContent = name || "—";
+  // document.getElementById("doctorEmail").textContent = email || "—";
+  // document.getElementById("userDisplayName").textContent = name || "—";
+  // document.getElementById("userRole").textContent = role;
 
-  const initials = name
-    .split(" ")
-    .filter(Boolean)
-    .map((n) => n[0])
-    .join("")
-    .substring(0, 2)
-    .toUpperCase();
-  document.getElementById("userAvatar").textContent = initials || "--";
+  // const initials = name
+  //   .split(" ")
+  //   .filter(Boolean)
+  //   .map((n) => n[0])
+  //   .join("")
+  //   .substring(0, 2)
+  //   .toUpperCase();
+  // document.getElementById("userAvatar").textContent = initials || "--";
 }
 
 async function loadAssessments() {
@@ -56,9 +56,11 @@ async function loadAssessments() {
       API_PATHS.PATIENT_HISTORY_DATA.PATIENT_ASSESSMENT(currentHospitalId),
     );
     const result = res.data;
-    if (result.status !== "success") {
-      throw new Error("Backend error!");
+
+    if (!result || !result.data) {
+      throw new Error("Invalid response");
     }
+
     const assessments = result.data;
 
     // Process assessments into display format
@@ -67,8 +69,8 @@ async function loadAssessments() {
         full_name: assessment.patient_name,
         age: assessment.age,
         contact: assessment.contact,
-        gender:assessment.gender,
-        id:assessment.id
+        gender: assessment.gender,
+        id: assessment.id,
       };
       const doctor = assessment.doctor_name;
       let symptomsArray = [];
@@ -473,10 +475,10 @@ function downloadCSV() {
   a.click();
 }
 
-function toggleSidebar() {
-  document.getElementById("sidebar").classList.toggle("collapsed");
-  document.getElementById("mainContent").classList.toggle("expanded");
-}
+// function toggleSidebar() {
+//   document.getElementById("sidebar").classList.toggle("collapsed");
+//   document.getElementById("mainContent").classList.toggle("expanded");
+// }
 
 function logout() {
   [
@@ -511,5 +513,5 @@ window.addEventListener("resize", () => {
   }
 });
 
-window.toggleSidebar = toggleSidebar;
+// window.toggleSidebar = toggleSidebar;
 window.loadAssessments = loadAssessments;
