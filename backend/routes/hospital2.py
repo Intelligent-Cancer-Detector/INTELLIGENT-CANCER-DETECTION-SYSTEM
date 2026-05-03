@@ -29,13 +29,14 @@ def get_hospital_stats(hospital_id):
 # ===== GET ALL STAFF =====
 @hospital_info_bp.route("/<hospital_id>/staff", methods=["GET"])
 def get_all_staff(hospital_id):
+    return get_all_staff_by_hospital(hospital_id)
     pass
 
 
 # ===== ADD NEW STAFF =====
 @hospital_info_bp.route("/<hospital_id>/staff/add-staff", methods=["POST"])
 def add_staff(hospital_id):
-    pass
+    return add_staff_controller(hospital_id)
 
 
 # ===== DELETE STAFF (SOFT DELETE) =====
