@@ -1,5 +1,8 @@
 from controllers.hospital_profile.hospital_profile_controller import (
-    get_hospital_data_stats, get_hospital_profile, update_hospital_profile)
+    get_hospital_data_stats,
+    get_hospital_profile,
+    update_hospital_profile,
+)
 from flask import Blueprint
 
 hospital_info_bp = Blueprint("hospital_info", __name__)
@@ -23,6 +26,7 @@ def get_hospital_stats(hospital_id):
     return get_hospital_data_stats(hospital_id)
 
 
+# staff section
 # ===== GET ALL STAFF =====
 @hospital_info_bp.route("/<hospital_id>/staff", methods=["GET"])
 def get_all_staff(hospital_id):

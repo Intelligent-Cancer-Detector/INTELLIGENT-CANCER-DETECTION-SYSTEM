@@ -1,5 +1,8 @@
 from controllers.dashboard.dashboard_controller import (
-    alert_handler, dashboard_data_handler, recent_assement_handler)
+    alert_handler,
+    dashboard_data_handler,
+    recent_assement_handler,
+)
 from flask import Blueprint
 
 dashboard_bp = Blueprint("dashboard", __name__)

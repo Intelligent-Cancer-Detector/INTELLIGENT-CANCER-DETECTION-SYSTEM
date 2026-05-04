@@ -1,6 +1,8 @@
-from database.dashboard_data.dashboard_queries import (get_alerts,
-                                                       get_dashboard_stats,
-                                                       get_recent_assessments)
+from database.dashboard_data.dashboard_queries import (
+    get_alerts,
+    get_dashboard_stats,
+    get_recent_assessments,
+)
 
 
 def recent_assement_handler(hospital_id):

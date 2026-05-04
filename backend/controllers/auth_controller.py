@@ -49,6 +49,12 @@ def register_user():
             hospital.get("type"),
         )
 
+        if not hospital_result:
+            return (
+                jsonify({"success": False, "error": "Failed to create hospital"}),
+                500,
+            )
+
         # CREATE USER
         user_id = str(uuid.uuid4())
         user = create_user(
@@ -58,10 +64,14 @@ def register_user():
             password_hash=password_hash,
             hospital_id=hospital_id,
             role="super_admin",
-            department=admin.get("department"),
             phone=admin.get("phone"),
         )
 
+        if not user:
+            return (
+                jsonify({"success": False, "error": "Failed to create hospital"}),
+                500,
+            )
         return (
             jsonify(
                 {

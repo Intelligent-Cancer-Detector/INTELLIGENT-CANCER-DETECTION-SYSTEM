@@ -124,8 +124,8 @@ function validateAll() {
   const city = document.getElementById("city");
   const phone = document.getElementById("phone");
   const fullName = document.getElementById("fullName");
-  const designation = document.getElementById("designation");
-  const department = document.getElementById("department");
+  // const designation = document.getElementById("designation");
+  // const department = document.getElementById("department");
   const adminEmail = document.getElementById("adminEmail");
   const adminPhone = document.getElementById("adminPhone");
   const username = document.getElementById("username");
@@ -133,6 +133,7 @@ function validateAll() {
   const confirmPassword = document.getElementById("confirmPassword");
   const agreeTerms = document.getElementById("agreeTerms");
   const agreePrivacy = document.getElementById("agreePrivacy");
+  const jobTitle = document.getElementById("jobTitle");
 
   if (!hospitalEmail.value) {
     missingFields.push("Institution Email");
@@ -162,14 +163,14 @@ function validateAll() {
     missingFields.push("Full Name");
     highlightField(fullName);
   }
-  if (!designation.value) {
-    missingFields.push("Designation");
-    highlightField(designation);
-  }
-  if (!department.value) {
-    missingFields.push("Department");
-    highlightField(department);
-  }
+  // if (!designation.value) {
+  //   missingFields.push("Designation");
+  //   highlightField(designation);
+  // }
+  // if (!department.value) {
+  //   missingFields.push("Department");
+  //   highlightField(department);
+  // }
   if (!adminEmail.value) {
     missingFields.push("Work Email");
     highlightField(adminEmail);
@@ -238,13 +239,14 @@ function getFormData() {
     },
     admin: {
       fullName: document.getElementById("fullName").value,
-      designation: document.getElementById("designation").value,
-      department: document.getElementById("department").value,
+      // designation: document.getElementById("designation").value,
+      // department: document.getElementById("department").value,
       email: document.getElementById("adminEmail").value,
       phone: document.getElementById("adminPhone").value,
       license: document.getElementById("adminLicense").value,
       mobile: document.getElementById("adminMobile").value,
       alternative: document.getElementById("alternativeContact").value,
+      jobTitle: document.getElementById("jobTitle")?.value || "",
     },
     security: {
       username: document.getElementById("username").value,
@@ -388,8 +390,9 @@ document.addEventListener("keydown", function (e) {
     document.getElementById("yearEstablished").value = "2010";
 
     document.getElementById("fullName").value = "Dr. Isaac Ireri";
-    document.getElementById("designation").value = "medical-director";
-    document.getElementById("department").value = "administration";
+    // document.getElementById("designation").value = "medical-director";
+    // document.getElementById("department").value = "administration";
+    document.getElementById("jobTitle").value = "Hospital Director";
     document.getElementById("adminLicense").value = "MD-998877";
     document.getElementById("adminEmail").value = "isaac@test.com";
     document.getElementById("adminPhone").value = "+254700000000";
@@ -421,8 +424,9 @@ document.addEventListener("keydown", function (e) {
 
       // Administrator Information
       "fullName",
-      "designation",
-      "department",
+      // "designation",
+      // "department",
+      "jobTitle",
       "adminLicense",
       "adminEmail",
       "adminPhone",

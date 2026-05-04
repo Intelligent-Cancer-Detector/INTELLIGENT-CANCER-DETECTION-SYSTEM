@@ -1,7 +1,8 @@
 import uuid
 
-from database.staff_queries import check_email_exists, insert_staff
 from flask import jsonify, request
+
+from backend.database.user_queries import create_user, get_user_by_email
 
 
 # ===== ADD STAFF MEMBER =====
@@ -33,14 +34,14 @@ def add_staff_member(hospital_id):
             )
 
         # check duplicate email
-        if check_email_exists(email):
+        if get_user_by_email(email):
             return jsonify({"status": "error", "message": "Email already exists"}), 400
 
         # generate user id
         user_id = f"user_{uuid.uuid4().hex[:8]}"
 
         # insert into database
-        new_staff = insert_staff(
+        new_staff = create_user(
             user_id=user_id,
             hospital_id=hospital_id,
             name=name,

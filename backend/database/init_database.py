@@ -56,7 +56,6 @@ def initialize_database():
             email TEXT UNIQUE NOT NULL,
             password_hash TEXT NOT NULL,
             role TEXT DEFAULT 'doctor',
-            department TEXT,
             phone TEXT,
             active BOOLEAN DEFAULT true,
             last_login TIMESTAMPTZ,
@@ -254,11 +253,11 @@ def reset_database():
     print("✅ All tables dropped!")
 
 
-# ADD THIS AT THE VERY BOTTOM:
-if __name__ == "__main__":
-    try:
-        initialize_database()
-        seed_database()
-        print("🚀 Database initialization and seeding complete!")
-    except Exception as e:
-        print(f"❌ An error occurred: {e}")
+# # ADD THIS AT THE VERY BOTTOM:
+# if __name__ == "__main__":
+#     try:
+#         initialize_database()
+#         # seed_database()
+#         print("🚀 Database initialization and seeding complete!")
+#     except Exception as e:
+#         print(f"❌ An error occurred: {e}")
