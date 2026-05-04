@@ -18,13 +18,13 @@
 #     try:
 #         conn = get_db()
 #         cur = conn.cursor()
-        
+
 #         cur.execute("""
-#             SELECT 
-#                 u.id, 
-#                 u.full_name as name, 
-#                 u.email, 
-#                 u.phone, 
+#             SELECT
+#                 u.id,
+#                 u.full_name as name,
+#                 u.email,
+#                 u.phone,
 #                 u.role as position,
 #                 u.department,
 #                 u.active,
@@ -39,11 +39,11 @@
 #             WHERE u.hospital_id = %s AND u.active = true
 #             ORDER BY u.full_name
 #         """, (hospital_id,))
-        
+
 #         staff = cur.fetchall()
 #         cur.close()
 #         conn.close()
-        
+
 #         return jsonify(staff if staff else [])
 #     except Exception as e:
 #         return jsonify({'success': False, 'message': str(e)}), 500
@@ -55,55 +55,55 @@
 #         data = request.get_json()
 #         conn = get_db()
 #         cur = conn.cursor()
-        
+
 #         # Validate required fields
 #         required = ['name', 'email', 'position']
 #         for field in required:
 #             if field not in data:
 #                 return jsonify({'success': False, 'message': f'Missing required field: {field}'}), 400
-        
+
 #         # Check if email exists
 #         cur.execute("SELECT id FROM users WHERE email = %s", (data['email'],))
 #         if cur.fetchone():
 #             return jsonify({'success': False, 'message': 'Email already exists'}), 400
-        
+
 #         # Generate user ID
 #         user_id = f"user_{uuid.uuid4().hex[:8]}"
-        
+
 #         # Insert new user
 #         cur.execute("""
 #             INSERT INTO users (
-#                 id, hospital_id, full_name, email, phone, role, 
+#                 id, hospital_id, full_name, email, phone, role,
 #                 password_hash, active, created_at, updated_at
 #             )
 #             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
 #         """, (
-#             user_id, 
-#             hospital_id, 
-#             data['name'], 
-#             data['email'], 
-#             data.get('phone', ''), 
-#             data['position'], 
-#             'pending_hash', 
+#             user_id,
+#             hospital_id,
+#             data['name'],
+#             data['email'],
+#             data.get('phone', ''),
+#             data['position'],
+#             'pending_hash',
 #             True,
 #             datetime.now(),
 #             datetime.now()
 #         ))
-        
+
 #         # If department assigned, add to junction table
 #         if data.get('department_id'):
 #             cur.execute("""
 #                 INSERT INTO user_departments (user_id, department_id, position_in_dept, join_date)
 #                 VALUES (%s, %s, %s, %s)
 #             """, (user_id, data['department_id'], data['position'], data.get('join_date')))
-        
+
 #         conn.commit()
 #         cur.close()
 #         conn.close()
-        
+
 #         return jsonify({
-#             'success': True, 
-#             'message': 'Staff added successfully', 
+#             'success': True,
+#             'message': 'Staff added successfully',
 #             'user_id': user_id
 #         }), 201
 #     except Exception as e:
@@ -115,18 +115,18 @@
 #     try:
 #         conn = get_db()
 #         cur = conn.cursor()
-        
+
 #         # Soft delete - set active to false
 #         cur.execute("""
-#             UPDATE users 
+#             UPDATE users
 #             SET active = false, updated_at = NOW()
 #             WHERE id = %s AND hospital_id = %s
 #         """, (staff_id, hospital_id))
-        
+
 #         conn.commit()
 #         cur.close()
 #         conn.close()
-        
+
 #         return jsonify({'success': True, 'message': 'Staff deleted successfully'})
 #     except Exception as e:
 #         return jsonify({'success': False, 'message': str(e)}), 500
@@ -138,10 +138,10 @@
 #         data = request.get_json()
 #         conn = get_db()
 #         cur = conn.cursor()
-        
+
 #         update_fields = []
 #         params = []
-        
+
 #         if 'name' in data:
 #             update_fields.append("full_name = %s")
 #             params.append(data['name'])
@@ -154,19 +154,19 @@
 #         if 'position' in data:
 #             update_fields.append("role = %s")
 #             params.append(data['position'])
-        
+
 #         if update_fields:
 #             update_fields.append("updated_at = NOW()")
 #             params.append(staff_id)
 #             params.append(hospital_id)
-            
+
 #             query = f"UPDATE users SET {', '.join(update_fields)} WHERE id = %s AND hospital_id = %s"
 #             cur.execute(query, params)
-        
+
 #         conn.commit()
 #         cur.close()
 #         conn.close()
-        
+
 #         return jsonify({'success': True, 'message': 'Staff updated successfully'})
 #     except Exception as e:
 #         return jsonify({'success': False, 'message': str(e)}), 500

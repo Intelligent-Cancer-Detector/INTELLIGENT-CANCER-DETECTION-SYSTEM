@@ -44,11 +44,11 @@ CORS(
 # ======================
 # if os.getenv("RESET_DB") == "true":
 #     reset_database()
-    
+
 #     # seed_database()
 
 # reset_database()
-    
+
 initialize_database()
 
 register_routes(app)

@@ -17,18 +17,12 @@ def update_hospital_profile(hospital_id):
     try:
         data = request.get_json()
         if not data:
-            return jsonify({
-                "status": "error",
-                "message": "No data provided"
-            }), 400
+            return jsonify({"status": "error", "message": "No data provided"}), 400
 
         # Check if hospital exists
         existing = get_hospital_by_id(hospital_id)
         if not existing:
-            return jsonify({
-                "status": "error",
-                "message": "Hospital not found"
-            }), 404
+            return jsonify({"status": "error", "message": "Hospital not found"}), 404
 
         # ✅ Only allow specific fields (IMPORTANT)
         allowed_fields = {
@@ -50,17 +44,14 @@ def update_hospital_profile(hospital_id):
 
         # ❌ Prevent empty update
         if not filtered_data:
-            return jsonify({
-                "status": "error",
-                "message": "No valid fields to update"
-            }), 400
+            return (
+                jsonify({"status": "error", "message": "No valid fields to update"}),
+                400,
+            )
 
         # Optional: simple email validation
         if "email" in filtered_data and "@" not in filtered_data["email"]:
-            return jsonify({
-                "status": "error",
-                "message": "Invalid email format"
-            }), 400
+            return jsonify({"status": "error", "message": "Invalid email format"}), 400
 
         # Call DB layer
         updated = update_hospital(
@@ -81,22 +72,21 @@ def update_hospital_profile(hospital_id):
         )
 
         if not updated:
-            return jsonify({
-                "status": "error",
-                "message": "Update failed"
-            }), 500
+            return jsonify({"status": "error", "message": "Update failed"}), 500
 
-        return jsonify({
-            "status": "success",
-            "message": "Hospital updated successfully",
-            "data": updated
-        }), 200
+        return (
+            jsonify(
+                {
+                    "status": "success",
+                    "message": "Hospital updated successfully",
+                    "data": updated,
+                }
+            ),
+            200,
+        )
 
     except Exception as e:
-        return jsonify({
-            "status": "error",
-            "message": str(e)
-        }), 500
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 
 # ===== GET HOSPITAL STATISTICS =====

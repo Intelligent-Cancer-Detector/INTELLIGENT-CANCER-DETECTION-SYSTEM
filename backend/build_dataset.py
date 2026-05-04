@@ -40,57 +40,107 @@ if missing:
 
 import numpy as np
 import warnings
+
 warnings.filterwarnings("ignore")
 
-SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))
-DATA_DIR    = os.path.join(SCRIPT_DIR, "data")
-OUTPUT_DIR  = os.path.join(SCRIPT_DIR, "models")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(SCRIPT_DIR, "data")
+OUTPUT_DIR = os.path.join(SCRIPT_DIR, "models")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 OUTPUT_FILE = os.path.join(DATA_DIR, "cancer_master_dataset.csv")
 
 # ── The 10 cancer types we support ───────────────────────────────────────────
 CANCER_TYPES = [
-    "lung", "breast", "colorectal", "prostate",
-    "pancreatic", "brain", "eye", "skin", "ovarian", "bladder"
+    "lung",
+    "breast",
+    "colorectal",
+    "prostate",
+    "pancreatic",
+    "brain",
+    "eye",
+    "skin",
+    "ovarian",
+    "bladder",
 ]
 
 # ── Unified feature columns for the master dataset ───────────────────────────
 # Every row will have exactly these columns regardless of source file.
 MASTER_COLUMNS = [
-    "age", "gender",
-    "fatigue", "weight_loss", "loss_of_appetite", "night_sweats", "fever",
-    "cough", "hemoptysis", "shortness_of_breath", "chest_pain",
-    "hoarseness", "wheezing",
-    "headache", "seizures", "vision_changes", "memory_problems",
-    "balance_issues", "personality_change", "speech_difficulty",
-    "abdominal_pain", "nausea", "jaundice", "blood_in_stool",
-    "bowel_changes", "rectal_bleeding",
-    "blood_in_urine", "urinary_frequency", "urinary_pain", "back_pain",
-    "pelvic_pain", "bloating", "vaginal_bleeding",
-    "breast_lump", "skin_changes", "mole_changes",
-    "eye_pain", "eye_redness", "floaters", "pupil_changes",
-    "swollen_lymph_nodes", "bone_pain",
-    "smoking_history", "family_history", "alcohol_use",
-    "duration_weeks", "severity",
+    "age",
+    "gender",
+    "fatigue",
+    "weight_loss",
+    "loss_of_appetite",
+    "night_sweats",
+    "fever",
+    "cough",
+    "hemoptysis",
+    "shortness_of_breath",
+    "chest_pain",
+    "hoarseness",
+    "wheezing",
+    "headache",
+    "seizures",
+    "vision_changes",
+    "memory_problems",
+    "balance_issues",
+    "personality_change",
+    "speech_difficulty",
+    "abdominal_pain",
+    "nausea",
+    "jaundice",
+    "blood_in_stool",
+    "bowel_changes",
+    "rectal_bleeding",
+    "blood_in_urine",
+    "urinary_frequency",
+    "urinary_pain",
+    "back_pain",
+    "pelvic_pain",
+    "bloating",
+    "vaginal_bleeding",
+    "breast_lump",
+    "skin_changes",
+    "mole_changes",
+    "eye_pain",
+    "eye_redness",
+    "floaters",
+    "pupil_changes",
+    "swollen_lymph_nodes",
+    "bone_pain",
+    "smoking_history",
+    "family_history",
+    "alcohol_use",
+    "duration_weeks",
+    "severity",
 ]
 LABEL_COL = "cancer_type"
 
 # ── Column mapping: different datasets use different names ────────────────────
 COL_MAP = {
     # Lung cancer survey columns
-    "GENDER": "gender", "AGE": "age",
-    "SMOKING": "smoking_history", "YELLOW_FINGERS": "skin_changes",
-    "ANXIETY": "fatigue", "CHRONIC_DISEASE": "fatigue",
-    "FATIGUE ": "fatigue", "FATIGUE": "fatigue",
-    "ALLERGY": "fatigue", "WHEEZING": "wheezing",
-    "ALCOHOL CONSUMING": "alcohol_use", "ALCOHOL_CONSUMING": "alcohol_use",
-    "COUGHING": "cough", "SHORTNESS OF BREATH": "shortness_of_breath",
+    "GENDER": "gender",
+    "AGE": "age",
+    "SMOKING": "smoking_history",
+    "YELLOW_FINGERS": "skin_changes",
+    "ANXIETY": "fatigue",
+    "CHRONIC_DISEASE": "fatigue",
+    "FATIGUE ": "fatigue",
+    "FATIGUE": "fatigue",
+    "ALLERGY": "fatigue",
+    "WHEEZING": "wheezing",
+    "ALCOHOL CONSUMING": "alcohol_use",
+    "ALCOHOL_CONSUMING": "alcohol_use",
+    "COUGHING": "cough",
+    "SHORTNESS OF BREATH": "shortness_of_breath",
     "SHORTNESS_OF_BREATH": "shortness_of_breath",
     "SWALLOWING DIFFICULTY": "abdominal_pain",
     "SWALLOWING_DIFFICULTY": "abdominal_pain",
-    "CHEST PAIN": "chest_pain", "CHEST_PAIN": "chest_pain",
-    "LUNG_CANCER": LABEL_COL, "LUNG CANCER": LABEL_COL,
+    "CHEST PAIN": "chest_pain",
+    "CHEST_PAIN": "chest_pain",
+    "LUNG_CANCER": LABEL_COL,
+    "LUNG CANCER": LABEL_COL,
     "PEER_PRESSURE": "family_history",
     # Breast cancer WDBC
     "diagnosis": LABEL_COL,
@@ -99,10 +149,12 @@ COL_MAP = {
     "age": "age",
     "irradiat": "fatigue",
     # Cervical cancer
-    "Age": "age", "Smokes": "smoking_history",
+    "Age": "age",
+    "Smokes": "smoking_history",
     "Biopsy": LABEL_COL,
     # Skin / dermatology
-    "erythema": "skin_changes", "scaling": "skin_changes",
+    "erythema": "skin_changes",
+    "scaling": "skin_changes",
     "itching": "skin_changes",
     # Colon survival
     "status": LABEL_COL,
@@ -111,9 +163,12 @@ COL_MAP = {
     # Bladder
     "event": LABEL_COL,
     # Generic
-    "target": LABEL_COL, "label": LABEL_COL, "outcome": LABEL_COL,
+    "target": LABEL_COL,
+    "label": LABEL_COL,
+    "outcome": LABEL_COL,
     "diagnosis_result": LABEL_COL,
 }
+
 
 # ── Label normaliser ──────────────────────────────────────────────────────────
 def normalise_label(val, source_cancer):
@@ -135,6 +190,7 @@ def normalise_label(val, source_cancer):
     except:
         return source_cancer
 
+
 def normalise_gender(val):
     val = str(val).strip().upper()
     if val in ["M", "MALE", "1", "1.0"]:
@@ -145,6 +201,7 @@ def normalise_gender(val):
         return int(float(val)) % 2
     except:
         return random.randint(0, 1)
+
 
 def to_binary(val):
     """Convert various formats to 0 or 1."""
@@ -159,6 +216,7 @@ def to_binary(val):
     except:
         return 0
 
+
 def to_age(val):
     try:
         a = int(float(str(val).strip()))
@@ -166,17 +224,20 @@ def to_age(val):
     except:
         return random.randint(35, 70)
 
+
 def to_duration(val):
     try:
         return max(1, min(int(float(str(val).strip())), 52))
     except:
         return random.randint(2, 16)
 
+
 def to_severity(val):
     try:
         return max(1, min(int(float(str(val).strip())), 3))
     except:
         return random.randint(1, 3)
+
 
 # ── Build a standardised row from any source row ─────────────────────────────
 def standardise_row(raw_row, source_cancer, filename):
@@ -213,6 +274,7 @@ def standardise_row(raw_row, source_cancer, filename):
 
     return row
 
+
 # ── Read one CSV file ─────────────────────────────────────────────────────────
 def read_csv(filepath, source_cancer):
     rows = []
@@ -235,18 +297,19 @@ def read_csv(filepath, source_cancer):
         print(f"     ⚠  Could not read {os.path.basename(filepath)}: {e}")
     return rows
 
+
 # ── Scan all cancer folders ───────────────────────────────────────────────────
 FOLDER_TO_CANCER = {
-    "brain":      "brain",
-    "breast":     "breast",
+    "brain": "brain",
+    "breast": "breast",
     "colorectal": "colorectal",
-    "eye":        "eye",
-    "lungs":      "lung",
-    "prostate":   "prostate",
-    "ovarian":    "ovarian",
+    "eye": "eye",
+    "lungs": "lung",
+    "prostate": "prostate",
+    "ovarian": "ovarian",
     "pancreatic": "pancreatic",
-    "skin":       "skin",
-    "bladder":    "bladder",
+    "skin": "skin",
+    "bladder": "bladder",
 }
 
 # ── MAIN ─────────────────────────────────────────────────────────────────────
@@ -275,7 +338,7 @@ for folder, cancer in FOLDER_TO_CANCER.items():
     folder_rows = 0
     for fname in csv_files:
         fpath = os.path.join(folder_path, fname)
-        rows  = read_csv(fpath, cancer)
+        rows = read_csv(fpath, cancer)
         all_rows.extend(rows)
         folder_rows += len(rows)
         print(f"  ✅ data/{folder}/{fname:<40} {len(rows):>5} rows")
@@ -314,8 +377,8 @@ print("  Step 3: Applying SMOTE to balance all cancer classes")
 print("  " + "─" * 56)
 
 le = LabelEncoder()
-y  = le.fit_transform(df[LABEL_COL])
-X  = df[MASTER_COLUMNS].values
+y = le.fit_transform(df[LABEL_COL])
+X = df[MASTER_COLUMNS].values
 
 # Need at least 6 samples per class for SMOTE (k_neighbors=5)
 min_samples = counts.min()
@@ -328,7 +391,7 @@ else:
 target_per_class = max(500, counts.max())
 
 try:
-    smote  = SMOTE(sampling_strategy="not majority", k_neighbors=k, random_state=42)
+    smote = SMOTE(sampling_strategy="not majority", k_neighbors=k, random_state=42)
     X_res, y_res = smote.fit_resample(X, y)
     print(f"  ✅ SMOTE applied — {len(X_res)} total rows")
 except Exception as e:

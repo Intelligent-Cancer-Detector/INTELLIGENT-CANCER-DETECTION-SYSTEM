@@ -7,7 +7,8 @@ import socket
 try:
     # Try Google DNS to resolve
     import dns.resolver
-    answers = dns.resolver.resolve('db.tgrrmzusqjzzvhevmmbt.supabase.co', 'A')
+
+    answers = dns.resolver.resolve("db.tgrrmzusqjzzvhevmmbt.supabase.co", "A")
     ip_address = str(answers[0])
     print(f"Resolved IP: {ip_address}")
 except:
@@ -23,20 +24,20 @@ try:
         user="postgres",
         password="Monsyvalghese@1",
         sslmode="require",
-        connect_timeout=30
+        connect_timeout=30,
     )
     print("✅ Connected to Supabase successfully!")
-    
+
     cur = conn.cursor()
     cur.execute("SELECT id, name, email FROM hospitals")
     hospitals = cur.fetchall()
-    
+
     print("\n🏥 Hospitals in database:")
     for hospital in hospitals:
         print(f"   - {hospital[1]} ({hospital[2]})")
-    
+
     cur.close()
     conn.close()
-    
+
 except Exception as e:
     print(f"❌ Error: {e}")

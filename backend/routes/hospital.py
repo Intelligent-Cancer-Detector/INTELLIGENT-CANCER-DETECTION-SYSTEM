@@ -20,21 +20,21 @@
 #     try:
 #         conn = get_db()
 #         cur = conn.cursor()
-        
+
 #         cur.execute("""
-#             SELECT id, name, email, phone, city, country, address, 
+#             SELECT id, name, email, phone, city, country, address,
 #                    verified, created_at, updated_at
-#             FROM hospital 
+#             FROM hospital
 #             WHERE id = %s
 #         """, (hospital_id,))
-        
+
 #         hospital = cur.fetchone()
 #         cur.close()
 #         conn.close()
-        
+
 #         if not hospital:
 #             return jsonify({'success': False, 'message': 'Hospital not found'}), 404
-        
+
 #         return jsonify({
 #             'id': hospital['id'],
 #             'name': hospital['name'],
@@ -54,10 +54,10 @@
 #         data = request.get_json()
 #         conn = get_db()
 #         cur = conn.cursor()
-        
+
 #         update_fields = []
 #         params = []
-        
+
 #         if 'name' in data:
 #             update_fields.append("name = %s")
 #             params.append(data['name'])
@@ -76,20 +76,20 @@
 #         if 'address' in data:
 #             update_fields.append("address = %s")
 #             params.append(data['address'])
-        
+
 #         if not update_fields:
 #             return jsonify({'success': False, 'message': 'No fields to update'}), 400
-        
+
 #         update_fields.append("updated_at = NOW()")
 #         params.append(hospital_id)
-        
+
 #         query = f"UPDATE hospital SET {', '.join(update_fields)} WHERE id = %s"
 #         cur.execute(query, params)
-        
+
 #         conn.commit()
 #         cur.close()
 #         conn.close()
-        
+
 #         return jsonify({'success': True, 'message': 'Hospital updated successfully'})
 #     except Exception as e:
 #         return jsonify({'success': False, 'message': str(e)}), 500
@@ -100,31 +100,31 @@
 #     try:
 #         conn = get_db()
 #         cur = conn.cursor()
-        
+
 #         # Total staff (users)
 #         cur.execute("""
-#             SELECT COUNT(*) as count FROM users 
+#             SELECT COUNT(*) as count FROM users
 #             WHERE hospital_id = %s AND active = true
 #         """, (hospital_id,))
 #         staff_count = cur.fetchone()
-        
+
 #         # Total departments
 #         cur.execute("""
-#             SELECT COUNT(*) as count FROM departments 
+#             SELECT COUNT(*) as count FROM departments
 #             WHERE hospital_id = %s
 #         """, (hospital_id,))
 #         dept_count = cur.fetchone()
-        
+
 #         # Total assessments
 #         cur.execute("""
-#             SELECT COUNT(*) as count FROM assessment 
+#             SELECT COUNT(*) as count FROM assessment
 #             WHERE hospital_id = %s
 #         """, (hospital_id,))
 #         assessment_count = cur.fetchone()
-        
+
 #         cur.close()
 #         conn.close()
-        
+
 #         return jsonify({
 #             'success': True,
 #             'totalStaff': staff_count['count'] if staff_count else 0,

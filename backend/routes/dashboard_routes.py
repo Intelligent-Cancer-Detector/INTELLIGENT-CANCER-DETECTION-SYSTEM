@@ -6,7 +6,6 @@ from controllers.dashboard.dashboard_controller import (
     recent_assement_handler,
 )
 
-
 dashboard_bp = Blueprint("dashboard", __name__)
 
 

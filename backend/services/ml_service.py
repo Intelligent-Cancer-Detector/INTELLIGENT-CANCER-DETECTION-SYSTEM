@@ -18,6 +18,7 @@ try:
 except Exception as e:
     print(f"❌ Error loading ML models: {e}")
 
+
 def predict(data):
     """
     Processes symptoms and returns JSON-safe prediction results.
@@ -33,7 +34,9 @@ def predict(data):
         vector = []
         for f in FEATURES:
             # Check if any user-provided symptom is part of this feature
-            matched = 1 if any(s.lower().strip() in f.lower() for s in symptoms if s) else 0
+            matched = (
+                1 if any(s.lower().strip() in f.lower() for s in symptoms if s) else 0
+            )
             vector.append(matched)
 
         # 4. RUN PREDICTION
@@ -44,10 +47,10 @@ def predict(data):
         # NumPy types (float64, int64, bool_) must be cast to standard Python types
         top_idx = int(np.argmax(probs))
         top_prob = float(probs[top_idx])
-        
+
         # Identify 'none' class for safety logic
         class_list = list(ENCODER.classes_)
-        none_idx = class_list.index('none') if 'none' in class_list else -1
+        none_idx = class_list.index("none") if "none" in class_list else -1
 
         # Build the final predictions dictionary
         results = {}
@@ -57,20 +60,29 @@ def predict(data):
                 results[label] = round(float(p) * 100, 2)
 
         # Sort results (Highest probability first)
-        sorted_results = dict(sorted(results.items(), key=lambda item: item[1], reverse=True))
+        sorted_results = dict(
+            sorted(results.items(), key=lambda item: item[1], reverse=True)
+        )
 
         # 6. SAFETY & THRESHOLD LOGIC
         # Standardize as a Python boolean to avoid "bool_ is not JSON serializable"
         is_cancer_likely = bool((top_idx != none_idx) and (top_prob > 0.35))
 
         # 7. FINAL RESPONSE
-        return jsonify({
-            "success": True, 
-            "predictions": sorted_results,
-            "top_prediction": str(ENCODER.classes_[top_idx]) if is_cancer_likely else "none",
-            "is_flagged": is_cancer_likely,
-            "confidence": round(top_prob * 100, 2)
-        }), 200
+        return (
+            jsonify(
+                {
+                    "success": True,
+                    "predictions": sorted_results,
+                    "top_prediction": (
+                        str(ENCODER.classes_[top_idx]) if is_cancer_likely else "none"
+                    ),
+                    "is_flagged": is_cancer_likely,
+                    "confidence": round(top_prob * 100, 2),
+                }
+            ),
+            200,
+        )
 
     except Exception as e:
         print(f"Prediction Error Trace: {str(e)}")
