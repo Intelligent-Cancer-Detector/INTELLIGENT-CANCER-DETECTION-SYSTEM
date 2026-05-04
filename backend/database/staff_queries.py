@@ -10,7 +10,7 @@ def insert_staff(
     phone,
     position,
     department_id=None,
-    join_date=None
+    join_date=None,
 ):
     now = datetime.now(timezone.utc)
 
@@ -32,18 +32,21 @@ def insert_staff(
         RETURNING *
     """
 
-    result = query(sql, [
-        user_id,
-        hospital_id,
-        name,
-        email,
-        phone,
-        position,
-        "pending_hash",
-        True,
-        now,
-        now
-    ])
+    result = query(
+        sql,
+        [
+            user_id,
+            hospital_id,
+            name,
+            email,
+            phone,
+            position,
+            "pending_hash",
+            True,
+            now,
+            now,
+        ],
+    )
 
     # 🔥 Insert department (optional)
     if department_id:
@@ -57,11 +60,6 @@ def insert_staff(
             VALUES (%s, %s, %s, %s)
         """
 
-        query(dept_sql, [
-            user_id,
-            department_id,
-            position,
-            join_date
-        ])
+        query(dept_sql, [user_id, department_id, position, join_date])
 
     return result[0] if result else None

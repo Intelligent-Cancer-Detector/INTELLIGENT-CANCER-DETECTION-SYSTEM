@@ -5,12 +5,7 @@ from datetime import datetime, timezone
 
 
 def insert_department(
-    department_id,
-    hospital_id,
-    name,
-    head=None,
-    description=None,
-    location=None
+    department_id, hospital_id, name, head=None, description=None, location=None
 ):
     sql = """
         INSERT INTO departments (
@@ -30,16 +25,9 @@ def insert_department(
 
     now = datetime.now(timezone.utc)
 
-    result = query(sql, [
-        department_id,
-        hospital_id,
-        name,
-        head,
-        description,
-        location,
-        True,
-        now,
-        now
-    ])
+    result = query(
+        sql,
+        [department_id, hospital_id, name, head, description, location, True, now, now],
+    )
 
     return result[0] if result else None

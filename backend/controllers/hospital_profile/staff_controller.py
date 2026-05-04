@@ -9,10 +9,7 @@ def add_staff_member(hospital_id):
         data = request.get_json()
 
         if not data:
-            return jsonify({
-                "status": "error",
-                "message": "No data provided"
-            }), 400
+            return jsonify({"status": "error", "message": "No data provided"}), 400
 
         # normalize keys
         name = data.get("name") or data.get("fullName")
@@ -24,17 +21,19 @@ def add_staff_member(hospital_id):
 
         # required fields
         if not name or not email or not position:
-            return jsonify({
-                "status": "error",
-                "message": "Name, email, and position are required"
-            }), 400
+            return (
+                jsonify(
+                    {
+                        "status": "error",
+                        "message": "Name, email, and position are required",
+                    }
+                ),
+                400,
+            )
 
         # check duplicate email
         if check_email_exists(email):
-            return jsonify({
-                "status": "error",
-                "message": "Email already exists"
-            }), 400
+            return jsonify({"status": "error", "message": "Email already exists"}), 400
 
         # generate user id
         user_id = f"user_{uuid.uuid4().hex[:8]}"
@@ -48,23 +47,25 @@ def add_staff_member(hospital_id):
             phone=phone,
             position=position,
             department_id=department_id,
-            join_date=join_date
+            join_date=join_date,
         )
 
         if not new_staff:
-            return jsonify({
-                "status": "error",
-                "message": "Failed to add staff member"
-            }), 500
+            return (
+                jsonify({"status": "error", "message": "Failed to add staff member"}),
+                500,
+            )
 
-        return jsonify({
-            "status": "success",
-            "message": "Staff member added successfully",
-            "data": new_staff
-        }), 201
+        return (
+            jsonify(
+                {
+                    "status": "success",
+                    "message": "Staff member added successfully",
+                    "data": new_staff,
+                }
+            ),
+            201,
+        )
 
     except Exception as e:
-        return jsonify({
-            "status": "error",
-            "message": str(e)
-        }), 500
+        return jsonify({"status": "error", "message": str(e)}), 500

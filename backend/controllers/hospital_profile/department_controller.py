@@ -10,10 +10,7 @@ def add_department_controller(hospital_id):
         data = request.get_json()
 
         if not data:
-            return jsonify({
-                "status": "error",
-                "message": "No data provided"
-            }), 400
+            return jsonify({"status": "error", "message": "No data provided"}), 400
 
         # 🔥 Extract fields
         name = data.get("name")
@@ -23,38 +20,35 @@ def add_department_controller(hospital_id):
 
         # ✅ Validate
         if not name:
-            return jsonify({
-                "status": "error",
-                "message": "Department name is required"
-            }), 400
+            return (
+                jsonify({"status": "error", "message": "Department name is required"}),
+                400,
+            )
 
         # 🔥 Generate ID
         department_id = f"dept_{uuid.uuid4().hex[:8]}"
 
         # ✅ Call DB
         new_department = insert_department(
-            department_id,
-            hospital_id,
-            name,
-            head,
-            description,
-            location
+            department_id, hospital_id, name, head, description, location
         )
 
         if not new_department:
-            return jsonify({
-                "status": "error",
-                "message": "Failed to add department"
-            }), 500
+            return (
+                jsonify({"status": "error", "message": "Failed to add department"}),
+                500,
+            )
 
-        return jsonify({
-            "status": "success",
-            "message": "Department added successfully",
-            "data": new_department
-        }), 201
+        return (
+            jsonify(
+                {
+                    "status": "success",
+                    "message": "Department added successfully",
+                    "data": new_department,
+                }
+            ),
+            201,
+        )
 
     except Exception as e:
-        return jsonify({
-            "status": "error",
-            "message": str(e)
-        }), 500
+        return jsonify({"status": "error", "message": str(e)}), 500
