@@ -13,18 +13,20 @@ export const API_PATHS = {
   },
   PATIENT_HISTORY_DATA: {
     PATIENT_ASSESSMENT: (hospitalId) =>
-      `/patient_assessment/patient-history/${hospitalId}`,
+      `/patient-assessment/patient-history/${hospitalId}`,
+    NEW_PATIENT_ASSESSMENT: (hospitalId) =>
+      `/new-patient-assessment/${hospitalId}/save-patient-assessment`,
   },
   HOSPITAL: {
     GET_HOSPITAL: (hospitalId) => `/hospital/${hospitalId}`,
-    UPDATE_HOSPITAL: (hospitalId) => `/hospital/${hospitalId}/update-hospital`, 
-    GET_STATS: (hospitalId) => `/hospital/${hospitalId}/hospital-stats`, 
-    
+    UPDATE_HOSPITAL: (hospitalId) => `/hospital/${hospitalId}/update-hospital`,
+    GET_STATS: (hospitalId) => `/hospital/${hospitalId}/hospital-stats`,
 
     GET_STAFF: (hospitalId) => `/hospital/${hospitalId}/staff`,
     ADD_STAFF: (hospitalId) => `/hospital/${hospitalId}/staff/add-staff`,
 
     GET_DEPARTMENTS: (hospitalId) => `/hospital/${hospitalId}/department`,
-    ADD_DEPARTMENT: (hospitalId) => `/hospital/${hospitalId}/department/add-department`,
+    ADD_DEPARTMENT: (hospitalId) =>
+      `/hospital/${hospitalId}/department/add-department`,
   },
 };

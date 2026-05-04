@@ -3,6 +3,9 @@
  * Assessment Logic & Database Integration
  */
 
+import { API_PATHS } from "../utils/apiPaths.js";
+import api from "../utils/axiosInstance.js";
+
 // 1. Disease Intelligence (Mapping Symptoms to 10 Cancers)
 const cancers = [
   {
@@ -102,8 +105,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const idDisplay = document.getElementById("autoPatientId");
   if (idDisplay) idDisplay.textContent = generatedPatientId;
 
-  // Sync Hospital Details (Nairobi General Hospital)
-  syncHospitalData();
+  // // Sync Hospital Details (Nairobi General Hospital)
+  // syncHospitalData();
 
   // Set Dynamic Today's Date
   const dateEl = document.getElementById("currentDate");
@@ -117,17 +120,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// 3. Utility: Sync UI with Branding/Doctor Info
-function syncHospitalData() {
-  const hospital =
-    localStorage.getItem("icds_hospital") || "Nairobi General Hospital";
-  const doctor = localStorage.getItem("icds_user_name") || "Dr. John Smith";
-  const email = localStorage.getItem("icds_user_email") || "john@hospital.com";
+// // 3. Utility: Sync UI with Branding/Doctor Info
+// function syncHospitalData() {
+//   const hospital =
+//     localStorage.getItem("icds_hospital") || "Nairobi General Hospital";
+//   const doctor = localStorage.getItem("icds_user_name") || "Dr. John Smith";
+//   const email = localStorage.getItem("icds_user_email") || "john@hospital.com";
 
-  document.getElementById("displayHospitalName").textContent = hospital;
-  document.getElementById("displayDoctorName").textContent = doctor;
-  document.getElementById("displayDoctorEmail").textContent = email;
-}
+//   document.getElementById("displayHospitalName").textContent = hospital;
+//   document.getElementById("displayDoctorName").textContent = doctor;
+//   document.getElementById("displayDoctorEmail").textContent = email;
+// }
 
 // 4. Navigation: Stepper Movement
 window.goToStep = (n) => {
@@ -175,6 +178,7 @@ window.generateFollowUps = () => {
 window.runFinalAnalysis = function () {
   const pName = document.getElementById("pName").value;
   const symptomsText = document.getElementById("sympInput").value;
+  console.log("symptoms are : ", symptomsText);
   const container = document.getElementById("finalProbList");
   container.innerHTML = "";
 
@@ -232,6 +236,7 @@ window.runFinalAnalysis = function () {
 
 // 7. Database Integration: Send data to Flask/Supabase
 window.triggerDatabaseSave = async function () {
+  // console.log("hello from DatabaseSave");
   const saveBtn = document.getElementById("saveBtn");
   const successMsg = document.getElementById("saveSuccessMessage");
   const resNameEl = document.getElementById("resName");
@@ -241,9 +246,11 @@ window.triggerDatabaseSave = async function () {
 
   const payload = {
     patient_id: generatedPatientId,
+    doctor_id: localStorage.getItem("icds_user_id"),
     patient_name: resNameEl.textContent,
     age: parseInt(document.getElementById("pAge").value) || 0,
     gender: document.getElementById("pGender").value,
+    contact: document.getElementById("pContact").value,
     cancer_type: resNameEl.dataset.topCancer,
     risk_level: document.getElementById("statusBadge").textContent,
     confidence: parseInt(resNameEl.dataset.maxRisk),
@@ -251,14 +258,16 @@ window.triggerDatabaseSave = async function () {
     hospital_id: localStorage.getItem("icds_hospital_id") || "hosp_1",
   };
 
-  try {
-    const response = await fetch("http://localhost:5000/api/assessments/save", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+  console.log("Payload is: ", payload);
 
-    const result = await response.json();
+  try {
+    const currentHospitalId = localStorage.getItem("icds_hospital_id");
+    const response = await api.post(
+      API_PATHS.PATIENT_HISTORY_DATA.NEW_PATIENT_ASSESSMENT(currentHospitalId),
+      payload,
+    );
+
+    const result = response.data;
 
     if (result.success) {
       saveBtn.style.display = "none";
@@ -268,8 +277,13 @@ window.triggerDatabaseSave = async function () {
       throw new Error(result.error);
     }
   } catch (e) {
+    console.error("🔥 FULL ERROR:", e);
+
+    const backendError = e.response?.data?.error;
+
+    alert(backendError || "Something went wrong");
+
     saveBtn.disabled = false;
     saveBtn.innerHTML = '<i class="fas fa-redo"></i> Retry Save';
-    alert("Server Error: Check if Flask is running and connected to Supabase.");
   }
 };

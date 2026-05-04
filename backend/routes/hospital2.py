@@ -2,12 +2,12 @@ from controllers.hospital_profile.department_controller import (
     add_hospital_department,
     get_departments,
 )
-from controllers.hospital_profile.staff_controller import add_staff_member, get_staff
 from controllers.hospital_profile.hospital_profile_controller import (
     get_hospital_data_stats,
     get_hospital_profile,
     update_hospital_profile,
 )
+from controllers.hospital_profile.staff_controller import add_staff_member, get_staff
 from flask import Blueprint
 
 hospital_info_bp = Blueprint("hospital_info", __name__)

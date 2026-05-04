@@ -184,7 +184,6 @@ def delete_hospital(hospital_id):
     return result[0] if result else None
 
 
-
 # ======================
 # GET HOSPITAL STATS
 # ======================

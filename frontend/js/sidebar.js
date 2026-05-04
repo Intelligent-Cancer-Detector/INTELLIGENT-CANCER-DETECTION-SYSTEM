@@ -126,8 +126,8 @@ async function syncSidebarRegistry() {
     }
   } catch (e) {
     console.log("Offline mode - using session cache");
-    document.getElementById("hospitalName").textContent =
-      localStorage.getItem("icds_hospital_name");
+    // document.getElementById("hospitalName").textContent =
+    //   localStorage.getItem("icds_hospital");
   }
 }
 

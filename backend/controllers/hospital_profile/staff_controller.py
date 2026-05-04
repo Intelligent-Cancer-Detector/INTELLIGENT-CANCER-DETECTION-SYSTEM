@@ -1,13 +1,12 @@
 import uuid
 
-from flask import jsonify, request
-
 from database.user_queries import (
+    assign_user_to_department,
     create_user,
     get_user_by_email,
-    assign_user_to_department,
     get_users_by_hospital,
 )
+from flask import jsonify, request
 
 # Allowed roles for staff (NOT super_admin)
 ALLOWED_ROLES = [
@@ -110,16 +109,11 @@ def add_staff_member(hospital_id):
 # GET STAFFs
 # ======================
 
+
 def get_staff(hospital_id):
     try:
         staff = get_users_by_hospital(hospital_id)
-        return jsonify({
-            "success": True,
-            "data": staff
-        }), 200
-        
+        return jsonify({"success": True, "data": staff}), 200
+
     except Exception as e:
-        return jsonify({
-             "success": False,
-            "error": str(e)
-        }),500
+        return jsonify({"success": False, "error": str(e)}), 500
