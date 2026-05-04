@@ -29,4 +29,9 @@ export const API_PATHS = {
     ADD_DEPARTMENT: (hospitalId) =>
       `/hospital/${hospitalId}/department/add-department`,
   },
+
+  // analytics endpoints
+  ANALYTICS: {
+  GET_ALL: (id) => `/analytics/${id}`,
+}
 };
