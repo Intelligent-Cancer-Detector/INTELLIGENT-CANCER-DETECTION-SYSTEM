@@ -1,6 +1,7 @@
 import uuid
-from flask import Blueprint, request, jsonify
+
 from database.config import get_db_connection
+from flask import Blueprint, jsonify, request
 
 assessment_bp = Blueprint("assessment", __name__)
 

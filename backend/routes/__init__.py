@@ -1,9 +1,9 @@
-from .health import health_bp
 from .auth_routes import auth_bp
-from .ml import ml_bp
 from .dashboard_routes import dashboard_bp
-from .patient_history_routes import patient_assessment_bp
+from .health import health_bp
 from .hospital2 import hospital_info_bp
+from .ml import ml_bp
+from .patient_history_routes import patient_assessment_bp
 
 # # NEW: Import hospital profile blueprints
 # from .hospital import hospital_bp

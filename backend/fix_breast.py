@@ -9,7 +9,9 @@ Then: python build_dataset.py
 Then: python train_model.py
 """
 
-import csv, random, os
+import csv
+import os
+import random
 
 random.seed(77)
 

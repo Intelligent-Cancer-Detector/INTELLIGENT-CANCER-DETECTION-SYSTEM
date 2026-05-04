@@ -9,8 +9,8 @@ Then: python train_model.py
 """
 
 import csv
-import random
 import os
+import random
 
 random.seed(99)
 

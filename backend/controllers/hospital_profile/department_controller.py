@@ -1,8 +1,9 @@
 # controllers/department/department_controller.py
 
-from flask import request, jsonify
 import uuid
+
 from database.department_queries import insert_department
+from flask import jsonify, request
 
 
 def add_department_controller(hospital_id):

@@ -1,6 +1,7 @@
-import random
-import pandas as pd
 import os
+import random
+
+import pandas as pd
 
 # 1. 10 Cancer types + "none" for healthy patients
 CANCER_TYPES = [

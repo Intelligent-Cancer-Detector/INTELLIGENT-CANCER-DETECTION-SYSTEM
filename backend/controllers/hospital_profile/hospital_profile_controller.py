@@ -1,5 +1,5 @@
-from flask import request, jsonify
-from database.hospital_queries import update_hospital, get_hospital_by_id
+from database.hospital_queries import get_hospital_by_id, update_hospital
+from flask import jsonify, request
 
 
 # ===== GET HOSPITAL PROFILE =====

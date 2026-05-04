@@ -1,6 +1,7 @@
+import os
+
 import joblib
 import numpy as np
-import os
 from flask import jsonify
 
 # 1. SETUP DIRECTORIES

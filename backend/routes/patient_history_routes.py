@@ -1,5 +1,4 @@
 from flask import Blueprint
-
 from routes.dashboard_routes import recent_assessments
 
 patient_assessment_bp = Blueprint("patient_assessment", __name__)

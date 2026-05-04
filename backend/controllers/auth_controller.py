@@ -1,10 +1,9 @@
 import hashlib
 import uuid
 
-from flask import jsonify, request
 from database.hospital_queries import create_hospital, get_hospital_by_id
-from database.user_queries import get_user_by_email
-from database.user_queries import create_user
+from database.user_queries import create_user, get_user_by_email
+from flask import jsonify, request
 
 DEBUG_MODE = True
 

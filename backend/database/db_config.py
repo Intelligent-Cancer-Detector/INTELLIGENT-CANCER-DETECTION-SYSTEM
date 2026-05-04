@@ -1,5 +1,6 @@
-from flask_sqlalchemy import SQLAlchemy
 import datetime
+
+from flask_sqlalchemy import SQLAlchemy
 
 # 1. Initialize the database object HERE
 db = SQLAlchemy()

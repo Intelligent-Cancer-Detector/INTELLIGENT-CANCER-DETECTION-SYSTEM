@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, jsonify, request
 from services.ml_service import predict
 
 ml_bp = Blueprint("ml", __name__)

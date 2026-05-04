@@ -3,10 +3,11 @@ ICDS - Backend with Supabase PostgreSQL
 """
 
 import os
+
+from database.init_database import initialize_database, reset_database
 from dotenv import load_dotenv
 from flask import Flask
 from flask_cors import CORS
-from database.init_database import initialize_database, reset_database
 from routes import register_routes
 
 load_dotenv()

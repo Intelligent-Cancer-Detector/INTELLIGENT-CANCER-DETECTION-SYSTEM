@@ -1,6 +1,7 @@
-from flask import request, jsonify
-from database.staff_queries import insert_staff, check_email_exists
 import uuid
+
+from database.staff_queries import check_email_exists, insert_staff
+from flask import jsonify, request
 
 
 # ===== ADD STAFF MEMBER =====

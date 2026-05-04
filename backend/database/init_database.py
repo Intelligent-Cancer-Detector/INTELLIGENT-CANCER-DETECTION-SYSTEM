@@ -5,12 +5,13 @@ This is for initializing all tables!
 """
 
 import json
-from psycopg2.extras import RealDictCursor
-from dotenv import load_dotenv
-from database.config import get_db_connection
 import random
 import uuid
 from datetime import datetime, timedelta
+
+from database.config import get_db_connection
+from dotenv import load_dotenv
+from psycopg2.extras import RealDictCursor
 
 load_dotenv()
 

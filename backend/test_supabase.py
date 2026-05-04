@@ -1,6 +1,6 @@
 # test_supabase.py - Test connection to Supabase
 
-from supabase import create_client, Client
+from supabase import Client, create_client
 
 # Your Supabase credentials
 SUPABASE_URL = "https://tgrrmzusqjzzvhevmmbt.supabase.co"

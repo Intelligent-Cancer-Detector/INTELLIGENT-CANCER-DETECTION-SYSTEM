@@ -10,8 +10,8 @@ Usage:
 """
 
 import csv
-import random
 import os
+import random
 
 random.seed(42)
 

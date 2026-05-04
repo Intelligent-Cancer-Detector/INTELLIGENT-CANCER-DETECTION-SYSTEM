@@ -1,7 +1,8 @@
 # test_db.py - Using IP address fallback
 
-import psycopg2
 import socket
+
+import psycopg2
 
 # Try to get the IP address first
 try:

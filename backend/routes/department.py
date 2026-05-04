@@ -3,9 +3,10 @@ Department Management Routes
 Handles hospital departments
 """
 
-from flask import Blueprint, request, jsonify
-from database.config import get_db_connection
 from datetime import datetime
+
+from database.config import get_db_connection
+from flask import Blueprint, jsonify, request
 
 departments_bp = Blueprint("departments", __name__, url_prefix="/api/hospitals")
 

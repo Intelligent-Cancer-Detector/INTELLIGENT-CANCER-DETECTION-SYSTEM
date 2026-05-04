@@ -1,9 +1,6 @@
-from flask import Blueprint
 from controllers.hospital_profile.hospital_profile_controller import (
-    get_hospital_data_stats,
-    get_hospital_profile,
-    update_hospital_profile,
-)
+    get_hospital_data_stats, get_hospital_profile, update_hospital_profile)
+from flask import Blueprint
 
 hospital_info_bp = Blueprint("hospital_info", __name__)
 

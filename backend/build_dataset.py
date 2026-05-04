@@ -10,10 +10,10 @@ Usage:
   python build_dataset.py
 """
 
-import os
-import sys
 import csv
+import os
 import random
+import sys
 
 # ── Check dependencies ────────────────────────────────────────────────────────
 missing = []
@@ -38,8 +38,9 @@ if missing:
     print()
     sys.exit(1)
 
-import numpy as np
 import warnings
+
+import numpy as np
 
 warnings.filterwarnings("ignore")
 

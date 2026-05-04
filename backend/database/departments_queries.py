@@ -1,7 +1,8 @@
 # database/department_queries.py
 
-from database.config import query
 from datetime import datetime, timezone
+
+from database.config import query
 
 
 def insert_department(

@@ -1,7 +1,8 @@
+import datetime
+import hashlib
 import os
 import sys
-import hashlib
-import datetime
+
 import joblib
 
 # ─── PATH FIX ────────────────────────────────────────────────────────
@@ -14,7 +15,7 @@ if project_root not in sys.path:
 
 # ─── IMPORTS ─────────────────────────────────────────────────────────
 from app import app
-from database.db_config import db, Hospital, User, AuditLog, Assessment
+from database.db_config import Assessment, AuditLog, Hospital, User, db
 
 
 def hash_password(password):
