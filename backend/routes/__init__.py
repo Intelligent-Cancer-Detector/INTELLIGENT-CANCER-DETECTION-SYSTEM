@@ -4,6 +4,7 @@ from .health import health_bp
 from .hospital2 import hospital_info_bp
 from .ml import ml_bp
 from .patient_history_routes import patient_assessment_bp
+from routes.analytics_routes import analytics_bp
 
 # # NEW: Import hospital profile blueprints
 # from .hospital import hospital_bp
@@ -27,3 +28,6 @@ def register_routes(app):
 
     # hospital routes
     app.register_blueprint(hospital_info_bp, url_prefix="/api/hospital")
+
+    # analytics routes
+    app.register_blueprint(analytics_bp, url_prefix="/api/analytics")
