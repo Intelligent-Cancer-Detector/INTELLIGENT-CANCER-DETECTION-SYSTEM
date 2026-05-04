@@ -182,3 +182,20 @@ def delete_hospital(hospital_id):
     """
     result = query(sql, [datetime.now(timezone.utc), hospital_id])
     return result[0] if result else None
+
+
+
+# ======================
+# GET HOSPITAL STATS
+# ======================
+def get_all_hospital_stats(hospital_id):
+    sql = """
+        SELECT
+            (SELECT COUNT(*) FROM users WHERE hospital_id = %s AND active = true) AS total_staff,
+            (SELECT COUNT(*) FROM patient WHERE hospital_id = %s) AS total_patients,
+            (SELECT COUNT(*) FROM departments WHERE hospital_id = %s AND active = true) AS total_departments,
+            (SELECT COUNT(*) FROM assessment WHERE hospital_id = %s) AS total_assessments
+    """
+
+    result = query(sql, [hospital_id, hospital_id, hospital_id, hospital_id])
+    return result[0] if result else None

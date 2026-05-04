@@ -1,4 +1,8 @@
-from database.hospital_queries import get_hospital_by_id, update_hospital
+from database.hospital_queries import (
+    get_all_hospital_stats,
+    get_hospital_by_id,
+    update_hospital,
+)
 from flask import jsonify, request
 
 
@@ -24,7 +28,7 @@ def update_hospital_profile(hospital_id):
         if not existing:
             return jsonify({"status": "error", "message": "Hospital not found"}), 404
 
-        # ✅ Only allow specific fields (IMPORTANT)
+        # ✅ Only allow specific fields
         allowed_fields = {
             "name",
             "email",
@@ -91,4 +95,26 @@ def update_hospital_profile(hospital_id):
 
 # ===== GET HOSPITAL STATISTICS =====
 def get_hospital_data_stats(hospital_id):
-    pass
+    try:
+        stats = get_all_hospital_stats(hospital_id)
+
+        if not stats:
+            return jsonify({"status": "error", "message": "No stats found"}), 404
+
+        return (
+            jsonify(
+                {
+                    "status": "success",
+                    "data": {
+                        "total_staff": stats["total_staff"],
+                        "total_patients": stats["total_patients"],
+                        "total_departments": stats["total_departments"],
+                        "total_assessments": stats["total_assessments"],
+                    },
+                }
+            ),
+            200,
+        )
+
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500

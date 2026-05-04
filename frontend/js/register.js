@@ -389,17 +389,17 @@ document.addEventListener("keydown", function (e) {
     document.getElementById("licenseNumber").value = "HSP-2026-001";
     document.getElementById("yearEstablished").value = "2010";
 
-    document.getElementById("fullName").value = "Dr. Isaac Ireri";
+    document.getElementById("fullName").value = "Dr. Wyckie Nthiga";
     // document.getElementById("designation").value = "medical-director";
     // document.getElementById("department").value = "administration";
     document.getElementById("jobTitle").value = "Hospital Director";
     document.getElementById("adminLicense").value = "MD-998877";
-    document.getElementById("adminEmail").value = "isaac@test.com";
+    document.getElementById("adminEmail").value = "admin@test.com";
     document.getElementById("adminPhone").value = "+254700000000";
     document.getElementById("adminMobile").value = "+254700000123";
     document.getElementById("alternativeContact").value = "Jane Doe";
 
-    document.getElementById("username").value = "Isaac";
+    document.getElementById("username").value = "admin";
     document.getElementById("password").value = "Test123";
     document.getElementById("confirmPassword").value = "Test123";
 

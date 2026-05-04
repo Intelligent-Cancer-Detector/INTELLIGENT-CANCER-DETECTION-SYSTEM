@@ -2,72 +2,124 @@ import uuid
 
 from flask import jsonify, request
 
-from backend.database.user_queries import create_user, get_user_by_email
+from database.user_queries import (
+    create_user,
+    get_user_by_email,
+    assign_user_to_department,
+    get_users_by_hospital,
+)
+
+# Allowed roles for staff (NOT super_admin)
+ALLOWED_ROLES = [
+    "doctor",
+    "nurse",
+    "admin",
+    "lab_technician",
+    "receptionist",
+    "pharmacist",
+]
 
 
-# ===== ADD STAFF MEMBER =====
 def add_staff_member(hospital_id):
     try:
         data = request.get_json()
 
         if not data:
-            return jsonify({"status": "error", "message": "No data provided"}), 400
+            return jsonify({"success": False, "error": "No data provided"}), 400
 
-        # normalize keys
+        # Normalize fields
         name = data.get("name") or data.get("fullName")
         email = data.get("email")
         phone = data.get("phone")
-        position = data.get("position") or data.get("role")
+        role = data.get("position") or data.get("role")
         department_id = data.get("department_id")
         join_date = data.get("join_date")
 
-        # required fields
-        if not name or not email or not position:
+        # Validate required fields
+        if not name or not email or not role:
             return (
                 jsonify(
-                    {
-                        "status": "error",
-                        "message": "Name, email, and position are required",
-                    }
+                    {"success": False, "error": "Name, email, and role are required"}
                 ),
                 400,
             )
 
-        # check duplicate email
-        if get_user_by_email(email):
-            return jsonify({"status": "error", "message": "Email already exists"}), 400
+        # 🚫 Block super_admin creation
+        if role == "super_admin":
+            return (
+                jsonify({"success": False, "error": "Cannot assign super_admin role"}),
+                403,
+            )
 
-        # generate user id
+        # Validate role
+        if role not in ALLOWED_ROLES:
+            return jsonify({"success": False, "error": "Invalid role"}), 400
+
+        # Check duplicate email
+        if get_user_by_email(email):
+            return jsonify({"success": False, "error": "Email already exists"}), 400
+
+        # Generate user ID
         user_id = f"user_{uuid.uuid4().hex[:8]}"
 
-        # insert into database
-        new_staff = create_user(
+        # Temporary password
+        temp_password = "temp123"
+
+        # Create user
+        new_user = create_user(
             user_id=user_id,
-            hospital_id=hospital_id,
-            name=name,
+            full_name=name,
             email=email,
+            password_hash=temp_password,
+            hospital_id=hospital_id,
+            role=role,
             phone=phone,
-            position=position,
-            department_id=department_id,
-            join_date=join_date,
         )
 
-        if not new_staff:
+        if not new_user:
             return (
-                jsonify({"status": "error", "message": "Failed to add staff member"}),
+                jsonify({"success": False, "error": "Failed to create staff user"}),
                 500,
+            )
+
+        # Assign department (optional)
+        if department_id:
+            assign_user_to_department(
+                user_id=user_id,
+                department_id=department_id,
+                position=role,
+                join_date=join_date,
             )
 
         return (
             jsonify(
                 {
-                    "status": "success",
+                    "success": True,
                     "message": "Staff member added successfully",
-                    "data": new_staff,
+                    "data": new_user,
                 }
             ),
             201,
         )
 
     except Exception as e:
-        return jsonify({"status": "error", "message": str(e)}), 500
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+# ======================
+# GET STAFFs
+# ======================
+
+def get_staff(hospital_id):
+    try:
+        staff = get_users_by_hospital(hospital_id)
+        return jsonify({
+            "success": True,
+            "data": staff
+        }), 200
+        
+    except Exception as e:
+        return jsonify({
+             "success": False,
+            "error": str(e)
+        }),500

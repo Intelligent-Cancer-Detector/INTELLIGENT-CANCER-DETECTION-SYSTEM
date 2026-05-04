@@ -1,55 +1,131 @@
-# controllers/department/department_controller.py
-
-import uuid
-
-from database.department_queries import insert_department
 from flask import jsonify, request
 
+from database.departments_queries import (
+    create_department,
+    get_departments_by_hospital,
+    update_department,
+    delete_department,
+)
 
-def add_department_controller(hospital_id):
+
+# ======================
+# CREATE DEPARTMENT
+# ======================
+def add_hospital_department(hospital_id):
     try:
         data = request.get_json()
 
-        if not data:
-            return jsonify({"status": "error", "message": "No data provided"}), 400
-
-        # 🔥 Extract fields
         name = data.get("name")
         head = data.get("head")
         description = data.get("description")
         location = data.get("location")
 
-        # ✅ Validate
         if not name:
-            return (
-                jsonify({"status": "error", "message": "Department name is required"}),
-                400,
-            )
+            return jsonify({
+                "success": False,
+                "error": "Department name is required"
+            }), 400
 
-        # 🔥 Generate ID
-        department_id = f"dept_{uuid.uuid4().hex[:8]}"
-
-        # ✅ Call DB
-        new_department = insert_department(
-            department_id, hospital_id, name, head, description, location
+        department = create_department(
+            hospital_id,
+            name,
+            head,
+            description,
+            location,
         )
 
-        if not new_department:
-            return (
-                jsonify({"status": "error", "message": "Failed to add department"}),
-                500,
-            )
+        if not department:
+            return jsonify({
+                "success": False,
+                "error": "Failed to create department"
+            }), 500
 
-        return (
-            jsonify(
-                {
-                    "status": "success",
-                    "message": "Department added successfully",
-                    "data": new_department,
-                }
-            ),
-            201,
-        )
+        return jsonify({
+            "success": True,
+            "message": "Department created successfully",
+            "data": department
+        }), 201
 
     except Exception as e:
-        return jsonify({"status": "error", "message": str(e)}), 500
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+
+# ======================
+# GET DEPARTMENTS
+# ======================
+def get_departments(hospital_id):
+    try:
+        departments = get_departments_by_hospital(hospital_id)
+
+        return jsonify({
+            "success": True,
+            "data": departments
+        }), 200
+
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+
+# ======================
+# UPDATE DEPARTMENT
+# ======================
+def edit_department(department_id):
+    try:
+        data = request.get_json()
+
+        updated = update_department(
+            department_id,
+            name=data.get("name"),
+            head=data.get("head"),
+            description=data.get("description"),
+            location=data.get("location"),
+        )
+
+        if not updated:
+            return jsonify({
+                "success": False,
+                "error": "Department not found or update failed"
+            }), 404
+
+        return jsonify({
+            "success": True,
+            "message": "Department updated successfully",
+            "data": updated
+        }), 200
+
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
+
+# ======================
+# DELETE DEPARTMENT
+# ======================
+def remove_department(department_id):
+    try:
+        deleted = delete_department(department_id)
+
+        if not deleted:
+            return jsonify({
+                "success": False,
+                "error": "Department not found"
+            }), 404
+
+        return jsonify({
+            "success": True,
+            "message": "Department deleted successfully"
+        }), 200
+
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500

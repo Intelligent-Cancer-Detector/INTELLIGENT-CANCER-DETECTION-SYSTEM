@@ -79,10 +79,10 @@ async function loadStaffList() {
   const container = document.getElementById("usersList");
 
   // TODO: Uncomment when backend is ready
-  /*
+
   try {
     const response = await api.get(API_PATHS.HOSPITAL.GET_STAFF(currentHospitalId));
-    const staff = response.data;
+    const staff = response.data.data;
     
     if (!staff || staff.length === 0) {
       container.innerHTML = `<div class="empty-state"><i class="fas fa-user-plus"></i><p>No staff found. Click "Add User" to get started.</p></div>`;
@@ -105,7 +105,7 @@ async function loadStaffList() {
     console.error("Error loading staff:", error);
     container.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Error loading staff. Please try again.</p></div>`;
   }
-  */
+  
 
   // Temporary placeholder
   container.innerHTML = `<div class="empty-state"><i class="fas fa-user-plus"></i><p>No staff found. Click "Add User" to get started.</p></div>`;
@@ -116,34 +116,38 @@ async function loadDepartments() {
   const container = document.getElementById("deptList");
 
   // TODO: Uncomment when backend is ready
-  /*
+
   try {
-    const response = await api.get(API_PATHS.HOSPITAL.GET_DEPARTMENTS(currentHospitalId));
-    const departments = response.data;
-    
+    const response = await api.get(
+      API_PATHS.HOSPITAL.GET_DEPARTMENTS(currentHospitalId),
+    );
+    const departments = response.data.data;
+
     if (!departments || departments.length === 0) {
       container.innerHTML = `<div class="empty-state"><i class="fas fa-building"></i><p>No departments found. Click "Add Department" to get started.</p></div>`;
       return;
     }
-    
-    container.innerHTML = departments.map(dept => `
+
+    container.innerHTML = departments
+      .map(
+        (dept) => `
       <div class="dept-item" data-id="${dept.id}">
         <div class="dept-info">
           <h4><i class="fas fa-hospital-user"></i> ${escapeHtml(dept.name)}</h4>
-          <p>Head: ${escapeHtml(dept.head || 'Not assigned')}</p>
-          <p>${escapeHtml(dept.description || '')}</p>
+          <p>Head: ${escapeHtml(dept.head || "Not assigned")}</p>
+          <p>${escapeHtml(dept.description || "")}</p>
         </div>
         <div class="dept-actions">
           <button onclick="deleteDepartment(${dept.id})"><i class="fas fa-trash-alt"></i></button>
         </div>
       </div>
-    `).join("");
-    
+    `,
+      )
+      .join("");
   } catch (error) {
     console.error("Error loading departments:", error);
     container.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>Error loading departments. Please try again.</p></div>`;
   }
-  */
 
   // Temporary placeholder
   container.innerHTML = `<div class="empty-state"><i class="fas fa-building"></i><p>No departments found. Click "Add Department" to get started.</p></div>`;
@@ -153,37 +157,58 @@ async function loadDepartments() {
 async function loadDepartmentsIntoSelect() {
   const deptSelect = document.getElementById("staffDepartment");
 
-  // TODO: Uncomment when backend is ready
-  /*
   try {
-    const response = await api.get(API_PATHS.HOSPITAL.GET_DEPARTMENTS(currentHospitalId));
-    const departments = response.data;
-    
+    const response = await api.get(
+      API_PATHS.HOSPITAL.GET_DEPARTMENTS(currentHospitalId),
+    );
+
+    const departments = response.data.data;
+
+    // Reset dropdown
     deptSelect.innerHTML = '<option value="">Select Department</option>';
-    departments.forEach(dept => {
-      deptSelect.innerHTML += `<option value="${dept.id}">${escapeHtml(dept.name)}</option>`;
+
+    // 🔴 CASE: NO DEPARTMENTS
+    if (!departments || departments.length === 0) {
+      deptSelect.innerHTML =
+        '<option value="">No departments available</option>';
+
+      deptSelect.disabled = true; // 🔥 disable dropdown
+      return;
+    }
+
+    // ✅ CASE: departments exist
+    deptSelect.disabled = false;
+
+    departments.forEach((dept) => {
+      deptSelect.innerHTML += `
+        <option value="${dept.id}">
+          ${dept.name}
+        </option>
+      `;
     });
   } catch (error) {
-    console.error("Error loading departments for select:", error);
-  }
-  */
-}
+    console.error("Error loading departments:", error);
 
+    deptSelect.innerHTML =
+      '<option value="">Failed to load departments</option>';
+    deptSelect.disabled = true;
+  }
+}
 // ===== LOAD STATISTICS (API Ready) =====
 async function loadStats() {
   // TODO: Uncomment when backend is ready
-  /*
+  
   try {
     const response = await api.get(API_PATHS.HOSPITAL.GET_STATS(currentHospitalId));
-    const stats = response.data;
+    const stats = response.data.data;
     
-    document.getElementById("totalStaff").textContent = stats.totalStaff || "0";
-    document.getElementById("totalDepts").textContent = stats.totalDepartments || "0";
-    document.getElementById("totalAssessments").textContent = stats.totalAssessments || "0";
+    document.getElementById("totalStaff").textContent = stats.total_staff || "0";
+    document.getElementById("totalDepts").textContent = stats.total_departments || "0";
+    document.getElementById("totalAssessments").textContent = stats.total_assessments || "0";
   } catch (error) {
     console.error("Error loading stats:", error);
   }
-  */
+  
 }
 
 // ===== SAVE HOSPITAL PROFILE (API Ready) =====
@@ -244,7 +269,9 @@ async function addStaff(staffData) {
 
   try {
     await api.post(API_PATHS.HOSPITAL.ADD_STAFF(currentHospitalId), staffData);
-    showSuccess(`Staff ${staffData.name} added successfully!`);
+    showSuccess(
+      `Staff ${staffData.name} added successfully! \n passsword:"temp123" \n email: use your email`,
+    );
     await loadStaffList();
     await loadStats();
     return true;
@@ -265,9 +292,12 @@ async function addStaff(staffData) {
 // ===== ADD NEW DEPARTMENT (API Ready) =====
 async function addDepartment(deptData) {
   // TODO: Uncomment when backend is ready
-  /*
+
   try {
-    await api.post(API_PATHS.HOSPITAL.ADD_DEPARTMENT(currentHospitalId), deptData);
+    await api.post(
+      API_PATHS.HOSPITAL.ADD_DEPARTMENT(currentHospitalId),
+      deptData,
+    );
     showSuccess(`Department ${deptData.name} added successfully!`);
     await loadDepartments();
     await loadDepartmentsIntoSelect();
@@ -278,7 +308,6 @@ async function addDepartment(deptData) {
     showError("Failed to add department");
     return false;
   }
-  */
 
   // Temporary for frontend testing
   console.log("Add department data:", deptData);
@@ -399,7 +428,17 @@ function setupEventListeners() {
   const addStaffModal = document.getElementById("addStaffModal");
 
   if (addUserBtn && addStaffModal) {
-    addUserBtn.addEventListener("click", () => {
+    addUserBtn.addEventListener("click", async () => {
+      await loadDepartmentsIntoSelect(); // 🔥 refresh dropdown
+
+      const deptSelect = document.getElementById("staffDepartment");
+
+      if (deptSelect.disabled) {
+        showError(
+          "No departments available. Staff will be added without department.",
+        );
+      }
+
       addStaffModal.style.display = "flex";
     });
   }
@@ -445,7 +484,14 @@ function setupEventListeners() {
         return;
       }
 
-      const staffData = { name, email, phone, position, department, joinDate };
+      const staffData = {
+        name,
+        email,
+        phone,
+        position,
+        department_id: department || null,
+        join_date: joinDate || null,
+      };
       await addStaff(staffData);
 
       document.getElementById("addStaffModal").style.display = "none";

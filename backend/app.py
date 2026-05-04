@@ -27,6 +27,7 @@ CORS(
     allow_headers=["Content-Type", "Authorization"],
     supports_credentials=True,
 )
+# CORS(app)
 
 
 # ======================
@@ -50,7 +51,7 @@ CORS(
 
 # reset_database()
 
-initialize_database()
+# initialize_database()
 
 register_routes(app)
 # same as app.use("/api/auth", authRouter)

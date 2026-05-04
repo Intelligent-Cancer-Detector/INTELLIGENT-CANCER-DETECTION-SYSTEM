@@ -158,11 +158,21 @@ def initialize_database():
             head VARCHAR(200),
             description TEXT,
             location VARCHAR(200),
+            active BOOLEAN DEFAULT true,
             created_at TIMESTAMPTZ DEFAULT NOW(),
-            updated_at TIMESTAMPTZ DEFAULT NOW()
+            updated_at TIMESTAMPTZ DEFAULT NOW(),
+                
+            CONSTRAINT unique_department_per_hospital
+            UNIQUE (hospital_id, name)
         )
     """)
     print("✅ Departments table created")
+
+    cur.execute("""
+    CREATE UNIQUE INDEX IF NOT EXISTS idx_unique_department_per_hospital_ci
+    ON departments (hospital_id, LOWER(name))
+    WHERE active = true;
+""")
 
     # 9. User Departments Table (junction table - connects users to departments)
     cur.execute("""
